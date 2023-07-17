@@ -3,16 +3,17 @@ package com.example.demoproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_welcome.*
+import com.example.demoproject.databinding.ActivityWelcomeBinding
 
 
-class WelcomeActivity : AppCompatActivity() {
-
+class WelcomeActivity : BaseActivity() {
+    private lateinit var binding: ActivityWelcomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_welcome)
+        binding = ActivityWelcomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        btnGetStarted.setOnClickListener {
+        binding.btnGetStarted.setOnClickListener {
             val intent = Intent(this, LeagueActivity::class.java)
             startActivity(intent)
         }
