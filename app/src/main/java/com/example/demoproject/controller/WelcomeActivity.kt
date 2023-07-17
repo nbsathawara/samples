@@ -1,7 +1,6 @@
-package com.example.demoproject
+package com.example.demoproject.controller
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.demoproject.databinding.ActivityWelcomeBinding
 

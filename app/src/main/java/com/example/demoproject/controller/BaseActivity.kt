@@ -1,9 +1,8 @@
-package com.example.demoproject
+package com.example.demoproject.controller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.viewbinding.ViewBinding
 
 open class BaseActivity : AppCompatActivity() {
 
