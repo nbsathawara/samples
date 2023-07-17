@@ -5,16 +5,17 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.example.demoproject.EXTRA_LEAGUE
+import com.example.demoproject.EXTRA_PLAYER
 import com.example.demoproject.databinding.ActivityLeagueBinding
+import com.example.demoproject.model.Player
 
 class LeagueActivity : BaseActivity() {
 
     lateinit var binding: ActivityLeagueBinding
-
+    var player = Player("", "")
     val LEAUGUE_MENS = 1
     val LEAUGUE_WOMENS = 2
     val LEAUGUE_COED = 3
-    var selectedLeaugue = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,26 +32,26 @@ class LeagueActivity : BaseActivity() {
         val tag = (view.tag.toString()).toInt()
         when (tag) {
             LEAUGUE_MENS -> {
-                selectedLeaugue = "mens"
+                player.league = "mens"
                 binding.btnLeagueMens.isChecked = true
             }
             LEAUGUE_WOMENS -> {
-                selectedLeaugue = "womens"
+                player.league = "womens"
                 binding.btnLeaugueWomens.isChecked = true
             }
             LEAUGUE_COED -> {
-                selectedLeaugue = "coed"
+                player.league = "co-ed"
                 binding.btnLeaugueCoed.isChecked = true
             }
         }
     }
 
     fun nextClicked(view: View) {
-        if (selectedLeaugue.isNullOrEmpty())
+        if (player.league.isNullOrEmpty())
             Toast.makeText(this, "Please select a league", Toast.LENGTH_SHORT).show()
         else {
             val intent = Intent(this, SkillActivity::class.java)
-            intent.putExtra(EXTRA_LEAGUE, selectedLeaugue)
+            intent.putExtra(EXTRA_PLAYER, player)
             startActivity(intent)
         }
     }
