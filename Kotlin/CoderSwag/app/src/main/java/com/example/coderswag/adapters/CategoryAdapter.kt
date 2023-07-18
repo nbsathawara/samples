@@ -34,7 +34,7 @@ class CategoryAdapter(context: Context, categories: List<Category>) : BaseAdapte
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var catView: View
         var holder = ViewHolder()
-        if (convertView == null) { 
+        if (convertView == null) {
             catView = LayoutInflater.from(context).inflate(R.layout.cell_cat_list, null)
             holder.catImag = catView.findViewById(R.id.imgCat)
             holder.nameCat = catView.findViewById(R.id.nameCat)

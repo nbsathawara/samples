@@ -2,17 +2,15 @@ package com.example.coderswag.controller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import com.example.coderswag.R
-import com.example.coderswag.adapters.CategoryAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.coderswag.adapters.CategoryRecycleAdapter
 import com.example.coderswag.databinding.ActivityMainBinding
-import com.example.coderswag.model.Category
 import com.example.coderswag.serives.DataService
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
-    lateinit var adapter: CategoryAdapter
+    lateinit var adapter: CategoryRecycleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +21,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initialize() {
-        adapter = CategoryAdapter(this, DataService.categories)
+        val categories = DataService.categories
+        adapter = CategoryRecycleAdapter(this, categories)
         binding.catListView.adapter = adapter
+
+        val layoutManager=LinearLayoutManager(this)
+        binding.catListView.layoutManager=layoutManager
+       binding.catListView.setHasFixedSize(true)
+
+
     }
 }
