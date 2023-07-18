@@ -10,7 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.coderswag.R
 import com.example.coderswag.model.Category
 
-class CategoryRecycleAdapter(private val context: Context, private val categories: List<Category>) :
+class CategoryRecycleAdapter(
+    private val context: Context,
+    private val categories: List<Category>,
+    val itemClick: (Category) -> Unit
+) :
     RecyclerView.Adapter<CategoryRecycleAdapter.Holder>() {
 
     override fun getItemCount(): Int {
@@ -18,17 +22,16 @@ class CategoryRecycleAdapter(private val context: Context, private val categorie
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        println("Create...")
         val view = LayoutInflater.from(context).inflate(R.layout.cell_cat_list, parent, false)
-        return Holder(view)
+        return Holder(view, itemClick)
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        println("Bind...")
         holder.bindCategory(context, categories[position])
     }
 
-    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class Holder(itemView: View, val itemClick: (Category) -> Unit) :
+        RecyclerView.ViewHolder(itemView) {
         val catImg = itemView.findViewById<ImageView>(R.id.imgCat)
         val catName = itemView.findViewById<TextView>(R.id.nameCat)
 
@@ -41,6 +44,7 @@ class CategoryRecycleAdapter(private val context: Context, private val categorie
                     context.packageName
                 )
             )
+            itemView.setOnClickListener { itemClick(category) }
         }
     }
 }
