@@ -12,6 +12,9 @@
         android:theme="@style/Theme.Smack"
         tools:targetApi="31">
         <activity
+            android:name=".ui.controller.CreateUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.controller.LogInActivity"
             android:exported="false" />
         <activity
