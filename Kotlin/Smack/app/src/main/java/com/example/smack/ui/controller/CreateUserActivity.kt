@@ -1,10 +1,17 @@
 package com.example.smack.ui.controller
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.smack.databinding.ActivityCreateUserBinding
+import com.example.smack.ui.SmackApp
+import com.example.smack.ui.service.UserDataService
+import com.example.smack.ui.utilities.SharedPrefs
+import com.example.smack.ui.utilities.USER_DATA_CHANGE
+import com.example.smack.ui.utilities.hideKeyboard
 import java.util.Random
 
 class CreateUserActivity : AppCompatActivity() {
@@ -18,6 +25,7 @@ class CreateUserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        enableSpinner(false)
     }
 
     fun generateAvatarClicked(view: View) {
@@ -50,6 +58,35 @@ class CreateUserActivity : AppCompatActivity() {
 
 
     fun createUserClicked(view: View) {
+        hideKeyboard(this)
+        enableSpinner(true)
 
+        val userName = binding.etUserName.text.toString()
+        val email = binding.etEmail.text.toString()
+        val password = binding.etPassword.text.toString()
+
+        UserDataService.name = userName
+        UserDataService.email = email
+        UserDataService.avatarName = userAvatar
+        UserDataService.avatarColor = avtarColor
+        UserDataService.id = random.nextInt(1000).toString()
+        SmackApp.prefs.isLoggedIn = true
+
+        val userDataChange = Intent(USER_DATA_CHANGE)
+        LocalBroadcastManager.getInstance(this).sendBroadcast(userDataChange)
+        Thread.sleep(2000)
+        enableSpinner(false)
+        finish()
+    }
+
+    fun enableSpinner(enable: Boolean) {
+        binding.spinnerCreateUser.bringToFront()
+        if (enable)
+            binding.spinnerCreateUser.visibility = View.VISIBLE
+        else binding.spinnerCreateUser.visibility = View.INVISIBLE
+
+        binding.btnCreateUser.isEnabled = !enable
+        binding.btnUserColor.isEnabled = !enable
+        binding.imgProfile.isEnabled = !enable
     }
 }
