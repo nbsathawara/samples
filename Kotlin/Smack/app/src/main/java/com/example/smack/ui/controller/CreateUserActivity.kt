@@ -74,7 +74,7 @@ class CreateUserActivity : AppCompatActivity() {
 
         val userDataChange = Intent(USER_DATA_CHANGE)
         LocalBroadcastManager.getInstance(this).sendBroadcast(userDataChange)
-        Thread.sleep(2000)
+        //Thread.sleep(2000)
         enableSpinner(false)
         finish()
     }

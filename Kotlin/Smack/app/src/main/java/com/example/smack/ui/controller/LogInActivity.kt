@@ -30,7 +30,7 @@ class LogInActivity : AppCompatActivity() {
             SmackApp.prefs.isLoggedIn = true
             val userDataChange = Intent(USER_DATA_CHANGE)
             LocalBroadcastManager.getInstance(this).sendBroadcast(userDataChange)
-            Thread.sleep(2000)
+            //Thread.sleep(2000)
             enableSpinner(false)
             finish()
         }
@@ -63,7 +63,8 @@ class LogInActivity : AppCompatActivity() {
         val email = binding.etEmail.text.toString()
 
         UserDataService.email = email
-        UserDataService.name = email.substring(0, email.indexOf('@'))
+        UserDataService.name = if (email.contains("@")) email.substring(0, email.indexOf('@'))
+        else email
         UserDataService.id = random.nextInt(1000).toString()
         UserDataService.avatarName = userAvatar
         UserDataService.avatarColor = avtarColor
