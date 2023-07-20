@@ -19,6 +19,7 @@ class SharedPrefs(context: Context) {
     val USER_AVATAR = "userAvatar"
     val USER_AVATAR_COLOR = "userAvatarColor"
     val CHANNEL = "channels"
+    val MESSAGE = "messages"
 
     var isLoggedIn: Boolean
         get() = prefs.getBoolean(IS_LOGGED_IN, false)
@@ -51,6 +52,10 @@ class SharedPrefs(context: Context) {
     var channels: String
         get() = prefs.getString(CHANNEL, "")!!
         set(value) = prefs.edit().putString(CHANNEL, value).apply()
+
+    var messages: String
+        get() = prefs.getString(MESSAGE, "")!!
+        set(value) = prefs.edit().putString(MESSAGE, value).apply()
 
     val requestQueue: RequestQueue = Volley.newRequestQueue(context)
 

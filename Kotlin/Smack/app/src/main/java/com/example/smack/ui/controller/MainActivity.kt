@@ -5,34 +5,42 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.smack.R
 import com.example.smack.databinding.ActivityMainBinding
 import com.example.smack.ui.SmackApp
+import com.example.smack.ui.adapter.MessageAdapter
 import com.example.smack.ui.model.Channel
+import com.example.smack.ui.model.Message
 import com.example.smack.ui.service.MessageService
 import com.example.smack.ui.service.UserDataService
 import com.example.smack.ui.utilities.*
 import io.socket.client.IO
 import io.socket.emitter.Emitter
+import java.time.Instant
+import java.util.Date
 import java.util.Random
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var channelAdapter: ArrayAdapter<Channel>
+    private lateinit var msgAdapter: MessageAdapter
     var selectedChannel: Channel? = null
 
     val socket = IO.socket(SOCKET_URL)
@@ -59,6 +67,10 @@ class MainActivity : AppCompatActivity() {
 
     fun initialize() {
 
+        socket.connect()
+        socket.on("channelCreated", onNewChannel)
+        socket.on("messageCreated", onNewMessage)
+
         LocalBroadcastManager.getInstance(this).registerReceiver(
             userDataChangeReceiver,
             IntentFilter(USER_DATA_CHANGE)
@@ -67,6 +79,11 @@ class MainActivity : AppCompatActivity() {
         LocalBroadcastManager.getInstance(this).registerReceiver(
             newChannelReceiver,
             IntentFilter(NEW_CHANNEL)
+        )
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+            newMessageReceiver,
+            IntentFilter(NEW_MESSAGE)
         )
 
         binding.navDrawerHeaderInclude.btnLogIn.setOnClickListener {
@@ -86,8 +103,6 @@ class MainActivity : AppCompatActivity() {
             selectedChannel = MessageService.channels[position]
             setMessages()
         }
-
-
         logIn()
 
     }
@@ -97,6 +112,11 @@ class MainActivity : AppCompatActivity() {
         channelAdapter =
             ArrayAdapter(this, android.R.layout.simple_list_item_1, MessageService.channels)
         binding.lvChannels.adapter = channelAdapter
+
+        msgAdapter = MessageAdapter(this, MessageService.messages)
+        binding.appBarMain.mainContent.rvMessages.layoutManager = LinearLayoutManager(this)
+        binding.appBarMain.mainContent.rvMessages.adapter = msgAdapter
+
         if (SmackApp.prefs.isLoggedIn) {
             UserDataService.logIn(
                 this,
@@ -113,15 +133,43 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         LocalBroadcastManager.getInstance(this)
             .registerReceiver(userDataChangeReceiver, IntentFilter(USER_DATA_CHANGE))
-        socket.connect()
-        socket.on("channelCreated", onNewChannel)
     }
 
     override fun onDestroy() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(userDataChangeReceiver)
         LocalBroadcastManager.getInstance(this).unregisterReceiver(newChannelReceiver)
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(newMessageReceiver)
+
         socket.disconnect()
         super.onDestroy()
+    }
+
+    fun setChannels() {
+        val channels = MessageService.getChannels()
+        if (channels.isNotEmpty()) {
+            selectedChannel = channels[0]
+            channelAdapter.notifyDataSetChanged()
+            setMessages()
+        }
+    }
+
+    fun setMessages() {
+        binding.appBarMain.mainContent.txtSelectedChannel.text = "#${selectedChannel!!.name}"
+        MessageService.getMessages(selectedChannel!!)
+        msgAdapter.notifyDataSetChanged()
+        if (msgAdapter.itemCount > 0)
+            binding.appBarMain.mainContent.rvMessages.smoothScrollToPosition(msgAdapter.itemCount - 1)
+    }
+
+    private val onNewMessage = Emitter.Listener { args ->
+        val newMessage = Message(
+            args[0].toString(), args[1].toString(), args[2].toString(),
+            args[3].toString(), args[4].toString(), args[4].toString(),
+            args[6].toString()
+        )
+        runOnUiThread {
+
+        }
     }
 
     private val onNewChannel = Emitter.Listener { args ->
@@ -152,19 +200,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setChannels() {
-        val channels = MessageService.getChannels()
-        if (channels.isNotEmpty()) {
-            selectedChannel = channels[0]
-            channelAdapter.notifyDataSetChanged()
-            setMessages()
-        }
-    }
-
-    fun setMessages() {
-        binding.appBarMain.mainContent.txtSelectedChannel.text = "#${selectedChannel?.name}"
-    }
-
     private val newChannelReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (SmackApp.prefs.isLoggedIn) {
@@ -174,8 +209,30 @@ class MainActivity : AppCompatActivity() {
 
                 println("New Channel in Receiver : ${newChannel.name} : ${newChannel.desc} : ${newChannel.id}")
                 MessageService.getChannels()
-                channelAdapter.notifyDataSetChanged()
+                runOnUiThread() {
+                    channelAdapter.notifyDataSetChanged()
+                }
+            }
+        }
+    }
 
+    private val newMessageReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (SmackApp.prefs.isLoggedIn) {
+                val args = intent?.getStringArrayExtra(NEW_MESSAGE)!!
+                val channelId = args[2].toString()
+                if (selectedChannel != null && channelId == selectedChannel!!.id) {
+                    val newMessage = Message(
+                        args[0].toString(), args[1].toString(), channelId,
+                        args[3].toString(), args[4].toString(), args[5].toString(),
+                        args[6].toString()
+                    )
+                    MessageService.messages.add(newMessage)
+
+                    println("New Message in Receiver : ${newMessage.userName} : ${newMessage.message} : ${newMessage.timeStamp}")
+                    MessageService.getMessages(selectedChannel!!)
+                    runOnUiThread { msgAdapter.notifyDataSetChanged() }
+                }
             }
         }
     }
@@ -224,6 +281,43 @@ class MainActivity : AppCompatActivity() {
 
 
     fun sendMessageClicked(view: View) {
-        hideKeyboard(this)
+        val etMsg = binding.appBarMain.mainContent.etMessage
+        if (SmackApp.prefs.isLoggedIn && etMsg.text.isNotEmpty()
+            && selectedChannel != null
+        ) {
+            socket.emit(
+                "newMessage",
+                etMsg.text.toString(),
+                UserDataService.id,
+                selectedChannel!!.id,
+                UserDataService.name,
+                UserDataService.avatarName,
+                UserDataService.avatarColor
+            )
+
+            //Create Message with name & desc
+            val id = random.nextInt(10000).toString()
+            val message = Message(
+                etMsg.text.toString(),
+                UserDataService.name,
+                selectedChannel!!.id, UserDataService.avatarName,
+                UserDataService.avatarColor, id, getCurrentDateTime()
+            )
+            addMessage(message)
+
+            val newMessageIntent = Intent(NEW_MESSAGE)
+            newMessageIntent.putExtra(
+                NEW_MESSAGE, arrayOf(
+                    etMsg.text.toString(),
+                    UserDataService.name,
+                    selectedChannel!!.id, UserDataService.avatarName,
+                    UserDataService.avatarColor, id, getCurrentDateTime()
+                )
+            )
+            LocalBroadcastManager.getInstance(this).sendBroadcast(newMessageIntent)
+
+            etMsg.text.clear()
+            hideKeyboard(this)
+        }
     }
 }

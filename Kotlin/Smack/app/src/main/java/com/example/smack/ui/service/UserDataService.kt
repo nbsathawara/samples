@@ -69,8 +69,8 @@ object UserDataService {
         SmackApp.prefs.authToken = ""
         SmackApp.prefs.userEmail = ""
         SmackApp.prefs.isLoggedIn = false
-//     MessageService.clearMessages()
-       MessageService.clearChannels()
+        MessageService.clearMessages()
+        MessageService.clearChannels()
     }
 
     fun returnAvatarColor(components: String): Int {
