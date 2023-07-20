@@ -15,6 +15,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.smack.R
 import com.example.smack.databinding.ActivityMainBinding
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var channelAdapter: ArrayAdapter<Channel>
+    var selectedChannel: Channel? = null
 
     val socket = IO.socket(SOCKET_URL)
     val random = Random()
@@ -57,6 +59,16 @@ class MainActivity : AppCompatActivity() {
 
     fun initialize() {
 
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+            userDataChangeReceiver,
+            IntentFilter(USER_DATA_CHANGE)
+        )
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+            newChannelReceiver,
+            IntentFilter(NEW_CHANNEL)
+        )
+
         binding.navDrawerHeaderInclude.btnLogIn.setOnClickListener {
             logInClicked(it)
         }
@@ -68,19 +80,33 @@ class MainActivity : AppCompatActivity() {
         binding.appBarMain.mainContent.btnSend.setOnClickListener {
             sendMessageClicked(it)
         }
-        LocalBroadcastManager.getInstance(this).registerReceiver(
-            userDataChangeReceiver,
-            IntentFilter(USER_DATA_CHANGE)
-        )
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(
-            newChannelReceiver,
-            IntentFilter(NEW_CHANNEL)
-        )
+        binding.lvChannels.setOnItemClickListener { parent, view, position, id ->
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            selectedChannel = MessageService.channels[position]
+            setMessages()
+        }
+
+
+        logIn()
+
+    }
+
+    fun logIn() {
 
         channelAdapter =
             ArrayAdapter(this, android.R.layout.simple_list_item_1, MessageService.channels)
         binding.lvChannels.adapter = channelAdapter
+        if (SmackApp.prefs.isLoggedIn) {
+            UserDataService.logIn(
+                this,
+                SmackApp.prefs.userId,
+                SmackApp.prefs.userName,
+                SmackApp.prefs.userEmail,
+                SmackApp.prefs.userAvatar,
+                SmackApp.prefs.userAvatarColor
+            )
+        }
     }
 
     override fun onResume() {
@@ -121,10 +147,22 @@ class MainActivity : AppCompatActivity() {
                 )
                 binding.navDrawerHeaderInclude.btnLogIn.text = "Log Out"
 
-                MessageService.getChannels()
-                channelAdapter.notifyDataSetChanged()
+                setChannels()
             }
         }
+    }
+
+    fun setChannels() {
+        val channels = MessageService.getChannels()
+        if (channels.isNotEmpty()) {
+            selectedChannel = channels[0]
+            channelAdapter.notifyDataSetChanged()
+            setMessages()
+        }
+    }
+
+    fun setMessages() {
+        binding.appBarMain.mainContent.txtSelectedChannel.text = "#${selectedChannel?.name}"
     }
 
     private val newChannelReceiver = object : BroadcastReceiver() {

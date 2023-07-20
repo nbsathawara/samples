@@ -64,16 +64,8 @@ class CreateUserActivity : AppCompatActivity() {
         val userName = binding.etUserName.text.toString()
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
-
-        UserDataService.name = userName
-        UserDataService.email = email
-        UserDataService.avatarName = userAvatar
-        UserDataService.avatarColor = avtarColor
-        UserDataService.id = random.nextInt(1000).toString()
-        SmackApp.prefs.isLoggedIn = true
-
-        val userDataChange = Intent(USER_DATA_CHANGE)
-        LocalBroadcastManager.getInstance(this).sendBroadcast(userDataChange)
+        val id = random.nextInt(10000).toString()
+        UserDataService.logIn(this, id, userName, email, userAvatar, avtarColor)
         //Thread.sleep(2000)
         enableSpinner(false)
         finish()

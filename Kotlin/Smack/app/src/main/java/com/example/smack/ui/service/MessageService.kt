@@ -18,4 +18,8 @@ object MessageService {
             }
         return channels
     }
+
+    fun clearChannels() {
+        channels.clear()
+    }
 }

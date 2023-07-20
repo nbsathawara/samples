@@ -60,14 +60,14 @@ class LogInActivity : AppCompatActivity() {
 
         avtarColor = "[${r.toDouble() / 255},${g.toDouble() / 255},${b.toDouble() / 255},1]"
 
+        val id = random.nextInt(1000).toString()
         val email = binding.etEmail.text.toString()
-
-        UserDataService.email = email
-        UserDataService.name = if (email.contains("@")) email.substring(0, email.indexOf('@'))
+        val userName = if (email.contains("@")) email.substring(0, email.indexOf('@'))
         else email
-        UserDataService.id = random.nextInt(1000).toString()
         UserDataService.avatarName = userAvatar
         UserDataService.avatarColor = avtarColor
+
+        UserDataService.logIn(this, id, userName, email, userAvatar, avtarColor)
     }
 
     fun enableSpinner(enable: Boolean) {
