@@ -1,0 +1,4 @@
+<p *ngIf="isLoading">Fetchin Data....</p>
+<ul *ngIf="!isLoading">
+    <li *ngFor="let person of personList" (click)="onReovePerson(person)">{{person}}</li>
+</ul>
