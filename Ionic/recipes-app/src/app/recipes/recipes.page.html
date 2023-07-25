@@ -1,0 +1,10 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Recipes</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-list> 
+    <app-recipe-item *ngFor="let recipe of recipes" [recipe]="recipe"/>
+  </ion-list>
+</ion-content>
