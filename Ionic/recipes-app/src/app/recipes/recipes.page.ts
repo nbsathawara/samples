@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { RecipesService } from './recipes.service';
+import { ViewDidEnter, ViewDidLeave, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
 
 @Component({
   selector: 'app-recipes',
@@ -13,7 +14,9 @@ export class RecipesPage implements OnInit {
   constructor(private recipeService: RecipesService) { }
 
   ngOnInit() {
-    this.recipes = this.recipeService.getAllRecipes()
   }
 
+  ionViewWillEnter(): void {
+    this.recipes = this.recipeService.getAllRecipes()
+  }
 }
