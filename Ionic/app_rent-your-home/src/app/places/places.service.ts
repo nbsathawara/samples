@@ -26,7 +26,7 @@ export class PlacesService {
       'Not your average city trip!',
       'https://upload.wikimedia.org/wikipedia/commons/0/01/San_Francisco_with_two_bridges_and_the_fog.jpg',
       99.99
-    ),
+    )
   ];
 
   constructor() {}
