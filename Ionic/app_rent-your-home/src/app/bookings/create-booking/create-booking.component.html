@@ -1,17 +1,97 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      {{place.title}}
+      {{ place.title }}
     </ion-title>
     <ion-buttons slot="primary">
       <ion-button (click)="onCancel()">
-        <ion-icon name="close"/>
+        <ion-icon name="close" />
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-text-center">
-  <p>{{place.desc}}</p>
-  <ion-button color="primary" (click)="onBookPlace()">Book</ion-button>
+<ion-content>
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">First Name </ion-label>
+            <ion-input type="text" formControlName="firstName"
+          /></ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3"
+          ><ion-item>
+            <ion-label position="floating">Last Name </ion-label>
+            <ion-input type="text" formControlName="lastName"
+          /></ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3"
+          ><ion-item>
+            <ion-label position="floating">Number of Guests</ion-label>
+            <ion-select formControlName="noOfGuests">
+              <ion-select-option value="1">1</ion-select-option>
+              <ion-select-option value="2">2</ion-select-option>
+              <ion-select-option value="3">3</ion-select-option>
+            </ion-select></ion-item
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="3" offset-sm="3"
+          ><ion-item>
+            <ion-label>Available From</ion-label>
+            <ion-datetime-button datetime="fromDateTime"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime
+                  id="fromDateTime"
+                  showDefaultButtons
+                  presentation="date"
+                  display-format="YYYY-MM-DD"
+                  [min]="place.availableFrom.toISOString()"
+                  [max]="place.availableTo.toISOString()"
+                  formControlName="fromDate"
+                  (ionChange)="onFromDateChange($event)"
+                ></ion-datetime>
+              </ng-template> </ion-modal
+          ></ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="3" offset-sm="3"
+          ><ion-item>
+            <ion-label>Available To</ion-label>
+            <ion-datetime-button datetime="toDateTime"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime
+                  id="toDateTime"
+                  showDefaultButtons
+                  presentation="date"
+                  display-format="YYYY-MM-DD"
+                  [value]="toMinDate"
+                  [min]="toMinDate"
+                  [max]="place.availableTo.toISOString()"
+                  formControlName="toDate"
+                ></ion-datetime>
+              </ng-template> </ion-modal
+          ></ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-button color="primary" expand="block" [disabled]="!form.valid || !isValidDates()"
+          (click)="onBookPlace()"
+            >Book</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>
