@@ -5,7 +5,10 @@
       <ion-back-button defaultHref="/places/tabs/offers" />
     </ion-buttons>
     <ion-buttons slot="primary">
-      <ion-button [disabled]="!form.valid" (click)="onCreateOffer()">
+      <ion-button
+        [disabled]="!form.valid || !isValidDates()"
+        (click)="onCreateOffer()"
+      >
         <ion-icon name="checkmark" slot="icon-only" />
       </ion-button>
     </ion-buttons>
@@ -19,7 +22,7 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Title</ion-label>
-            <ion-input 
+            <ion-input
               type="text"
               formControlName="title"
               autocomplete
@@ -60,9 +63,8 @@
               <ng-template>
                 <ion-datetime
                   presentation="date"
-                  id="fromDateTime" 
-                  min="2023-07-27"
-                  max="2030-12-31"
+                  id="fromDateTime"
+                  [min]="curDateStr"
                   showDefaultButtons="true"
                   formControlName="fromDate"
                 ></ion-datetime>
@@ -81,8 +83,7 @@
                 <ion-datetime
                   id="toDateTime"
                   presentation="date"
-                  min="2023-07-28"
-                  max="2030-12-31"
+                  [min]="curDateStr"
                   showDefaultButtons="true"
                   formControlName="toDate"
                 ></ion-datetime>

@@ -7,8 +7,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-button class="ion-margin" (click)="onBookPlace()">
-    Book
-  </ion-button>
+<ion-content class="ion-text-center">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col sizeSm="6" offsetSm="3">
+        <ion-img [src]="place.imgUrl" />
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col sizeSm="6" offsetSm="3" class="ion-padding">
+        <p>{{[place.desc]}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col sizeSm="6" offsetSm="3" *ngIf="isBookable">
+        <ion-button (click)="onBookPlace()"> Book</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

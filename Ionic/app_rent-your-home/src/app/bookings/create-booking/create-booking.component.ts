@@ -23,7 +23,7 @@ export class CreateBookingComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this.selectedMode == 'random') {
+    if (this.selectedMode === 'random') {
       const availableFrom = new Date(this.place.availableFrom)
       const availableTo = new Date(this.place.availableTo)
 
@@ -80,7 +80,7 @@ export class CreateBookingComponent implements OnInit {
 
   isValidDates() {
     const fromDate = this.form.get('fromDate')?.value
-    const toDate = this.form.get('toDate')?.value 
+    const toDate = this.form.get('toDate')?.value
     return toDate >= fromDate
   }
 
@@ -91,14 +91,13 @@ export class CreateBookingComponent implements OnInit {
   onBookPlace() {
     if (!this.form.valid || !this.isValidDates())
       return
-    console.log(this.form.value)
     this.modalCtrl.dismiss({
       bookingData: {
-        firstName: this.form.get('firstName'),
-        lastName: this.form.get('lastName'),
-        noOfGuests: this.form.get('noOfGuests'),
-        startDate: this.form.get('fromDate'),
-        endDate: this.form.get('toDate')
+        firstName: this.form.value.firstName,
+        lastName: this.form.value.lastName,
+        guestNumber: +this.form.value.noOfGuests,
+        startDate: new Date(this.form.value.fromDate),
+        endDate: new Date(this.form.value.toDate)
 
       }
     }, 'booking-confirm')

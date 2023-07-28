@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PlacesService } from '../../places.service';
-import { NavController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { Place } from '../../place.model';
-import { FormControl, FormGroup, Validators } from '@angular/forms'; 
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-offer',
   templateUrl: './edit-offer.page.html',
   styleUrls: ['./edit-offer.page.scss'],
 })
-export class EditOfferPage implements OnInit {
+export class EditOfferPage implements OnInit, OnDestroy {
 
   offer!: Place
   form!: FormGroup
-  constructor(private route: ActivatedRoute, private navCtrl: NavController, private placeService: PlacesService) { }
+  offerSubscription!: Subscription
+  constructor(private route: ActivatedRoute, private navCtrl: NavController
+    , private placeService: PlacesService, private router: Router, private loadintCrl: LoadingController) { }
 
   ngOnInit() {
 
@@ -23,7 +26,10 @@ export class EditOfferPage implements OnInit {
         this.closeScreen()
         return
       }
-      this.offer = this.placeService.getPlace(paramMap.get('placeId') as string) as Place
+      this.placeService.getPlace(paramMap.get('placeId') as string)
+        .subscribe(offer => {
+          this.offer = offer as Place
+        })
 
       this.form = new FormGroup({
         title: new FormControl(this.offer.title, {
@@ -39,10 +45,24 @@ export class EditOfferPage implements OnInit {
     })
   }
 
-  onUpdateOffer(){
-if(!this.form.valid)
-return
-console.log(this.form)
+  ngOnDestroy(): void {
+    this.offerSubscription?.unsubscribe()
+  }
+
+  onUpdateOffer() {
+    if (!this.form.valid)
+      return
+    this.loadintCrl.create({
+      message: 'Updating offer...'
+    }).then(loadingEl => {
+      loadingEl.present()
+      this.placeService.updatePlace(this.offer.id, this.form.value.title, this.form.value.desc)
+        .subscribe(() => {
+          loadingEl.dismiss()
+          this.form.reset()
+          this.router.navigate(['/places/tabs/offers'])
+        })
+    })
   }
 
   closeScreen() {
