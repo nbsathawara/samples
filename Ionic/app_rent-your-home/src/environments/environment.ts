@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  baseUrl: 'https://ionic-sample-backend-default-rtdb.firebaseio.com/',
+  defGoogleMapCenter: { lat: 23.046, lng: 72.607 },
+  googleMapsAPIKey: 'AIzaSyCaO8mfW4F5b-WB6Pi5BwsrVanoeMwTJqE'
+
 };
 
 /*

@@ -9,7 +9,7 @@
 
 <ion-content class="ion-text-center">
   <div *ngIf="isLoading" class="ion-padding ion-text-center">
-    <ion-spinner color="primary"/>
+    <ion-spinner color="primary" />
   </div>
   <ion-grid class="ion-no-padding" *ngIf="!isLoading">
     <ion-row>
@@ -20,6 +20,17 @@
     <ion-row>
       <ion-col sizeSm="6" offsetSm="3" class="ion-padding">
         <p>{{[place.desc]}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col sizeSm="6" offsetSm="3" class="ion-padding">
+        <p class="ion-text-center"> {{place.location.address}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col sizeSm="6" offsetSm="3">
+        <ion-img class="location-img" [src]="place.location.staticMNapImgUrl" 
+        (click)="onMapClicked()"/>
       </ion-col>
     </ion-row>
     <ion-row>

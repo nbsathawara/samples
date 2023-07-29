@@ -3,7 +3,8 @@ import { Place } from './place.model';
 import { AuthService } from '../auth/auth.service';
 import { BehaviorSubject, delay, map, of, switchMap, take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Constants } from '../constants.modal';
+import { environment } from 'src/environments/environment';
+import { PlaceLocation } from './location.model';
 
 
 interface PlaceData {
@@ -14,6 +15,7 @@ interface PlaceData {
   price: number
   title: string
   userId: string
+  location: PlaceLocation
 }
 
 @Injectable({
@@ -52,23 +54,23 @@ export class PlacesService {
   //   )
   // ]
 
-  constructor(private authService: AuthService, private http: HttpClient,
-    private constants: Constants) { }
+  constructor(private authService: AuthService, private http: HttpClient) { }
 
   get places() {
     return this._places.asObservable();
   }
 
   getPlace(id: string) {
-    return this.http.get<PlaceData>(`https://ionic-sample-backend-default-rtdb.firebaseio.com/offered-places/${id}.json`)
+    return this.http.get<PlaceData>(environment.baseUrl + `offered-places/${id}.json`)
       .pipe(map(placeData => {
         return new Place(id, placeData.title, placeData.desc, placeData.imgUrl,
-          placeData.price, new Date(placeData.availableFrom), new Date(placeData.availableTo), placeData.userId)
+          placeData.price, new Date(placeData.availableFrom), new Date(placeData.availableTo),
+          placeData.userId, placeData.location)
       }))
   }
 
   fetchPlaces() {
-    return this.http.get<{ [keys: string]: PlaceData }>('https://ionic-sample-backend-default-rtdb.firebaseio.com/offered-places.json')
+    return this.http.get<{ [keys: string]: PlaceData }>(environment.baseUrl + 'offered-places.json')
       .pipe(map(resData => {
         const places: Place[] = []
         for (const key in resData) {
@@ -76,7 +78,7 @@ export class PlacesService {
 
             const place = new Place(key, resData[key].title, resData[key].desc, resData[key].imgUrl,
               resData[key].price, new Date(resData[key].availableFrom), new Date(resData[key].availableTo),
-              resData[key].userId)
+              resData[key].userId, resData[key].location)
 
             places.push(place)
           }
@@ -87,10 +89,10 @@ export class PlacesService {
       }))
   }
 
-  addPlace(title: string, desc: string, price: number, startDate: Date, endDate: Date) {
+  addPlace(title: string, desc: string, price: number, startDate: Date, endDate: Date, location: PlaceLocation) {
     const newPlace = new Place(Math.random().toString(), title, desc,
       'https://lonelyplanetimages.imgix.net/mastheads/GettyImages-538096543_medium.jpg?sharp=10&vib=20&w=1200',
-      price, startDate, endDate, this.authService.userId)
+      price, startDate, endDate, this.authService.userId, location)
 
 
     let generatedId: string = ''
@@ -108,7 +110,7 @@ export class PlacesService {
       },
     }
 
-    return this.http.post<{ name: string }>('https://ionic-sample-backend-default-rtdb.firebaseio.com/offered-places.json',
+    return this.http.post<{ name: string }>(environment.baseUrl + 'offered-places.json',
       {
         ...newPlace, id: null
       }).pipe(
@@ -135,9 +137,9 @@ export class PlacesService {
         const oldPlace = updatedPlaces[index] as Place
         updatedPlaces[index] = new Place(placeId, title, desc, oldPlace.imgUrl, oldPlace.price,
           oldPlace.availableFrom, oldPlace.availableTo,
-          oldPlace.userId)
+          oldPlace.userId, oldPlace.location)
         console.log(updatedPlaces[index])
-        return this.http.put(`https://ionic-sample-backend-default-rtdb.firebaseio.com/offered-places/${placeId}.json`,
+        return this.http.put(environment.baseUrl + `offered-places/${placeId}.json`,
           {
             ...updatedPlaces[index], id: null
           }

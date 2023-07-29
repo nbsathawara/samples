@@ -3,6 +3,7 @@ import { Booking } from './booking.model';
 import { BehaviorSubject, delay, map, switchMap, take, tap } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 interface bookingData {
   endDate: string
@@ -29,7 +30,7 @@ export class BookingService {
   }
 
   fetchBookings() {
-    const url = `https://ionic-sample-backend-default-rtdb.firebaseio.com/bookings.json?orderBy="userId"&&equalTo="${this.authService.userId}"`
+    const url = environment.baseUrl + `bookings.json?orderBy="userId"&&equalTo="${this.authService.userId}"`
     return this.http.get<{ [key: string]: bookingData }>(url)
       .pipe(
         map(
@@ -59,7 +60,7 @@ export class BookingService {
       , firstName, lastName,
       guestNumber, startDate, endDate)
 
-    return this.http.post<{ name: string }>('https://ionic-sample-backend-default-rtdb.firebaseio.com/bookings.json',
+    return this.http.post<{ name: string }>(environment.baseUrl + 'bookings.json',
       {
         ...newBooking, id: null
       }
@@ -77,7 +78,7 @@ export class BookingService {
   }
 
   cancelBooking(bookingId: string) {
-    const url = `https://ionic-sample-backend-default-rtdb.firebaseio.com/bookings/${bookingId}.json`
+    const url = environment.baseUrl + `bookings/${bookingId}.json`
 
     return this.http.delete(url)
       .pipe(

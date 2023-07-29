@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PlacesService } from '../../places.service';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { PlaceLocation } from '../../location.model';
 
 @Component({
   selector: 'app-new-offer',
@@ -15,7 +16,7 @@ export class NewOfferPage implements OnInit {
   curDateStr = new Date().toISOString()
 
   constructor(private placeService: PlacesService, private router: Router,
-    private loadingCtrl:LoadingController) { }
+    private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -40,8 +41,15 @@ export class NewOfferPage implements OnInit {
       toDate: new FormControl(new Date().toISOString(), {
         updateOn: 'blur',
         validators: [Validators.required]
+      }),
+      location: new FormControl(null, {
+        validators: [Validators.required]
       })
     })
+  }
+
+  onLoactionPicked(location: PlaceLocation) {
+    this.form.patchValue({ location: location })
   }
 
   isValidDates() {
@@ -54,14 +62,14 @@ export class NewOfferPage implements OnInit {
     if (!this.form.valid || !this.isValidDates())
       return
 
-      this.loadingCtrl.create({
-        message:"Creating Offer...",
-      }).then(loadingEl=>{
-        loadingEl.present()
-      })
+    this.loadingCtrl.create({
+      message: "Creating Offer...",
+    }).then(loadingEl => {
+      loadingEl.present()
+    })
     this.placeService.addPlace(this.form.value.title,
       this.form.value.description, +this.form.value.price, new Date(this.form.value.fromDate)
-      , new Date(this.form.value.toDate)).subscribe(()=>{
+      , new Date(this.form.value.toDate), this.form.value.location).subscribe(() => {
         this.loadingCtrl.dismiss()
         this.form.reset()
         this.router.navigate(['/places/tabs/offers'])
