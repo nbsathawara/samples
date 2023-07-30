@@ -3,12 +3,12 @@
   <ion-img
     class="location-img"
     [src]="pickedLocationImg"
-    *ngIf="pickedLocationImg && !isLoading"
+    *ngIf="pickedLocationImg && !isLoading && showPreview"
     (click)="onPickLocation()"
   ></ion-img>
   <ion-button
     color="primary"
-    *ngIf="!pickedLocationImg && !isLoading"
+    *ngIf="(!pickedLocationImg || !showPreview) && !isLoading"
     (click)="onPickLocation()"
   >
     <ion-icon name="map" slot="start"></ion-icon>

@@ -89,9 +89,8 @@ export class PlacesService {
       }))
   }
 
-  addPlace(title: string, desc: string, price: number, startDate: Date, endDate: Date, location: PlaceLocation) {
-    const newPlace = new Place(Math.random().toString(), title, desc,
-      'https://lonelyplanetimages.imgix.net/mastheads/GettyImages-538096543_medium.jpg?sharp=10&vib=20&w=1200',
+  addPlace(title: string, desc: string, price: number, startDate: Date, endDate: Date, location: PlaceLocation, imgUrl: string) {
+    const newPlace = new Place(Math.random().toString(), title, desc, imgUrl,
       price, startDate, endDate, this.authService.userId, location)
 
 
@@ -151,5 +150,32 @@ export class PlacesService {
       })
     )
   }
+
+  uploadImage(image: File) {
+    let index = Math.floor(Math.random() * this.imgs.length);
+    let imgUrl = this.imgs[index]
+    console.log(imgUrl)
+    return imgUrl
+    // const uploadData = new FormData()
+    // uploadData.append('image', image)
+
+    // return this.http.post<{ imageUrl: string, imagePath: string }>(
+    //   'https://us-central1-ionic-angular-course.cloudfunctions.net/storeImage',
+    //   uploadData
+    // );
+  }
+
+  imgs = [
+    'https://picsum.photos/seed/picsum/200/300',
+    'https://fastly.picsum.photos/id/435/200/300.jpg?grayscale&hmac=sIIPB5XgUzv2gJ06dY0RTZiPBblJi7Rv7wb9WOfIXvU',
+    'https://images.pexels.com/photos/2825578/pexels-photo-2825578.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    'https://picsum.photos/id/237/200/300',
+    'https://picsum.photos/1200/600',
+    'https://images.unsplash.com/photo-1563713665854-e72327bf780e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+    'https://i2.wp.com/beebom.com/wp-content/uploads/2016/01/Reverse-Image-Search-Engines-Apps-And-Its-Uses-2016.jpg',
+    'https://lonelyplanetimages.imgix.net/mastheads/GettyImages-538096543_medium.jpg?sharp=10&vib=20&w=1200',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Paris_Night.jpg/1024px-Paris_Night.jpg',
+    'https://upload.wikimedia.org/wikipedia/commons/0/01/San_Francisco_with_two_bridges_and_the_fog.jpg',
+  ]
 
 }
