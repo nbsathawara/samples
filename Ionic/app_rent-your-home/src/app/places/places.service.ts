@@ -90,12 +90,12 @@ export class PlacesService {
   }
 
   addPlace(title: string, desc: string, price: number, startDate: Date, endDate: Date, location: PlaceLocation, imgUrl: string) {
-    const newPlace = new Place(Math.random().toString(), title, desc, imgUrl,
-      price, startDate, endDate, this.authService.userId, location)
+
+    let newPlace: Place
+    let generatedId: string
 
 
-    let generatedId: string = ''
-    const observer = {
+    const placeObserver = {
       next: (places) => {
         newPlace.id = generatedId
         this._places.next(places.concat(newPlace))
@@ -109,15 +109,24 @@ export class PlacesService {
       },
     }
 
-    return this.http.post<{ name: string }>(environment.baseUrl + 'offered-places.json',
-      {
-        ...newPlace, id: null
-      }).pipe(
+    return this.authService.userId.pipe
+      (take(1), switchMap(userId => {
+        if (!userId) {
+          throw new Error('User not found!!')
+        }
+
+        newPlace = new Place(Math.random().toString(), title, desc, imgUrl,
+          price, startDate, endDate, userId, location)
+
+        return this.http.post<{ name: string }>(environment.baseUrl + 'offered-places.json',
+          {
+            ...newPlace, id: null
+          })
+      }),
         switchMap(resData => {
           generatedId = resData.name
           return this.places
-        }), take(1), tap(observer)
-
+        }), take(1), tap(placeObserver)
       )
   }
 

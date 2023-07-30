@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PlacesService } from '../places.service';
 import { Place } from '../place.model';
 import { InfiniteScrollCustomEvent, IonInput, SegmentChangeEventDetail, SegmentCustomEvent } from '@ionic/angular';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class DiscoverPage implements OnInit, OnDestroy {
   _places!: Place[]
   _filteredPlaces!: Place[]
   placesSubscription!: Subscription
-  isLoading=false
+  isLoading = false
 
   constructor(private authService: AuthService, private placeService: PlacesService) { }
 
@@ -26,7 +26,7 @@ export class DiscoverPage implements OnInit, OnDestroy {
     })
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.isLoading = true;
     this.placeService.fetchPlaces().subscribe(() => {
       this.isLoading = false
@@ -39,13 +39,18 @@ export class DiscoverPage implements OnInit, OnDestroy {
   }
 
   onSegmentUpdate(event, detail?: CustomEvent) {
-    const filter = (event as SegmentCustomEvent).detail.value
-    if (filter === 'all') {
-      this._filteredPlaces = this._places
-    } else {
-      this._filteredPlaces = this._places.filter(place => { 
-        return place.userId != this.authService.userId
+
+    this.authService.userId.pipe(take(1))
+      .subscribe(userId => {
+        const filter = (event as SegmentCustomEvent).detail.value
+        if (filter === 'all') {
+          this._filteredPlaces = this._places
+        } else {
+          this._filteredPlaces = this._places.filter(place => {
+            return place.userId != userId
+          })
+        }
       })
-    } 
+
   }
 }

@@ -4,7 +4,7 @@ import { ActionSheetController, AlertController, LoadingController, ModalControl
 import { PlacesService } from '../../places.service';
 import { Place } from '../../place.model';
 import { CreateBookingComponent } from '../../../bookings/create-booking/create-booking.component';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, switchMap, take } from 'rxjs';
 import { BookingService } from 'src/app/bookings/booking.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { MapModalComponent } from 'src/app/shared/map-modal/map-modal.component';
@@ -34,12 +34,15 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
       }
 
       this.isLoading = true
-      this.placeService.getPlace(paramMap.get('placeId') as string)
-        .subscribe(place => {
+      let fetchedUserId: string
+
+      const placObserver = {
+        next: (place) => {
           this.place = place as Place
-          this.isBookable = this.place.userId !== this.authService.userId
+          this.isBookable = this.place.userId !== fetchedUserId
           this.isLoading = false
-        }, error => {
+        },
+        error: (error) => {
           this.alertCtrl.create({
             message: "Something went wrong.Try again later.",
             header: 'Error',
@@ -54,7 +57,17 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
           }).then(alertEl => {
             alertEl.present()
           })
-        })
+        },
+        complete: () => { }
+      }
+
+      this.authService.userId.pipe(switchMap(userId => {
+        if (!userId) {
+          throw new Error('User not found!!')
+        }
+        fetchedUserId = userId
+        return this.placeService.getPlace(paramMap.get('placeId') as string)
+      })).subscribe(placObserver)
     })
   }
 
