@@ -61,8 +61,10 @@ export class PlacesService {
   }
 
   getPlace(id: string) {
-    return this.http.get<PlaceData>(environment.baseUrl + `offered-places/${id}.json`)
-      .pipe(map(placeData => {
+    return this.authService.token.pipe(take(1),
+      switchMap(token => {
+        return this.http.get<PlaceData>(environment.baseUrl + `offered-places/${id}.json?auth=${token}`)
+      }), map(placeData => {
         return new Place(id, placeData.title, placeData.desc, placeData.imgUrl,
           placeData.price, new Date(placeData.availableFrom), new Date(placeData.availableTo),
           placeData.userId, placeData.location)
@@ -70,8 +72,12 @@ export class PlacesService {
   }
 
   fetchPlaces() {
-    return this.http.get<{ [keys: string]: PlaceData }>(environment.baseUrl + 'offered-places.json')
-      .pipe(map(resData => {
+
+    return this.authService.token.pipe(take(1),
+      switchMap(token => {
+        return this.http.get<{ [keys: string]: PlaceData }>(environment.baseUrl + `offered-places.json?auth=${token}`)
+      }),
+      map(resData => {
         const places: Place[] = []
         for (const key in resData) {
           if (resData.hasOwnProperty(key)) {
@@ -93,7 +99,7 @@ export class PlacesService {
 
     let newPlace: Place
     let generatedId: string
-
+    let fetchedUserId: string
 
     const placeObserver = {
       next: (places) => {
@@ -109,20 +115,27 @@ export class PlacesService {
       },
     }
 
+
     return this.authService.userId.pipe
-      (take(1), switchMap(userId => {
-        if (!userId) {
-          throw new Error('User not found!!')
-        }
+      (take(1),
+        switchMap(userId => {
+          fetchedUserId = userId as string
+          return this.authService.token
+        }),
+        take(1),
+        switchMap(token => {
+          if (!fetchedUserId) {
+            throw new Error('User not found!!')
+          }
 
-        newPlace = new Place(Math.random().toString(), title, desc, imgUrl,
-          price, startDate, endDate, userId, location)
+          newPlace = new Place(Math.random().toString(), title, desc, imgUrl,
+            price, startDate, endDate, fetchedUserId, location)
 
-        return this.http.post<{ name: string }>(environment.baseUrl + 'offered-places.json',
-          {
-            ...newPlace, id: null
-          })
-      }),
+          return this.http.post<{ name: string }>(environment.baseUrl + `offered-places.json?auth=${token}`,
+            {
+              ...newPlace, id: null
+            })
+        }),
         switchMap(resData => {
           generatedId = resData.name
           return this.places
@@ -132,7 +145,14 @@ export class PlacesService {
 
   updatePlace(placeId: string, title: string, desc: string) {
     let updatedPlaces!: Place[]
-    return this.places.pipe(take(1),
+    let fetchedToken: string
+    return this.authService.token.pipe(
+      take(1),
+      switchMap(token => {
+        fetchedToken = token as string
+        return this.places
+      }
+      ), take(1),
       switchMap(places => {
         if (!places || places.length <= 0)
           return this.fetchPlaces()
@@ -147,7 +167,7 @@ export class PlacesService {
           oldPlace.availableFrom, oldPlace.availableTo,
           oldPlace.userId, oldPlace.location)
         console.log(updatedPlaces[index])
-        return this.http.put(environment.baseUrl + `offered-places/${placeId}.json`,
+        return this.http.put(environment.baseUrl + `offered-places/${placeId}.json?auth=${fetchedToken}`,
           {
             ...updatedPlaces[index], id: null
           }

@@ -30,29 +30,38 @@ export class BookingService {
   }
 
   fetchBookings() {
-    return this.authService.userId.pipe(switchMap(userId => {
-      if (!userId) {
-        throw new Error('User not found')
-      }
-      const url = environment.baseUrl + `bookings.json?orderBy="userId"&&equalTo="${userId}"`
-      console.log('url : ', url)
-      return this.http.get<{ [key: string]: bookingData }>(url)
-    }),
-      map(
-        bookingData => {
-          const bookings: Booking[] = []
-          for (const key in bookingData) {
-            if (bookingData.hasOwnProperty(key)) {
-              const data = bookingData[key]
-              bookings.push(new Booking(key, data.placeId, data.userId, data.placeTitle, data.placeImg
-                , data.firstName, data.lastName, data.guestNumber, new Date(data.startDate), new Date(data.endDate)))
-            }
+    let fetchedUserId: string
+
+    return this.authService.userId
+      .pipe(
+        take(1),
+        switchMap(userId => {
+          fetchedUserId = userId as string
+          return this.authService.token
+        }),
+        switchMap(token => {
+          if (!fetchedUserId) {
+            throw new Error('User not found')
           }
-          return bookings
-        }
-      ), tap(bookings => {
-        this._bookings.next(bookings)
-      }))
+          const url = environment.baseUrl + `bookings.json?orderBy="userId"&&equalTo="${fetchedUserId}"&&auth=${token}`
+          console.log('url : ', url)
+          return this.http.get<{ [key: string]: bookingData }>(url)
+        }),
+        map(
+          bookingData => {
+            const bookings: Booking[] = []
+            for (const key in bookingData) {
+              if (bookingData.hasOwnProperty(key)) {
+                const data = bookingData[key]
+                bookings.push(new Booking(key, data.placeId, data.userId, data.placeTitle, data.placeImg
+                  , data.firstName, data.lastName, data.guestNumber, new Date(data.startDate), new Date(data.endDate)))
+              }
+            }
+            return bookings
+          }
+        ), tap(bookings => {
+          this._bookings.next(bookings)
+        }))
   }
 
   addBooking(placeId: string, placeTitle: string, placeImg: string,
@@ -60,18 +69,23 @@ export class BookingService {
     startDate: Date, endDate: Date) {
 
     let generatedId = ''
+    let fetchedUserId
     let newBooking: Booking
 
     return this.authService.userId.pipe(
       take(1),
       switchMap(userId => {
-        if (!userId) {
-          throw new Error('No user id found!');
+        fetchedUserId = userId
+        return this.authService.token
+      }),
+      switchMap(token => {
+        if (!fetchedUserId) {
+          throw new Error('User not found!!');
         }
         newBooking = new Booking(
           Math.random().toString(),
           placeId,
-          userId,
+          fetchedUserId,
           placeTitle,
           placeImg,
           firstName,
@@ -80,7 +94,7 @@ export class BookingService {
           startDate,
           endDate
         );
-        return this.http.post<{ name: string }>(environment.baseUrl + 'bookings.json',
+        return this.http.post<{ name: string }>(environment.baseUrl + `bookings.json?auth=${token}`,
           { ...newBooking, id: null }
         );
       }),
@@ -97,23 +111,24 @@ export class BookingService {
   }
 
   cancelBooking(bookingId: string) {
-    const url = environment.baseUrl + `bookings/${bookingId}.json`
+    //const url = 
 
-    return this.http.delete(url)
-      .pipe(
-        switchMap(() => {
-          return this.bookings
-        }),
-        take(1),
-        tap(bookings => {
-          this._bookings.next(
-            bookings.filter(
-              booking => {
-                return booking.id != bookingId
-              }))
-        })
+    return this.authService.token.pipe(take(1), switchMap(token => {
+      return this.http.delete(environment.baseUrl + `bookings/${bookingId}.json?auth=${token}`)
+    }),
+      switchMap(() => {
+        return this.bookings
+      }),
+      take(1),
+      tap(bookings => {
+        this._bookings.next(
+          bookings.filter(
+            booking => {
+              return booking.id != bookingId
+            }))
+      })
 
-      )
+    )
 
   }
 }

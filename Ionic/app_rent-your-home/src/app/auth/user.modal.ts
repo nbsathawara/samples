@@ -7,7 +7,15 @@ export class User {
         else return this._token
     }
 
-    get userId(){
+    get userId() {
         return this.id
+    }
+
+    get toeknDuration() {
+        if (!this.token) {
+            return 0
+        }
+        //return 5000
+        return this._tokenExpDate.getTime() - new Date().getTime()
     }
 }

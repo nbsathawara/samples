@@ -31,6 +31,7 @@ export class AuthPage implements OnInit {
     const email = form.value.email
     const pwd = form.value.password
     this.authenticate(email, pwd)
+    form.reset()
   }
 
   authenticate(email: string, password: string) {

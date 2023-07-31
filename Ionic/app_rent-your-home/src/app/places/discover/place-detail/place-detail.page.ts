@@ -50,7 +50,7 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
               {
                 text: 'OK',
                 handler: () => {
-                  this.router.navigate(['/places/tabs/offers'])
+                  this.router.navigate(['/places/tabs/discover'])
                 }
               }
             ]
@@ -61,13 +61,16 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
         complete: () => { }
       }
 
-      this.authService.userId.pipe(switchMap(userId => {
-        if (!userId) {
-          throw new Error('User not found!!')
-        }
-        fetchedUserId = userId
-        return this.placeService.getPlace(paramMap.get('placeId') as string)
-      })).subscribe(placObserver)
+      this.authService.userId
+        .pipe(
+          take(1),
+          switchMap(userId => {
+            if (!userId) {
+              throw new Error('User not found!!')
+            }
+            fetchedUserId = userId
+            return this.placeService.getPlace(paramMap.get('placeId') as string)
+          })).subscribe(placObserver)
     })
   }
 

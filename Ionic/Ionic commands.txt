@@ -1,0 +1,8 @@
+
+- ionic build
+
+- ionic serve
+
+- ionic capacitor run android -l --external
+
+- ionic capacitor run ios -l --external
