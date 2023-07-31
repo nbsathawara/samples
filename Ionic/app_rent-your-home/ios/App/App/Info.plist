@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>Rent Your Home</string>
+	<string>Rent Your Home</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -27,15 +27,15 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Privacy - Location Always Usage Description</string>
+	<string>Location access to detect current for new place</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Privacy - Location When In Use Usage Description</string>
-	    <key>NSCameraUsageDescription</key>
-	    <string>Privacy - Camera Usage Description</string>
-	    <key>NSPhotoLibraryAddUsageDescription</key>
-	    <string>Privacy - Photo Library Additions Usage Description</string>
-	    <key>NSPhotoLibraryUsageDescription</key>
-	    <string>Privacy - Photo Library Usage Description</string>
+	<string>Location access to detect current for new place</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera access to get image for new place</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Camera access to get image for new place</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Camera access to get image for new place</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

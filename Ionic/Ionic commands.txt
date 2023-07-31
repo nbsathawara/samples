@@ -5,4 +5,17 @@
 
 - ionic capacitor run android -l --external
 
-- ionic capacitor run ios -l --external
+- ionic capacitor run iOS -l --external
+
+
+For Production
+
+- ng build --configuration production
+
+- ionic capacitor sync android
+
+- ionic capacitor sync ios
+
+- ionic capacitor opne android
+
+- ionic capacitor open ios
