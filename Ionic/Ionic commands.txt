@@ -19,3 +19,10 @@ For Production
 - ionic capacitor opne android
 
 - ionic capacitor open ios
+
+
+ngRx
+
+- npm run server 
+
+- npm start
