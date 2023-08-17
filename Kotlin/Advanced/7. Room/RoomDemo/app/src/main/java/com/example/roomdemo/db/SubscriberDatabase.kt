@@ -1,11 +1,29 @@
 package com.example.roomdemo.db
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
+import androidx.room.migration.AutoMigrationSpec
 
-@Database(version = 1, entities = [Subscriber::class])
+@Database(
+    version = 4, entities = [Subscriber::class],
+    autoMigrations = [
+        AutoMigration(
+            from = 1,
+            to = 2,
+            spec = SubscriberDatabase.Migration1to2::class
+        ),
+        AutoMigration(
+            from = 2,
+            to = 3,
+            spec = SubscriberDatabase.Migration2to3::class
+        ),
+        AutoMigration(
+            from = 3,
+            to = 4,
+            spec = SubscriberDatabase.Migration3to4::class
+        )
+    ]
+)
 abstract class SubscriberDatabase : RoomDatabase() {
     abstract fun subscriberDao(): SubscriberDao
 
@@ -27,4 +45,25 @@ abstract class SubscriberDatabase : RoomDatabase() {
             }
         }
     }
+
+    @RenameColumn(
+        tableName = "subscriber_data_table",
+        fromColumnName = "subscriber_id",
+        toColumnName = "id",
+    )
+    class Migration1to2 : AutoMigrationSpec
+
+    @RenameColumn(
+        tableName = "subscriber_data_table",
+        fromColumnName = "subscriber_name",
+        toColumnName = "name",
+    )
+    class Migration2to3 : AutoMigrationSpec
+
+    @RenameColumn(
+        tableName = "subscriber_data_table",
+        fromColumnName = "subscriber_email",
+        toColumnName = "email",
+    )
+    class Migration3to4 : AutoMigrationSpec
 }

@@ -7,11 +7,11 @@ import androidx.room.PrimaryKey
 @Entity("subscriber_data_table")
 data class Subscriber(
     @PrimaryKey(true)
-    @ColumnInfo("subscriber_id")
+    @ColumnInfo("id")
     val id: Int,
-    @ColumnInfo("subscriber_name")
+    @ColumnInfo("name")
     var name: String,
-    @ColumnInfo("subscriber_email")
+    @ColumnInfo("email")
     var email: String
 ) {
 }
