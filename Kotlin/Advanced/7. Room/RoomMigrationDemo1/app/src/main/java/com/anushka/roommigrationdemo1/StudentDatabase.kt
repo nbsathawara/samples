@@ -1,15 +1,17 @@
 package com.anushka.roommigrationdemo1
 
 import android.content.Context
-import androidx.room.AutoMigration
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
+import androidx.room.migration.AutoMigrationSpec
 
 @Database(
     entities = [Student::class],
-    version = 4,
-    autoMigrations = [AutoMigration(from = 3, to = 4)]
+    version = 6,
+    autoMigrations = [AutoMigration(from = 1, to = 2),
+        AutoMigration(from = 2, to = 3),
+        AutoMigration(from = 3, to = 4),
+        AutoMigration(from = 4, to = 5, spec = StudentDatabase.Migration4T05::class),
+        AutoMigration(from = 5, to = 6, spec = StudentDatabase.Migration5To6::class)]
 )
 abstract class StudentDatabase : RoomDatabase() {
 
@@ -33,5 +35,15 @@ abstract class StudentDatabase : RoomDatabase() {
             }
         }
     }
+
+    @RenameColumn(
+        tableName = "student_info",
+        fromColumnName = "course_name",
+        toColumnName = "subject_name"
+    )
+    class Migration4T05 : AutoMigrationSpec
+
+    @DeleteColumn(tableName = "student_info", columnName = "student_age")
+    class Migration5To6 : AutoMigrationSpec
 }
 

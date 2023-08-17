@@ -31,13 +31,11 @@ class MainActivity : AppCompatActivity() {
                                 0,
                                 it.toString(),
                                 etEmail.text.toString(),
-                                (etAge.text.toString()).toInt(),
                                 etCourse.text.toString()
                             )
                         )
                         etName.setText("")
                         etEmail.setText("")
-                        etAge.setText("")
                         etCourse.setText("")
                     }
                 }
