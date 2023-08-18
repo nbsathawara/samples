@@ -1,7 +1,7 @@
 package com.nbs.tmdbclient.data.repository.movie.datasourceimpl
 
 import android.util.Log
-import com.nbs.tmdbclient.DataUtils
+import com.nbs.tmdbclient.custom.Utils
 import com.nbs.tmdbclient.data.model.movie.Movie
 import com.nbs.tmdbclient.data.repository.movie.datasource.MovieCacheDataSource
 import com.nbs.tmdbclient.data.repository.movie.datasource.MovieLocalDataSource
@@ -33,7 +33,7 @@ class MovieRepositoryImpl(
         try {
             movies = movieCacheDataSource.getMoviesFromCache()
         } catch (e: java.lang.Exception) {
-            Log.i(DataUtils.logTagName, e.message.toString())
+            Log.i(Utils.logTagName, e.message.toString())
         }
         if (movies.isNotEmpty()) {
             return movies
@@ -49,7 +49,7 @@ class MovieRepositoryImpl(
         try {
             movies = movieLocalDataSource.getMoviesFromDB()
         } catch (e: java.lang.Exception) {
-            Log.i(DataUtils.logTagName, e.message.toString())
+            Log.i(Utils.logTagName, e.message.toString())
         }
         if (movies.isNotEmpty()) {
             return movies
@@ -68,7 +68,7 @@ class MovieRepositoryImpl(
                 movies = body.movies
             }
         } catch (e: java.lang.Exception) {
-            Log.i(DataUtils.logTagName, e.message.toString())
+            Log.i(Utils.logTagName, e.message.toString())
         }
         return movies
     }

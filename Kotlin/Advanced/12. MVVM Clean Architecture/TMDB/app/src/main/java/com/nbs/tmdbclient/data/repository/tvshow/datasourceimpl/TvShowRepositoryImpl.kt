@@ -1,7 +1,7 @@
 package com.nbs.tmdbclient.data.repository.tvshow.datasourceimpl
 
 import android.util.Log
-import com.nbs.tmdbclient.DataUtils
+import com.nbs.tmdbclient.custom.Utils
 import com.nbs.tmdbclient.data.model.tvshow.TvShow
 import com.nbs.tmdbclient.data.repository.tvshow.datasource.TvShowCacheDataSource
 import com.nbs.tmdbclient.data.repository.tvshow.datasource.TvShowLocalDataSource
@@ -33,7 +33,7 @@ class TvShowRepositoryImpl(
         try {
             tvShows = tvShowCacheDataSource.getTvShowsFromCache()
         } catch (e: java.lang.Exception) {
-            Log.i(DataUtils.logTagName, e.message.toString())
+            Log.i(Utils.logTagName, e.message.toString())
         }
         if (tvShows.isNotEmpty()) {
             return tvShows
@@ -49,7 +49,7 @@ class TvShowRepositoryImpl(
         try {
             tvShows = tvShowLocalDataSource.getTvShowsFromDB()
         } catch (e: java.lang.Exception) {
-            Log.i(DataUtils.logTagName, e.message.toString())
+            Log.i(Utils.logTagName, e.message.toString())
         }
         if (tvShows.isNotEmpty()) {
             return tvShows
@@ -68,7 +68,7 @@ class TvShowRepositoryImpl(
                 tvShows = body.tvShows
             }
         } catch (e: java.lang.Exception) {
-            Log.i(DataUtils.logTagName, e.message.toString())
+            Log.i(Utils.logTagName, e.message.toString())
         }
         return tvShows
     }

@@ -1,17 +1,12 @@
 package com.nbs.tmdbclient.data.repository.artist.datasourceimpl
 
 import android.util.Log
-import com.nbs.tmdbclient.DataUtils
+import com.nbs.tmdbclient.custom.Utils
 import com.nbs.tmdbclient.data.model.artist.Artist
-import com.nbs.tmdbclient.data.model.movie.Movie
 import com.nbs.tmdbclient.data.repository.artist.datasource.ArtistCacheDataSource
 import com.nbs.tmdbclient.data.repository.artist.datasource.ArtistLocalDataSource
 import com.nbs.tmdbclient.data.repository.artist.datasource.ArtistRemoteDataSource
-import com.nbs.tmdbclient.data.repository.movie.datasource.MovieCacheDataSource
-import com.nbs.tmdbclient.data.repository.movie.datasource.MovieLocalDataSource
-import com.nbs.tmdbclient.data.repository.movie.datasource.MovieRemoteDataSource
 import com.nbs.tmdbclient.domain.repository.ArtistRepository
-import com.nbs.tmdbclient.domain.repository.MovieRepository
 
 class ArtistRepositoryImpl(
     private val artistRemoteDataSource: ArtistRemoteDataSource,
@@ -39,7 +34,7 @@ class ArtistRepositoryImpl(
         try {
             artists = artistCacheDataSource.getArtistsFromCache()
         } catch (e: java.lang.Exception) {
-            Log.i(DataUtils.logTagName, e.message.toString())
+            Log.i(Utils.logTagName, e.message.toString())
         }
         if (artists.isNotEmpty()) {
             return artists
@@ -55,7 +50,7 @@ class ArtistRepositoryImpl(
         try {
             artists = artistLocalDataSource.getArtistsFromDB()
         } catch (e: java.lang.Exception) {
-            Log.i(DataUtils.logTagName, e.message.toString())
+            Log.i(Utils.logTagName, e.message.toString())
         }
         if (artists.isNotEmpty()) {
             return artists
@@ -74,7 +69,7 @@ class ArtistRepositoryImpl(
                 artists = body.artists
             }
         } catch (e: java.lang.Exception) {
-            Log.i(DataUtils.logTagName, e.message.toString())
+            Log.i(Utils.logTagName, e.message.toString())
         }
         return artists
     }
