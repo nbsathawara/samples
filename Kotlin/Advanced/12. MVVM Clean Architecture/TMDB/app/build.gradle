@@ -6,19 +6,16 @@ plugins {
 
 android {
     namespace 'com.nbs.tmdbclient'
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.nbs.tmdbclient"
         minSdk 26
-        targetSdk 34
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField "String","API_KEY","\"f60ae473c8d03fdd88e75848cea96a8e\""
-
     }
     buildFeatures{
         dataBinding true
