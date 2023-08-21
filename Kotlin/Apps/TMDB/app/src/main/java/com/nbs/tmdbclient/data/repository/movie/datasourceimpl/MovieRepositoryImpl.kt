@@ -36,6 +36,7 @@ class MovieRepositoryImpl(
             Log.i(Utils.logTagName, e.message.toString())
         }
         if (movies.isNotEmpty()) {
+            Log.i(Utils.logTagName, "Getting data from Cache...")
             return movies
         } else {
             movies = getMoviesFromDB()
@@ -52,9 +53,11 @@ class MovieRepositoryImpl(
             Log.i(Utils.logTagName, e.message.toString())
         }
         if (movies.isNotEmpty()) {
+            Log.i(Utils.logTagName, "Getting data from DB...")
             return movies
         } else {
             movies = getMoviesFromAPI()
+            movieLocalDataSource.saveMoviesToDB(movies)
             return movies
         }
     }
@@ -70,6 +73,7 @@ class MovieRepositoryImpl(
         } catch (e: java.lang.Exception) {
             Log.i(Utils.logTagName, e.message.toString())
         }
+        Log.i(Utils.logTagName, "Getting data from Server...")
         return movies
     }
 }

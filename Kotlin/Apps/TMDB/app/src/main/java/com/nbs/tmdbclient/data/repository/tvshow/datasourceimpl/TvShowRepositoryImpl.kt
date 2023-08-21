@@ -36,6 +36,7 @@ class TvShowRepositoryImpl(
             Log.i(Utils.logTagName, e.message.toString())
         }
         if (tvShows.isNotEmpty()) {
+            Log.i(Utils.logTagName, "Getting data from Cache...")
             return tvShows
         } else {
             tvShows = getTvShowsFromDB()
@@ -52,9 +53,11 @@ class TvShowRepositoryImpl(
             Log.i(Utils.logTagName, e.message.toString())
         }
         if (tvShows.isNotEmpty()) {
+            Log.i(Utils.logTagName, "Getting data from DB...")
             return tvShows
         } else {
             tvShows = getTvShowsFromAPI()
+            tvShowLocalDataSource.saveTvShowToDB(tvShows)
             return tvShows
         }
     }
@@ -70,6 +73,7 @@ class TvShowRepositoryImpl(
         } catch (e: java.lang.Exception) {
             Log.i(Utils.logTagName, e.message.toString())
         }
+        Log.i(Utils.logTagName, "Getting data from Server...")
         return tvShows
     }
 }

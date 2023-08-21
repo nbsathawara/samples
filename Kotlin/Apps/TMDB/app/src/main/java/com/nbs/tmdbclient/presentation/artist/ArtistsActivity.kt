@@ -12,9 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nbs.tmdbclient.R
 import com.nbs.tmdbclient.databinding.ActivityArtistsBinding
-import com.nbs.tmdbclient.presentation.di.Injector
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class ArtistsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityArtistsBinding
 
@@ -28,8 +30,6 @@ class ArtistsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_artists)
 
-        (application as Injector).createArtistSubComponent()
-            .inject(this)
         initRecyclerView()
     }
 

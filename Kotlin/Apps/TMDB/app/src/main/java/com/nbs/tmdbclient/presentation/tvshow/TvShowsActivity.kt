@@ -12,9 +12,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nbs.tmdbclient.R
 import com.nbs.tmdbclient.databinding.ActivityTvShowsBinding
-import com.nbs.tmdbclient.presentation.di.Injector
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
+@AndroidEntryPoint
 class TvShowsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTvShowsBinding
 
@@ -27,8 +27,6 @@ class TvShowsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_tv_shows)
 
-        (application as Injector).createTvShowSubComponent()
-            .inject(this)
         initRecyclerView()
     }
 

@@ -37,6 +37,7 @@ class ArtistRepositoryImpl(
             Log.i(Utils.logTagName, e.message.toString())
         }
         if (artists.isNotEmpty()) {
+            Log.i(Utils.logTagName, "Getting data from Cache...")
             return artists
         } else {
             artists = getArtistsFromDB()
@@ -53,9 +54,11 @@ class ArtistRepositoryImpl(
             Log.i(Utils.logTagName, e.message.toString())
         }
         if (artists.isNotEmpty()) {
+            Log.i(Utils.logTagName, "Getting data from DB...")
             return artists
         } else {
             artists = getArtistsFromAPI()
+            artistLocalDataSource.saveArtistsToDB(artists)
             return artists
         }
     }
@@ -71,6 +74,7 @@ class ArtistRepositoryImpl(
         } catch (e: java.lang.Exception) {
             Log.i(Utils.logTagName, e.message.toString())
         }
+        Log.i(Utils.logTagName, "Getting data from Server...")
         return artists
     }
 }

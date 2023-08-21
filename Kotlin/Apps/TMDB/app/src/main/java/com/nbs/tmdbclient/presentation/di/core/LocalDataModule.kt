@@ -13,9 +13,13 @@ import com.nbs.tmdbclient.data.repository.tvshow.datasourceimpl.TvShowLocalDataS
 import com.nbs.tmdbclient.data.repository.tvshow.datasourceimpl.TvShowRemoteDataSourceImpl
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.scopes.ActivityScoped
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 class LocalDataModule() {
 
     @Singleton
