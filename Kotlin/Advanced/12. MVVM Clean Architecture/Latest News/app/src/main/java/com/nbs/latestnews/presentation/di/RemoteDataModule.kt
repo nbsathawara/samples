@@ -12,7 +12,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class RemoteDataModule {
-
     @Provides
     @Singleton
     fun providesNewsRemoteDataSource(newsAPIService: NewsAPIService): NewsRemoteDataSource =

@@ -15,18 +15,17 @@ class NewsViewModel(
     private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase
 ) : AndroidViewModel(app) {
 
-    private val newsHeadlines: MutableLiveData<Resource<NewsAPIResponse>> = MutableLiveData()
+      val newsHeadlines: MutableLiveData<Resource<NewsAPIResponse>> = MutableLiveData()
 
     fun getNewsHeadlines(country: String, page: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             newsHeadlines.postValue(Resource.Loading())
             try {
-
                 if (Utils.isNetworkAvailable(app)) {
                     val apiResponse = getNewsHeadlinesUseCase.execute(country, page)
                     newsHeadlines.postValue(apiResponse)
                 } else {
-                    newsHeadlines.postValue(Resource.Error(""))
+                    newsHeadlines.postValue(Resource.Error("Network not available..."))
                 }
             } catch (e: Exception) {
                 newsHeadlines.postValue(Resource.Error(e.message.toString()))

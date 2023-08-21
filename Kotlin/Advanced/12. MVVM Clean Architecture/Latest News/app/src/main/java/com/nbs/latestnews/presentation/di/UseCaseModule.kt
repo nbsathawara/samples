@@ -11,7 +11,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class UseCaseModule {
-
     @Provides
     @Singleton
     fun providesNewsHeadlineUseCase(newsRepository: NewsRepository): GetNewsHeadlinesUseCase =

@@ -12,6 +12,11 @@ class Utils {
         const val baseUrl = "https://newsapi.org/v2/"
 
 
+        const val newsCountry = "in"
+        const val newsPage = 1
+        const val keyArticle = "selectedArticle"
+
+
         fun isNetworkAvailable(context: Context): Boolean {
             if (context != null) {
                 val connectivityManager =
