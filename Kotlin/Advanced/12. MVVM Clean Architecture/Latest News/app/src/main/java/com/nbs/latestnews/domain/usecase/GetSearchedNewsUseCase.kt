@@ -6,6 +6,10 @@ import com.nbs.latestnews.domain.repository.NewsRepository
 
 class GetSearchedNewsUseCase(private val newsRepository: NewsRepository) {
 
-    suspend fun execute(searchQuery: String): Resource<NewsAPIResponse> =
-        newsRepository.getSearchedNews(searchQuery)
+    suspend fun execute(
+        country: String,
+        page: Int,
+        searchQuery: String
+    ): Resource<NewsAPIResponse> =
+        newsRepository.getSearchedNews(country, page, searchQuery)
 }

@@ -7,5 +7,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="bgr_cell">#2B2929</color>
+    <color name="bgr_cell">#2f2c2a</color>
+    <color name="bgr_search">#737271</color>
 </resources>

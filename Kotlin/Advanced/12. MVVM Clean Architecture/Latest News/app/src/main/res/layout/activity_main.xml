@@ -21,5 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/white"
+        android:background="@color/bgr_search"
         app:menu="@menu/bottom_menu" />
 </LinearLayout>
