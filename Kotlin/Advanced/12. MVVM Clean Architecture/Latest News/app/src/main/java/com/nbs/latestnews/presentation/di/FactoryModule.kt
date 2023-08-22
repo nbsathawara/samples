@@ -1,8 +1,7 @@
 package com.nbs.latestnews.presentation.di
 
 import android.app.Application
-import com.nbs.latestnews.domain.usecase.GetNewsHeadlinesUseCase
-import com.nbs.latestnews.domain.usecase.GetSearchedNewsUseCase
+import com.nbs.latestnews.domain.usecase.*
 import com.nbs.latestnews.presentation.viewmodel.NewsViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -18,7 +17,17 @@ class FactoryModule {
     fun providesNewsViewModuleFactory(
         application: Application,
         getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
-        getSearchedNewsUseCase: GetSearchedNewsUseCase
+        getSearchedNewsUseCase: GetSearchedNewsUseCase,
+        saveNewsUseCase: SaveNewsUseCase,
+        getSavedNewsUseCase: GetSavedNewsUseCase,
+        deleteSavedNewsUseCase: DeleteSavedNewsUseCase
     ): NewsViewModelFactory =
-        NewsViewModelFactory(application, getNewsHeadlinesUseCase, getSearchedNewsUseCase)
+        NewsViewModelFactory(
+            application,
+            getNewsHeadlinesUseCase,
+            getSearchedNewsUseCase,
+            saveNewsUseCase,
+            getSavedNewsUseCase,
+            deleteSavedNewsUseCase
+        )
 }

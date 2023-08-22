@@ -11,11 +11,14 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.nbs.latestnews.R
 import com.nbs.latestnews.databinding.FragmentNewsDetailsBinding
+import com.nbs.latestnews.presentation.viewmodel.NewsViewModel
 
 class NewsDetailsFragment : Fragment() {
     private lateinit var binding: FragmentNewsDetailsBinding
+    private lateinit var newsViewModel: NewsViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,6 +31,8 @@ class NewsDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNewsDetailsBinding.bind(view)
 
+        newsViewModel = (activity as MainActivity).newsViewModel
+
         val args: NewsDetailsFragmentArgs by navArgs()
         val article = args.selectedArticle
 
@@ -35,6 +40,13 @@ class NewsDetailsFragment : Fragment() {
             webViewClient = webClient
             if (!article.url.isNullOrEmpty())
                 loadUrl(article.url)
+        }
+
+        binding.floatingActionButton.visibility =
+            if (article.id > 0) View.GONE else View.VISIBLE
+        binding.floatingActionButton.setOnClickListener {
+            newsViewModel.saveArticle(article)
+            Snackbar.make(it, "Saved Successfully.", Snackbar.LENGTH_SHORT).show()
         }
     }
 

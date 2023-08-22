@@ -24,7 +24,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class NewsFragment : Fragment() {
+class NewsFragment : BaseFragment() {
     private lateinit var binding: FragmentNewsBinding
     private lateinit var newsViewModel: NewsViewModel
     private lateinit var newsAdapter: NewsAdapter
@@ -94,13 +94,11 @@ class NewsFragment : Fragment() {
             }
         )
 
-        binding.searchView.setOnCloseListener(object : SearchView.OnCloseListener {
-            override fun onClose(): Boolean {
-                initRecyclerView()
-                return false
-            }
-
-        })
+        binding.searchView.setOnCloseListener {
+            initRecyclerView()
+            getNewsList()
+            false
+        }
     }
 
     private fun getNewsList() {
@@ -133,6 +131,7 @@ class NewsFragment : Fragment() {
     }
 
     private fun getSearchedNewsList() {
+        if (view == null) return
         newsViewModel.searchedNewsList.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {

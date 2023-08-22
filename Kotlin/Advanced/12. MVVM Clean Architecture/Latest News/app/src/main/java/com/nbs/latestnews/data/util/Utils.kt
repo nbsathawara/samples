@@ -10,7 +10,7 @@ class Utils {
         const val logTag = "Latest News Debug"
         const val newsAPIKey = "8f3fddf391094922b79027f42014140d"
         const val baseUrl = "https://newsapi.org/v2/"
-
+        const val dbName = "news_database"
 
         const val newsCountry = "in"
         const val newsPage = 1
