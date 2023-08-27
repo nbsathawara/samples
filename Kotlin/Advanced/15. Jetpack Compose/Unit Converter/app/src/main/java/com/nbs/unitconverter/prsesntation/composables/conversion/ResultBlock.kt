@@ -1,4 +1,4 @@
-package com.nbs.unitconverter.prsesntation.composables
+package com.nbs.unitconverter.prsesntation.composables.conversion
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,7 +22,6 @@ fun ResultBlock(lbl1: String, lbl2: String, modifier: Modifier = Modifier) {
     ) {
         Column(
             modifier = modifier
-                .fillMaxWidth()
                 .padding(10.dp)
         ) {
             Text(

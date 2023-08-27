@@ -1,4 +1,4 @@
-package com.nbs.unitconverter.prsesntation.composables
+package com.nbs.unitconverter.prsesntation.composables.conversion
 
 import android.content.Context
 import android.view.MotionEvent
@@ -28,6 +28,7 @@ import com.nbs.unitconverter.data.Conversion
 fun InputBlock(
     conversion: Conversion,
     inputText: MutableState<String>,
+    isLandscape: Boolean,
     modifier: Modifier = Modifier,
     context: Context = LocalContext.current,
     calculate: (String) -> (Unit)
@@ -43,19 +44,29 @@ fun InputBlock(
     fun performClick() {
         val input = inputText.value
         if (input.isEmpty())
-            Toast.makeText(context, "Invalin input!!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Invalid input!!", Toast.LENGTH_SHORT).show()
         else
             calculate(input)
     }
 
+    var fullWidthModifier: Modifier = Modifier
+    var tfWidthModifier: Modifier = Modifier
+    var tWidthModifier: Modifier = Modifier
+    if (!isLandscape) {
+        fullWidthModifier = Modifier.fillMaxWidth()
+        tfWidthModifier = Modifier.fillMaxWidth(0.66f)
+        tWidthModifier = Modifier.fillMaxWidth(0.34f)
+    }
     Column(modifier = modifier.padding(0.dp, 20.dp)) {
-        Row(modifier = modifier.fillMaxWidth()) {
+        Row(
+            modifier = modifier.then(fullWidthModifier)
+        ) {
             TextField(
                 value = inputText.value,
                 onValueChange = {
                     inputText.value = it
                 },
-                modifier = modifier.fillMaxWidth(0.66f),
+                modifier = modifier.then(tfWidthModifier),
                 keyboardOptions = KeyboardOptions(
                     capitalization = KeyboardCapitalization.None,
                     autoCorrect = true,
@@ -74,7 +85,7 @@ fun InputBlock(
                 fontSize = 24.sp,
                 modifier = modifier
                     .padding(10.dp, 30.dp)
-                    .fillMaxWidth(0.34f)
+                    .then(tWidthModifier)
             )
         }
         Spacer(modifier = modifier.height(20.dp))
@@ -83,11 +94,11 @@ fun InputBlock(
 
             },
             modifier = Modifier
-                .fillMaxWidth()
+                .then(fullWidthModifier)
                 .pointerInteropFilter {
                     when (it.action) {
                         MotionEvent.ACTION_DOWN -> {
-                           setBGR(true)
+                            setBGR(true)
                         }
                         MotionEvent.ACTION_MOVE -> {
                             setBGR(true)

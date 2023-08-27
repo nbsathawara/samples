@@ -1,4 +1,4 @@
-package com.nbs.unitconverter.prsesntation.composables
+package com.nbs.unitconverter.prsesntation.composables.conversion
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -7,6 +7,7 @@ import androidx.compose.material.icons.*
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -20,11 +21,12 @@ import com.nbs.unitconverter.data.Conversion
 
 @Composable
 fun SelectionMenu(
-    list: List<Conversion>, modifier: Modifier = Modifier,
+    list: List<Conversion>,
+    isLandscape: Boolean,
+    modifier: Modifier = Modifier,
     convert: (Conversion) -> (Unit)
 ) {
-
-    var displayText by remember { mutableStateOf("Select the Conversion Type") }
+    var displayText by rememberSaveable { mutableStateOf("Select the Conversion Type") }
 
     var textFieldSize by remember { mutableStateOf(Size.Zero) }
 
@@ -33,6 +35,10 @@ fun SelectionMenu(
     var icon = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
 
     Column {
+        var fullWidthModifier: Modifier = Modifier
+        if (!isLandscape)
+            fullWidthModifier = Modifier.fillMaxWidth()
+
         OutlinedTextField(
             value = displayText,
             onValueChange = {
@@ -43,10 +49,10 @@ fun SelectionMenu(
                 fontWeight = FontWeight.Bold
             ),
             modifier = Modifier
-                .fillMaxWidth()
                 .onGloballyPositioned { coordinates ->
                     textFieldSize = coordinates.size.toSize()
-                },
+                }
+                .then(fullWidthModifier),
             label = {
                 Text(text = "Conversion Type")
             },
