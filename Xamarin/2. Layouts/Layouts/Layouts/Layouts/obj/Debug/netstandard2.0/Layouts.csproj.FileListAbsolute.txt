@@ -1,0 +1,17 @@
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/bin/Debug/netstandard2.0/Layouts.deps.json
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/bin/Debug/netstandard2.0/Layouts.dll
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/bin/Debug/netstandard2.0/ref/Layouts.dll
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/bin/Debug/netstandard2.0/Layouts.pdb
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/Layouts.csproj.AssemblyReference.cache
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/Layouts.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/App.xaml.g.cs
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/MainPage.xaml.g.cs
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/StackPage.xaml.g.cs
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/Layouts.AssemblyInfoInputs.cache
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/Layouts.AssemblyInfo.cs
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/Layouts.csproj.CoreCompileInputs.cache
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/XamlC.stamp
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/Layouts.dll
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/refint/Layouts.dll
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/Layouts.pdb
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/GridPage.xaml.g.cs

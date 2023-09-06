@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="HelloWorld.QuotesPage">
+
+    <StackLayout HorizontalOptions="FillAndExpand" Padding="20,100,0,20"
+            BindingContext="{x:Reference slider}">
+        <Button Text="Next" FontSize="20" Clicked="Button_Clicked"/>
+        <Label x:Name="lblFontSize" Text="{Binding Value ,StringFormat='Font Size : {0:00}'}"/>
+        <Slider x:Name="slider" Minimum="0" Maximum="100" Value="20"/>
+        <Label x:Name="lblQuote" Text="Quote 1" FontSize="{Binding Value}"/>
+    </StackLayout>
+
+</ContentPage>
+

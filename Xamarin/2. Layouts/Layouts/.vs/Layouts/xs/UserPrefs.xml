@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{6323BB8D-9C71-4A45-BBA0-7F86ECA3D357}|Default">
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="Android.Pixel_4_API_33" />
+  <MonoDevelop.Ide.ItemProperties.Layouts.Android FirstBuild="True" PreferredExecutionTarget="Android.Pixel_4_API_33" />
+  <MonoDevelop.Ide.ItemProperties.Layouts.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.5CE5286B-3ECC-481D-82E4-1CDFAAB12778" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Layouts/Layouts/GridPage.xaml">
+    <Files>
+      <File FileName="Layouts/Layouts/App.xaml.cs" Line="9" Column="22" />
+      <File FileName="Layouts/Layouts/GridPage.xaml" Line="21" Column="83" />
+      <File FileName="Layouts/Layouts/GridPage.xaml.cs" Line="23" Column="9" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Layouts" expanded="True">
+            <Node name="Layouts">
+              <Node name="App.xaml" expanded="True" />
+              <Node name="GridPage.xaml" selected="True" />
+              <Node name="StackPage.xaml" expanded="True" />
+            </Node>
+            <Node name="Layouts.iOS" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+</Properties>

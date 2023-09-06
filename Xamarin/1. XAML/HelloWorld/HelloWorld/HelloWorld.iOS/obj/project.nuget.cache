@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "2OdXiUJV1ouxHiK3LGvgjJHarZkb9GdK6GM+JQfClE4pRVB2aUzMi/NAvOnwXLM9PESNIctTVkydaEjoFb5G2w==",
+  "success": true,
+  "projectFilePath": "/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/Hello World/HelloWorld/HelloWorld/HelloWorld.iOS/HelloWorld.iOS.csproj",
+  "expectedPackageFiles": [
+    "/Users/nikhil-actabl/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
+    "/Users/nikhil-actabl/.nuget/packages/xamarin.essentials/1.8.0/xamarin.essentials.1.8.0.nupkg.sha512",
+    "/Users/nikhil-actabl/.nuget/packages/xamarin.forms/5.0.0.2612/xamarin.forms.5.0.0.2612.nupkg.sha512"
+  ],
+  "logs": []
+}
