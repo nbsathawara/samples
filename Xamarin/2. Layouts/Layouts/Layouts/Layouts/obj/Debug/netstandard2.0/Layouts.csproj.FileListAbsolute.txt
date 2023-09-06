@@ -15,3 +15,5 @@
 /Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/refint/Layouts.dll
 /Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/Layouts.pdb
 /Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/GridPage.xaml.g.cs
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/AbsolutePage.xaml.g.cs
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/2. Layouts/Layouts/Layouts/Layouts/obj/Debug/netstandard2.0/RelativePage.xaml.g.cs

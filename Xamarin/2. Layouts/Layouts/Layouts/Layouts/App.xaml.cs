@@ -10,7 +10,7 @@ namespace Layouts
         {
             InitializeComponent();
 
-            MainPage = new GridPage();
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart ()
