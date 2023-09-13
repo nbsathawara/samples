@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "xjjPhCcXkdOl0gEUnHs7Q638IMdtvzJCvx2XWcUpKPZeaDBsSW+PRtu7P1l1C4PIJqobwU58SipT7+VybOD0zg==",
+  "success": true,
+  "projectFilePath": "/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/3. Images/Images/Images/Images.iOS/Images.iOS.csproj",
+  "expectedPackageFiles": [
+    "/Users/nikhil-actabl/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
+    "/Users/nikhil-actabl/.nuget/packages/xam.plugins.forms.imagecircle/3.0.0.5/xam.plugins.forms.imagecircle.3.0.0.5.nupkg.sha512",
+    "/Users/nikhil-actabl/.nuget/packages/xamarin.essentials/1.7.0/xamarin.essentials.1.7.0.nupkg.sha512",
+    "/Users/nikhil-actabl/.nuget/packages/xamarin.forms/5.0.0.2196/xamarin.forms.5.0.0.2196.nupkg.sha512"
+  ],
+  "logs": []
+}

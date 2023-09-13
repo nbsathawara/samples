@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Images"
+    x:Class="Images.EmbededImagePage">
+    <Image x:Name="image" Aspect="Fill"
+           Source="{local:EmbededImage Images.Resources.Images.background.jpg}"/>
+</ContentPage>
+
