@@ -1,9 +1,17 @@
 ﻿<Properties StartupConfiguration="{6323BB8D-9C71-4A45-BBA0-7F86ECA3D357}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Layouts.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.Generic" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Layouts.Android PreferredExecutionTarget="Android.Pixel_4_API_33" FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workbench ActiveDocument="Layouts/Layouts/MainPage.xaml.cs">
     <Files>
-      <File FileName="Layouts/Layouts/App.xaml.cs" Line="22" Column="10" />
+      <File FileName="Layouts/Layouts/App.xaml.cs" />
       <File FileName="Layouts/Layouts/MainPage.xaml.cs" Line="26" Column="1" />
-      <File FileName="Layouts/Layouts/MainPage.xaml" Line="16" Column="49" />
+      <File FileName="Layouts/Layouts/MainPage.xaml" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -12,7 +20,9 @@
             <Node name="Layouts" expanded="True">
               <Node name="App.xaml" expanded="True" />
               <Node name="GridPage.xaml" expanded="True" />
-              <Node name="MainPage.xaml" expanded="True" />
+              <Node name="MainPage.xaml" expanded="True">
+                <Node name="MainPage.xaml.cs" selected="True" />
+              </Node>
               <Node name="RelativePage.xaml" expanded="True" />
             </Node>
             <Node name="Layouts.iOS" expanded="True" />
@@ -21,13 +31,5 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.Layouts.Android FirstBuild="True" PreferredExecutionTarget="Android.Pixel_4_API_33" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <Xamarin.Addins.Core.Project ActiveDebugTarget="Android.Pixel_4_API_33" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Layouts.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.5CE5286B-3ECC-481D-82E4-1CDFAAB12778" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

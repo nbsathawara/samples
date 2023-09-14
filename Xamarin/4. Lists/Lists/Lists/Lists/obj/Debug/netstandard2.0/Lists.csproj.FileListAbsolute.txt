@@ -1,0 +1,15 @@
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/bin/Debug/netstandard2.0/Lists.deps.json
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/bin/Debug/netstandard2.0/Lists.dll
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/bin/Debug/netstandard2.0/ref/Lists.dll
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/bin/Debug/netstandard2.0/Lists.pdb
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/obj/Debug/netstandard2.0/Lists.csproj.AssemblyReference.cache
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/obj/Debug/netstandard2.0/Lists.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/obj/Debug/netstandard2.0/App.xaml.g.cs
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/obj/Debug/netstandard2.0/MainPage.xaml.g.cs
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/obj/Debug/netstandard2.0/Lists.AssemblyInfoInputs.cache
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/obj/Debug/netstandard2.0/Lists.AssemblyInfo.cs
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/obj/Debug/netstandard2.0/Lists.csproj.CoreCompileInputs.cache
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/obj/Debug/netstandard2.0/XamlC.stamp
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/obj/Debug/netstandard2.0/Lists.dll
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/obj/Debug/netstandard2.0/refint/Lists.dll
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/obj/Debug/netstandard2.0/Lists.pdb

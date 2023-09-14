@@ -1,27 +1,40 @@
-﻿<Properties StartupConfiguration="{B2AF1559-D596-46DC-A5A9-96BA4094F800}|Default">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Images FirstBuild="True" />
-  <MonoDevelop.Ide.ItemProperties.Images.iOS FirstBuild="True" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Images/Images/MainPage.xaml">
+﻿<Properties StartupConfiguration="{7DECD746-6B3A-4D10-9CFD-DDAF7795378A}|Default">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="Android.Pixel_4_API_33" />
+  <MonoDevelop.Ide.ItemProperties.Images.Android PreferredExecutionTarget="Android.Pixel_4_API_33" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Images/Images/RoundedImagePage.xaml">
     <Files>
-      <File FileName="Images/Images/MainPage.xaml.cs" />
-      <File FileName="Images/Images/MainPage.xaml" Line="1" Column="1" />
+      <File FileName="Images/Images/App.xaml.cs" Line="21" Column="10" />
+      <File FileName="Images/Images/RoundedImagePage.xaml" Line="9" Column="42" />
+      <File FileName="Images/Images/RoundedImagePage.xaml.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Images" expanded="True">
-            <Node name="Images" expanded="True" />
+          <Node name="Images">
+            <Node name="Images" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
+              <Node name="Custom" expanded="True" />
+              <Node name="Resources" expanded="True">
+                <Node name="Images" expanded="True" />
+              </Node>
+              <Node name="App.xaml" expanded="True" />
+              <Node name="ImagePage.xaml" expanded="True" />
+              <Node name="MainPage.xaml" expanded="True" />
+            </Node>
+            <Node name="Images.Android" expanded="True" />
+            <Node name="Images.iOS" expanded="True" />
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.Images.Android FirstBuild="True" PreferredExecutionTarget="Android.Pixel_4_API_33" />
-  <Xamarin.Addins.Core.Project ActiveDebugTarget="Android.Pixel_4_API_33" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Images.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.5CE5286B-3ECC-481D-82E4-1CDFAAB12778" />
 </Properties>
