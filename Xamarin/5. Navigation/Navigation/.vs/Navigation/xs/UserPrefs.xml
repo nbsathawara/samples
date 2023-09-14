@@ -1,0 +1,35 @@
+﻿<Properties StartupConfiguration="{67445CE5-78C1-449B-B7AA-570CA839C677}|Default">
+  <MonoDevelop.Ide.ItemProperties.Navigation.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.5CE5286B-3ECC-481D-82E4-1CDFAAB12778" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Navigation.Android PreferredExecutionTarget="Android.Pixel_4_API_33" FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Navigation/Navigation/MainPage.xaml.cs">
+    <Files>
+      <File FileName="Navigation/Navigation/MainPage.xaml.cs" Line="20" Column="39" />
+      <File FileName="Navigation/Navigation/MainPage.xaml" Line="5" Column="28" />
+      <File FileName="Navigation/Navigation/IntroductionPage.xaml" Line="6" Column="26" />
+      <File FileName="Navigation/Navigation/IntroductionPage.xaml.cs" Line="15" Column="15" />
+      <File FileName="Navigation/Navigation/App.xaml.cs" Line="15" Column="41" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Navigation" expanded="True">
+            <Node name="Navigation">
+              <Node name="App.xaml" expanded="True" />
+              <Node name="MainPage.xaml">
+                <Node name="MainPage.xaml.cs" selected="True" />
+              </Node>
+            </Node>
+            <Node name="Navigation.iOS" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="Android.Pixel_4_API_33" />
+</Properties>

@@ -22,17 +22,14 @@ namespace Lists
             listView.ItemsSource = _contactGroups;
         }
 
-        void listview_ItemTapped(System.Object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        async void listview_ItemSelected(System.Object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
-            //var contact = e.Item as Contact;
-            //DisplayAlert("Tapped ", contact.name, "OK");
-        }
-
-        void listview_ItemSelected(System.Object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
-        {
-            //var contact = e.SelectedItem as Contact;
-            //DisplayAlert("Selected ", contact.name, "OK");
-            listView.SelectedItem = null;
+            if (e.SelectedItem != null)
+            {
+                var contact = e.SelectedItem as Contact;
+                await Navigation.PushAsync(new ContactDetailsPage(contact));
+                listView.SelectedItem = null;
+            }
         }
 
         void callContact(System.Object sender, System.EventArgs e)

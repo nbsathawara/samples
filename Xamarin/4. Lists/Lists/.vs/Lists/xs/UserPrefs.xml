@@ -1,6 +1,35 @@
-﻿<Properties StartupConfiguration="{569B684C-3636-4E2F-B986-12BE076D130B}|Default">
-  <MonoDevelop.Ide.ItemProperties.Lists FirstBuild="True" />
-  <MonoDevelop.Ide.ItemProperties.Lists.iOS FirstBuild="True" />
+﻿<Properties StartupConfiguration="{CEB24955-E554-427B-BF3D-9AB46837B9DE}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.Lists.Android FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.MonoDroid LastDeploySdkVersion="13.2.1.2" />
+  <MonoDevelop.Ide.ItemProperties.Lists.Android PreferredExecutionTarget="Android.Pixel_4_API_33" />
+  <MonoDevelop.Ide.ItemProperties.Lists.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.5CE5286B-3ECC-481D-82E4-1CDFAAB12778" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Lists/Lists/ContactDetailsPage.xaml.cs">
+    <Files>
+      <File FileName="Lists/Lists/MainPage.xaml" Line="6" Column="18" />
+      <File FileName="Lists/Lists/MainPage.xaml.cs" Line="71" Column="64" />
+      <File FileName="Lists/Lists/ContactDetailsPage.xaml" Line="8" Column="41" />
+      <File FileName="Lists/Lists/ContactDetailsPage.xaml.cs" Line="14" Column="49" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Lists" expanded="True">
+            <Node name="Lists">
+              <Node name="App.xaml" expanded="True" />
+              <Node name="ContactDetailsPage.xaml">
+                <Node name="ContactDetailsPage.xaml.cs" selected="True" />
+              </Node>
+            </Node>
+            <Node name="Lists.iOS" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="Android.Pixel_4_API_33" />
 </Properties>

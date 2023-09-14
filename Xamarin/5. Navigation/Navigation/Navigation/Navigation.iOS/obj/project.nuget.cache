@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "s3J9fgGCmWWyeTEzs9bLkhxr/NuBiu+zvpDw/jrXEcZWKB16Nk+fvbvQrsdtecJ4IuTBdRX4ITxojrh0tpdjjg==",
+  "success": true,
+  "projectFilePath": "/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/5. Navigation/Navigation/Navigation/Navigation.iOS/Navigation.iOS.csproj",
+  "expectedPackageFiles": [
+    "/Users/nikhil-actabl/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
+    "/Users/nikhil-actabl/.nuget/packages/xamarin.essentials/1.7.0/xamarin.essentials.1.7.0.nupkg.sha512",
+    "/Users/nikhil-actabl/.nuget/packages/xamarin.forms/5.0.0.2196/xamarin.forms.5.0.0.2196.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Lists.MainPage" Padding="0,50,0,0">
+             x:Class="Lists.MainPage" Padding="0,50,0,0"
+             Title="Contacts">
     <StackLayout>
         <SearchBar Placeholder="Serach contacts..." TextChanged="SearchBar_TextChanged"/>
     <ListView x:Name="listView" SeparatorColor="Red"
               HasUnevenRows="True" IsPullToRefreshEnabled="True" Refreshing="listView_Refreshing"
               IsGroupingEnabled="True"
               GroupDisplayBinding="{Binding title}"
-              GroupShortNameBinding="{Binding shortTitle}"
-              ItemTapped="listview_ItemTapped"
+              GroupShortNameBinding="{Binding shortTitle}" 
               ItemSelected="listview_ItemSelected">
         <ListView.ItemTemplate>
             <DataTemplate>

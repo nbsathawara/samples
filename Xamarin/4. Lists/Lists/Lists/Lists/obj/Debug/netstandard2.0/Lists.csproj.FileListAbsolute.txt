@@ -13,3 +13,4 @@
 /Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/obj/Debug/netstandard2.0/Lists.dll
 /Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/obj/Debug/netstandard2.0/refint/Lists.dll
 /Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/obj/Debug/netstandard2.0/Lists.pdb
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/4. Lists/Lists/Lists/Lists/obj/Debug/netstandard2.0/ContactDetailsPage.xaml.g.cs
