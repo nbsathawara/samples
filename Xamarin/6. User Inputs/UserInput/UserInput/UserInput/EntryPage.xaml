@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="UserInput.EntryPage" Padding="80">
+   <StackLayout Spacing="10">
+
+        <Entry Keyboard="Telephone" Placeholder="Phone No"/>
+        <Entry Keyboard="Email" Placeholder="Email"/>
+        <Entry Keyboard="Text" IsPassword="True" Placeholder="Password"/>
+        <Editor Keyboard="Text" Placeholder="Descrive youself!!!" VerticalOptions="FillAndExpand"/>
+    </StackLayout>
+</ContentPage>
+

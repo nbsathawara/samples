@@ -1,0 +1,44 @@
+﻿<Properties StartupConfiguration="{9AFEB1ED-ADC2-47C8-BC1F-1FED37EECD6A}|Default">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.UserInput.iOS Xamarin.HotReload.DebuggerTimeoutException.UserInput.iOS.HideInfoBar="True" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.5CE5286B-3ECC-481D-82E4-1CDFAAB12778" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.UserInput.Android FirstBuild="True" PreferredExecutionTarget="Android.Pixel_4_API_33" />
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="Android.Pixel_4_API_33" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="UserInput/UserInput/Custom/DateCell.xaml.cs">
+    <Files>
+      <File FileName="UserInput/UserInput/App.xaml.cs" Line="13" Column="37" />
+      <File FileName="UserInput/UserInput/TablePage.xaml.cs" Line="14" Column="12" />
+      <File FileName="UserInput/UserInput/TablePage.xaml" Line="18" Column="21" />
+      <File FileName="UserInput/UserInput/Custom/DateCell.xaml" Line="2" Column="8" />
+      <File FileName="UserInput/UserInput/Custom/DateCell.xaml.cs" Line="12" Column="36" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="UserInput" expanded="True">
+            <Node name="UserInput">
+              <Node name="Custom" expanded="True">
+                <Node name="DateCell.xaml">
+                  <Node name="DateCell.xaml.cs" selected="True" />
+                </Node>
+              </Node>
+              <Node name="App.xaml" expanded="True" />
+              <Node name="DateTimePage.xaml" expanded="True" />
+              <Node name="EntryPage.xaml" expanded="True" />
+              <Node name="MainPage.xaml" expanded="True" />
+              <Node name="PickerPage.xaml" expanded="True" />
+              <Node name="SliderPage.xaml" expanded="True" />
+              <Node name="StepperPage.xaml" expanded="True" />
+              <Node name="SwitchPage.xaml" expanded="True" />
+            </Node>
+            <Node name="UserInput.iOS" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>

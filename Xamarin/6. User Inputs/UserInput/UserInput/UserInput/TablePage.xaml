@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:UserInput"
+    x:Class="UserInput.TablePage" Padding="0,50,0,0">
+
+    <TableView Intent="Form" BackgroundColor="WhiteSmoke">
+        <TableRoot>
+
+            <TableSection Title="Basics">
+                <TextCell Text="Name" Detail="Nikhil Sathawara"/>
+                <EntryCell Label="Title" Placeholder="(eg Shopping)" Keyboard="Text"/>
+                <SwitchCell Text="Notifications" On="True" />
+                <local:DateCell lbl="Starts"/>
+                <local:DateCell lbl="Ends"/>
+                <ViewCell Tapped="ViewCell_Tapped">
+                    <StackLayout Orientation="Horizontal" Padding="18,0">
+                        <Label Text="Contact Method" VerticalOptions="Center"/>
+                        <Label x:Name="contactMethod"
+                               VerticalOptions="Center" HorizontalOptions="EndAndExpand"
+                               Text="None" TextColor="Gray"/>
+                    </StackLayout>
+
+                </ViewCell>
+            </TableSection>
+        </TableRoot>
+
+    </TableView>
+
+</ContentPage>
+

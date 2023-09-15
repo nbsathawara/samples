@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "5S9D9NozmsFwkBkh4aJAKhojwxeOc5FWErM7/sK1fF7oP4fp+l2BhlfJxYMg9HJ0zJc4QBNWsZq6bBd962p5zg==",
+  "success": true,
+  "projectFilePath": "/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/6. User Inputs/UserInput/UserInput/UserInput/UserInput.csproj",
+  "expectedPackageFiles": [
+    "/Users/nikhil-actabl/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "/Users/nikhil-actabl/.nuget/packages/netstandard.library/2.0.3/netstandard.library.2.0.3.nupkg.sha512",
+    "/Users/nikhil-actabl/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
+    "/Users/nikhil-actabl/.nuget/packages/xamarin.essentials/1.7.0/xamarin.essentials.1.7.0.nupkg.sha512",
+    "/Users/nikhil-actabl/.nuget/packages/xamarin.forms/5.0.0.2196/xamarin.forms.5.0.0.2196.nupkg.sha512"
+  ],
+  "logs": []
+}
