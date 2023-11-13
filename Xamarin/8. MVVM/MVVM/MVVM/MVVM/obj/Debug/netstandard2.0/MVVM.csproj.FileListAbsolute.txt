@@ -1,0 +1,16 @@
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM/bin/Debug/netstandard2.0/MVVM.deps.json
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM/bin/Debug/netstandard2.0/MVVM.dll
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM/bin/Debug/netstandard2.0/ref/MVVM.dll
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM/bin/Debug/netstandard2.0/MVVM.pdb
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM/obj/Debug/netstandard2.0/MVVM.csproj.AssemblyReference.cache
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM/obj/Debug/netstandard2.0/MVVM.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM/obj/Debug/netstandard2.0/App.xaml.g.cs
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM/obj/Debug/netstandard2.0/View/PlaylistDetailPage.xaml.g.cs
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM/obj/Debug/netstandard2.0/View/PlaylistsPage.xaml.g.cs
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM/obj/Debug/netstandard2.0/MVVM.AssemblyInfoInputs.cache
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM/obj/Debug/netstandard2.0/MVVM.AssemblyInfo.cs
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM/obj/Debug/netstandard2.0/MVVM.csproj.CoreCompileInputs.cache
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM/obj/Debug/netstandard2.0/XamlC.stamp
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM/obj/Debug/netstandard2.0/MVVM.dll
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM/obj/Debug/netstandard2.0/refint/MVVM.dll
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM/obj/Debug/netstandard2.0/MVVM.pdb

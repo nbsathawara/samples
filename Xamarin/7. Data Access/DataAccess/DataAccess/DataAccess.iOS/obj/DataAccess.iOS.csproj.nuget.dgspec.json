@@ -1,0 +1,150 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess.iOS/DataAccess.iOS.csproj": {}
+  },
+  "projects": {
+    "/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess.iOS/DataAccess.iOS.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess.iOS/DataAccess.iOS.csproj",
+        "projectName": "DataAccess.iOS",
+        "projectPath": "/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess.iOS/DataAccess.iOS.csproj",
+        "packagesPath": "/Users/nikhil-actabl/.nuget/packages/",
+        "outputPath": "/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess.iOS/obj/",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "configFilePaths": [
+          "/Users/nikhil-actabl/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "xamarinios10"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "xamarinios10": {
+            "projectReferences": {
+              "/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/DataAccess.csproj": {
+                "projectPath": "/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/DataAccess.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "xamarinios10": {
+          "dependencies": {
+            "Microsoft.Net.Http": {
+              "target": "Package",
+              "version": "[2.2.29, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "Xamarin.Essentials": {
+              "target": "Package",
+              "version": "[1.7.0, )"
+            },
+            "Xamarin.Forms": {
+              "target": "Package",
+              "version": "[5.0.0.2196, )"
+            },
+            "sqlite-net-pcl": {
+              "target": "Package",
+              "version": "[1.8.116, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    },
+    "/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/DataAccess.csproj",
+        "projectName": "DataAccess",
+        "projectPath": "/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/DataAccess.csproj",
+        "packagesPath": "/Users/nikhil-actabl/.nuget/packages/",
+        "outputPath": "/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/nikhil-actabl/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "Microsoft.Net.Http": {
+              "target": "Package",
+              "version": "[2.2.29, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "Xamarin.Essentials": {
+              "target": "Package",
+              "version": "[1.7.0, )"
+            },
+            "Xamarin.Forms": {
+              "target": "Package",
+              "version": "[5.0.0.2196, )"
+            },
+            "sqlite-net-pcl": {
+              "target": "Package",
+              "version": "[1.8.116, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/Users/nikhil-actabl/Library/Caches/VisualStudio/17.0/MSBuild/11518_3/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

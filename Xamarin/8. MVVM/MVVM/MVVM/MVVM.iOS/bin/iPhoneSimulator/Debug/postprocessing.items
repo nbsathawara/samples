@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <_PostProcessingItem Include="MVVM.iOS.app/MVVM.iOS">
+      <BCSymbolMapName>MVVM.iOS.bcsymbolmap</BCSymbolMapName>
+      <NoDSymUtil>true</NoDSymUtil>
+      <dSYMSourcePathExists>false</dSYMSourcePathExists>
+      <NoSymbolStrip>true</NoSymbolStrip>
+      <dSYMInfoPlistRelativePath>MVVM.iOS.app.dSYM\Contents\Info.plist</dSYMInfoPlistRelativePath>
+      <SymbolFile>/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM.iOS/obj/iPhoneSimulator/Debug/mtouch-symbols.list</SymbolFile>
+      <DSymName>MVVM.iOS.app.dSYM</DSymName>
+      <SourceProjectPath>/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/8. MVVM/MVVM/MVVM/MVVM.iOS</SourceProjectPath>
+    </_PostProcessingItem>
+  </ItemGroup>
+</Project>

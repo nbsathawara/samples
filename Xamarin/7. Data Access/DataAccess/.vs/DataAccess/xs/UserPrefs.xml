@@ -1,0 +1,33 @@
+﻿<Properties StartupConfiguration="{D6711378-F15E-4F74-85C7-C04DD0917A74}|Default">
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="Android.Pixel_4_XL_API_33" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.DataAccess.Android PreferredExecutionTarget="Android.Pixel_4_XL_API_33" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataAccess/DataAccess/RestAPIPage.xaml.cs">
+    <Files>
+      <File FileName="DataAccess/DataAccess/App.xaml.cs" Line="15" Column="39" />
+      <File FileName="DataAccess/DataAccess/RestAPIPage.xaml" Line="15" Column="36" />
+      <File FileName="DataAccess/DataAccess/RestAPIPage.xaml.cs" Line="83" Column="83" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="DataAccess" expanded="True">
+            <Node name="DataAccess">
+              <Node name="App.xaml" expanded="True" />
+              <Node name="RestAPIPage.xaml" expanded="True">
+                <Node name="RestAPIPage.xaml.cs" selected="True" />
+              </Node>
+              <Node name="SQLitePage.xaml" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.DataAccess.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.5CE5286B-3ECC-481D-82E4-1CDFAAB12778" />
+</Properties>

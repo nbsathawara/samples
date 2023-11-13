@@ -1,0 +1,17 @@
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/bin/Debug/netstandard2.0/DataAccess.deps.json
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/bin/Debug/netstandard2.0/DataAccess.dll
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/bin/Debug/netstandard2.0/ref/DataAccess.dll
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/bin/Debug/netstandard2.0/DataAccess.pdb
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/obj/Debug/netstandard2.0/DataAccess.csproj.AssemblyReference.cache
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/obj/Debug/netstandard2.0/DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/obj/Debug/netstandard2.0/App.xaml.g.cs
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/obj/Debug/netstandard2.0/DataAccess.AssemblyInfoInputs.cache
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/obj/Debug/netstandard2.0/DataAccess.AssemblyInfo.cs
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/obj/Debug/netstandard2.0/DataAccess.csproj.CoreCompileInputs.cache
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/obj/Debug/netstandard2.0/XamlC.stamp
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/obj/Debug/netstandard2.0/DataAccess.dll
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/obj/Debug/netstandard2.0/refint/DataAccess.dll
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/obj/Debug/netstandard2.0/DataAccess.pdb
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/obj/Debug/netstandard2.0/ApplicationProperties.xaml.g.cs
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/obj/Debug/netstandard2.0/SQLitePage.xaml.g.cs
+/Users/nikhil-actabl/Downloads/study/Samples/Xamarin/7. Data Access/DataAccess/DataAccess/DataAccess/obj/Debug/netstandard2.0/RestAPIPage.xaml.g.cs
