@@ -1,0 +1,6 @@
+﻿<Properties StartupConfiguration="{D7B3B84D-32B8-4132-A644-B76FDFCDD55B}|Default">
+  <MonoDevelop.Ide.ItemProperties.Advanced FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.Advanced.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.5CE5286B-3ECC-481D-82E4-1CDFAAB12778" FirstBuild="True" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Advanced.Android PreferredExecutionTarget="Android.Pixel_4_XL_API_33" FirstBuild="True" />
+</Properties>

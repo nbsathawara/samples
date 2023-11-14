@@ -1,5 +1,36 @@
 ﻿<Properties StartupConfiguration="{E1FD4E50-B608-4296-86E8-D75A8FC3FCDA}|Default">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.MVVM.Android PreferredExecutionTarget="Android.Pixel_4_XL_API_33" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.MVVM.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.5CE5286B-3ECC-481D-82E4-1CDFAAB12778" />
+  <MonoDevelop.Ide.ItemProperties.MVVM.Android PreferredExecutionTarget="Android.Pixel_4_XL_API_33" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MVVM/MVVM/Model/Playlist.cs">
+    <Files>
+      <File FileName="MVVM/MVVM/View/PlaylistsPage.xaml" Line="12" Column="29" />
+      <File FileName="MVVM/MVVM/View/PlaylistsPage.xaml.cs" />
+      <File FileName="MVVM/MVVM/ViewModel/PlayListViewModel.cs" Line="12" Column="40" />
+      <File FileName="MVVM/MVVM/ViewModel/BaseViewModel.cs" />
+      <File FileName="MVVM/MVVM/Model/Playlist.cs" Line="4" Column="23" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MVVM" expanded="True">
+            <Node name="MVVM" expanded="True">
+              <Node name="Model" expanded="True">
+                <Node name="Playlist.cs" selected="True" />
+              </Node>
+              <Node name="View" expanded="True" />
+              <Node name="ViewModel" expanded="True" />
+              <Node name="App.xaml" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="Android.Pixel_4_XL_API_33" />
 </Properties>

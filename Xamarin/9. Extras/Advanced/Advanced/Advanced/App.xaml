@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Advanced.App">
+    <Application.Resources>
+        <ResourceDictionary>
+			<x:Int32 x:Key="cornerRadius">20</x:Int32>
+			<Color x:Key="btnBgrColor">Purple</Color>
+            <Style x:Key="btnStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource btnBgrColor}"/>
+                 <Setter Property="TextColor" Value="White"/>
+                 <Setter Property="CornerRadius" Value="{StaticResource cornerRadius}"/>
+                 <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+              <Style x:Key="primaryBtnStyle" TargetType="Button" BasedOn="{StaticResource btnStyle}">
+                <Setter Property="TextColor" Value="Aqua"/>
+                </Style>
+		</ResourceDictionary>
+    </Application.Resources>
+</Application>

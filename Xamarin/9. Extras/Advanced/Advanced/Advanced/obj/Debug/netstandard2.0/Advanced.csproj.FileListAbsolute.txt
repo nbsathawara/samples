@@ -1,0 +1,16 @@
+/Users/nikhil-actabl/Projects/Advanced/Advanced/Advanced/bin/Debug/netstandard2.0/Advanced.deps.json
+/Users/nikhil-actabl/Projects/Advanced/Advanced/Advanced/bin/Debug/netstandard2.0/Advanced.dll
+/Users/nikhil-actabl/Projects/Advanced/Advanced/Advanced/bin/Debug/netstandard2.0/ref/Advanced.dll
+/Users/nikhil-actabl/Projects/Advanced/Advanced/Advanced/bin/Debug/netstandard2.0/Advanced.pdb
+/Users/nikhil-actabl/Projects/Advanced/Advanced/Advanced/obj/Debug/netstandard2.0/Advanced.csproj.AssemblyReference.cache
+/Users/nikhil-actabl/Projects/Advanced/Advanced/Advanced/obj/Debug/netstandard2.0/Advanced.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nikhil-actabl/Projects/Advanced/Advanced/Advanced/obj/Debug/netstandard2.0/App.xaml.g.cs
+/Users/nikhil-actabl/Projects/Advanced/Advanced/Advanced/obj/Debug/netstandard2.0/MainPage.xaml.g.cs
+/Users/nikhil-actabl/Projects/Advanced/Advanced/Advanced/obj/Debug/netstandard2.0/ResourceDictionaryPage.xaml.g.cs
+/Users/nikhil-actabl/Projects/Advanced/Advanced/Advanced/obj/Debug/netstandard2.0/Advanced.AssemblyInfoInputs.cache
+/Users/nikhil-actabl/Projects/Advanced/Advanced/Advanced/obj/Debug/netstandard2.0/Advanced.AssemblyInfo.cs
+/Users/nikhil-actabl/Projects/Advanced/Advanced/Advanced/obj/Debug/netstandard2.0/Advanced.csproj.CoreCompileInputs.cache
+/Users/nikhil-actabl/Projects/Advanced/Advanced/Advanced/obj/Debug/netstandard2.0/XamlC.stamp
+/Users/nikhil-actabl/Projects/Advanced/Advanced/Advanced/obj/Debug/netstandard2.0/Advanced.dll
+/Users/nikhil-actabl/Projects/Advanced/Advanced/Advanced/obj/Debug/netstandard2.0/refint/Advanced.dll
+/Users/nikhil-actabl/Projects/Advanced/Advanced/Advanced/obj/Debug/netstandard2.0/Advanced.pdb

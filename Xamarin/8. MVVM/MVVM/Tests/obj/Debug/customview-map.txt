@@ -1,0 +1,12 @@
+adaptive-icon;obj/Debug/res/mipmap-anydpi-v26/ic_launcher.xml
+adaptive-icon;obj/Debug/res/mipmap-anydpi-v26/ic_launcher_round.xml
+background;obj/Debug/res/mipmap-anydpi-v26/ic_launcher.xml
+background;obj/Debug/res/mipmap-anydpi-v26/ic_launcher_round.xml
+color;obj/Debug/res/values/colors.xml
+color;obj/Debug/res/values/ic_launcher_background.xml
+foreground;obj/Debug/res/mipmap-anydpi-v26/ic_launcher.xml
+foreground;obj/Debug/res/mipmap-anydpi-v26/ic_launcher_round.xml
+resources;obj/Debug/res/values/colors.xml
+resources;obj/Debug/res/values/ic_launcher_background.xml
+resources;obj/Debug/res/values/strings.xml
+string;obj/Debug/res/values/strings.xml
