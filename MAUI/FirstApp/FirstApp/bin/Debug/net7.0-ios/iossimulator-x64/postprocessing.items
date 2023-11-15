@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <_PostProcessingItem Include="FirstApp.app/FirstApp">
+      <BCSymbolMapName>FirstApp.bcsymbolmap</BCSymbolMapName>
+      <NoDSymUtil>true</NoDSymUtil>
+      <dSYMSourcePathExists>false</dSYMSourcePathExists>
+      <NoSymbolStrip>true</NoSymbolStrip>
+      <dSYMInfoPlistRelativePath>FirstApp.app.dSYM\Contents\Info.plist</dSYMInfoPlistRelativePath>
+      <SymbolFile>/Users/nikhil-actabl/Downloads/study/Samples/MAUI/FirstApp/FirstApp/obj/Debug/net7.0-ios/iossimulator-x64/mtouch-symbols.list</SymbolFile>
+      <DSymName>FirstApp.app.dSYM</DSymName>
+      <SourceProjectPath>/Users/nikhil-actabl/Downloads/study/Samples/MAUI/FirstApp/FirstApp</SourceProjectPath>
+    </_PostProcessingItem>
+  </ItemGroup>
+</Project>

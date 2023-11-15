@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FirstApp.TestPage"
+             Title="TestPage" Padding="10">
+    <VerticalStackLayout Spacing="10">
+        <Label
+            x:Name="lbl"
+            Text="Count : 0"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            FontSize="22"/>
+        <Button Text="Cick Me!!"
+                Clicked="Button_Clicked"
+                VerticalOptions="Center" 
+            HorizontalOptions="Center"/>
+    </VerticalStackLayout>
+</ContentPage>
