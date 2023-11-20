@@ -47,14 +47,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			WOJzYPIguFdfBaav02BBpHyXbZC6rnaBudGM3qUQlHU=
+			qZWW1UgOZZm6yTzu1BC16KTO1NC1xJzB7QwCG2ZgWd8=
 			</data>
 		</dict>
 		<key>MonoBundle/Car Listing.pdb</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Yk/qPP05ntz4cGqkYE7YYFdA7vdvxuo7yNBgqwZNw7w=
+			Pf8RhVaKxOD/k2DgvzQH+/ClvKIjTHzk8h5xsg70G7M=
+			</data>
+		</dict>
+		<key>MonoBundle/CommunityToolkit.Mvvm.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			oqsulFVnM7C7ilbH956OoKNj+YTEmgrnV+MponOkV3Q=
 			</data>
 		</dict>
 		<key>MonoBundle/Microsoft.CSharp.dll</key>
@@ -195,6 +202,48 @@
 			<key>hash2</key>
 			<data>
 			oJxyOQTg7phYTOsv67SPg/7p1/3ZMibNbea6EonYS0M=
+			</data>
+		</dict>
+		<key>MonoBundle/SQLite-net.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			G0Du6FIHrGQku+Pmrey48gKNhArHSSzdTDxdZdMFkb4=
+			</data>
+		</dict>
+		<key>MonoBundle/SQLitePCLRaw.batteries_v2.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			4nCf2j7kE33OozmCIfCvzWJB2w6m+lX9MaM2EL54zwI=
+			</data>
+		</dict>
+		<key>MonoBundle/SQLitePCLRaw.core.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			wzmVQn7dRPpkHPcC34tjzILLcFTdmE3IJ30V7nyViHQ=
+			</data>
+		</dict>
+		<key>MonoBundle/SQLitePCLRaw.nativelibrary.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			k6kuHu1PdUyKSs86EqhbgqnTWUwFcJhnu6p9u0PbP/k=
+			</data>
+		</dict>
+		<key>MonoBundle/SQLitePCLRaw.provider.dynamic_cdecl.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			bFp5BUVgGOuZwhRkSiXyqTVC5SqgCDoY92/+/0CNM/w=
+			</data>
+		</dict>
+		<key>MonoBundle/SQLitePCLRaw.provider.e_sqlite3.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ZqXqCaoxj5oFCTwo7RnT6ySR2MNxD/X7YiuJAquGbOg=
 			</data>
 		</dict>
 		<key>MonoBundle/System.AppContext.dll</key>
@@ -1336,6 +1385,13 @@
 			<key>hash2</key>
 			<data>
 			UYBgm2eduvMCWTliUcl318YqSMD3lImc247xRKSYF5Q=
+			</data>
+		</dict>
+		<key>MonoBundle/libe_sqlite3.dylib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			+QbffrTbDCr+q/Ygw+TJTRDu2zTdoKiVB9+MUaIwlrw=
 			</data>
 		</dict>
 		<key>MonoBundle/mscorlib.dll</key>

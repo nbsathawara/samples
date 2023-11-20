@@ -1,6 +1,7 @@
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/Car Listing.runtimeconfig.json
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/Car Listing.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/Car Listing.pdb
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/CommunityToolkit.Mvvm.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/Microsoft.Extensions.Configuration.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/Microsoft.Extensions.Configuration.Abstractions.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/Microsoft.Extensions.DependencyInjection.dll
@@ -10,6 +11,13 @@
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/Microsoft.Extensions.Options.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/Microsoft.Extensions.Primitives.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/Microsoft.Maui.Graphics.dll
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/SQLite-net.dll
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/SQLitePCLRaw.batteries_v2.dll
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/SQLitePCLRaw.nativelibrary.dll
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/SQLitePCLRaw.core.dll
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/SQLitePCLRaw.provider.dynamic_cdecl.dll
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/SQLitePCLRaw.provider.e_sqlite3.dll
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/libe_sqlite3.dylib
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/Microsoft.CSharp.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/Microsoft.VisualBasic.Core.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/Microsoft.VisualBasic.dll
@@ -245,6 +253,7 @@
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/_ProcessedBundleResourcesPath.items
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/_ProcessedContentPath.items
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/Car Listing.csproj.AssemblyReference.cache
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/resourcestamps/CommunityToolkit.Mvvm.stamp
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/resourcestamps/Microsoft.CSharp.stamp
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/resourcestamps/Microsoft.Extensions.Configuration.Abstractions.stamp
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/resourcestamps/Microsoft.Extensions.Configuration.stamp
@@ -267,6 +276,12 @@
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/resourcestamps/Microsoft.Win32.Registry.stamp
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/resourcestamps/mscorlib.stamp
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/resourcestamps/netstandard.stamp
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/resourcestamps/SQLite-net.stamp
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/resourcestamps/SQLitePCLRaw.batteries_v2.stamp
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/resourcestamps/SQLitePCLRaw.core.stamp
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/resourcestamps/SQLitePCLRaw.nativelibrary.stamp
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/resourcestamps/SQLitePCLRaw.provider.dynamic_cdecl.stamp
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/resourcestamps/SQLitePCLRaw.provider.e_sqlite3.stamp
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/resourcestamps/System.AppContext.stamp
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/resourcestamps/System.Buffers.stamp
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/resourcestamps/System.Collections.Concurrent.stamp

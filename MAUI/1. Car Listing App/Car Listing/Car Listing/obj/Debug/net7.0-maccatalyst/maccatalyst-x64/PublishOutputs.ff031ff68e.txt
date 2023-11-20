@@ -1,4 +1,5 @@
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/icudt.dat
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/CommunityToolkit.Mvvm.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/Microsoft.Extensions.Configuration.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/Microsoft.Extensions.Configuration.Abstractions.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/Microsoft.Extensions.DependencyInjection.dll
@@ -8,6 +9,12 @@
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/Microsoft.Extensions.Options.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/Microsoft.Extensions.Primitives.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/Microsoft.Maui.Graphics.dll
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/SQLite-net.dll
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/SQLitePCLRaw.batteries_v2.dll
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/SQLitePCLRaw.nativelibrary.dll
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/SQLitePCLRaw.core.dll
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/SQLitePCLRaw.provider.dynamic_cdecl.dll
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/SQLitePCLRaw.provider.e_sqlite3.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/Car Listing.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/Microsoft.CSharp.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/Microsoft.VisualBasic.Core.dll
@@ -184,5 +191,6 @@
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/Microsoft.Maui.Controls.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/Microsoft.Maui.Essentials.dll
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/Car Listing.pdb
+/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/libe_sqlite3.dylib
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MonoBundle/System.Private.CoreLib.aotdata.x86_64
 /Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../Car Listing.app/Contents/MacOS//Car Listing

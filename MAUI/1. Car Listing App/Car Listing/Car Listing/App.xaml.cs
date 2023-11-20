@@ -2,11 +2,13 @@
 
 public partial class App : Application
 {
-	public App()
-	{
-		InitializeComponent();
+    public static CarService CarService { get; private set; }
+    public App(CarService carService)
+    {
+        InitializeComponent();
 
-		MainPage = new AppShell();
-	}
+        MainPage = new AppShell();
+        CarService = carService;
+    }
 }
 
