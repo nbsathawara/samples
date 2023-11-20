@@ -50,6 +50,10 @@
         "net7.0-android33.0": {
           "targetAlias": "net7.0-android",
           "dependencies": {
+            "CommunityToolkit.Mvvm": {
+              "target": "Package",
+              "version": "[8.2.2, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[7.0.0, )",
@@ -64,10 +68,6 @@
               "target": "Package",
               "version": "[7.0.0, )",
               "autoReferenced": true
-            },
-            "Microsoft.Extensions.Logging.Debug": {
-              "target": "Package",
-              "version": "[7.0.0, )"
             },
             "Microsoft.Maui.Graphics": {
               "target": "Package",
@@ -163,6 +163,10 @@
         "net7.0-ios16.1": {
           "targetAlias": "net7.0-ios",
           "dependencies": {
+            "CommunityToolkit.Mvvm": {
+              "target": "Package",
+              "version": "[8.2.2, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[7.0.0, )",
@@ -177,10 +181,6 @@
               "target": "Package",
               "version": "[7.0.0, )",
               "autoReferenced": true
-            },
-            "Microsoft.Extensions.Logging.Debug": {
-              "target": "Package",
-              "version": "[7.0.0, )"
             },
             "Microsoft.Maui.Graphics": {
               "target": "Package",
@@ -221,6 +221,10 @@
         "net7.0-maccatalyst16.1": {
           "targetAlias": "net7.0-maccatalyst",
           "dependencies": {
+            "CommunityToolkit.Mvvm": {
+              "target": "Package",
+              "version": "[8.2.2, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[7.0.0, )",
@@ -235,10 +239,6 @@
               "target": "Package",
               "version": "[7.0.0, )",
               "autoReferenced": true
-            },
-            "Microsoft.Extensions.Logging.Debug": {
-              "target": "Package",
-              "version": "[7.0.0, )"
             },
             "Microsoft.Maui.Graphics": {
               "target": "Package",

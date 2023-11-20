@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "NBLgH1KxmpSmr+7VbFmRAyXFyIb7sBAlCXpLRYfX/93s7mHBXd/YxHDN4e1kdb8vuBsgHuc35udYb83wjawsLg==",
+  "dgSpecHash": "J4UmPgAQs4MDx0+Y2P2zdMMHo/20ZopJoJvXWeDrkGioggkMSPczkwZceqTpwYjyvN4KIdaEtwtAj4tfYV1rpA==",
   "success": true,
   "projectFilePath": "/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/Car Listing.csproj",
   "expectedPackageFiles": [
+    "/Users/nikhil-actabl/.nuget/packages/communitytoolkit.mvvm/8.2.2/communitytoolkit.mvvm.8.2.2.nupkg.sha512",
     "/Users/nikhil-actabl/.nuget/packages/googlegson/2.9.1.1/googlegson.2.9.1.1.nupkg.sha512",
     "/Users/nikhil-actabl/.nuget/packages/microsoft.extensions.configuration/7.0.0/microsoft.extensions.configuration.7.0.0.nupkg.sha512",
     "/Users/nikhil-actabl/.nuget/packages/microsoft.extensions.configuration.abstractions/7.0.0/microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
@@ -11,7 +12,6 @@
     "/Users/nikhil-actabl/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/7.0.0/microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
     "/Users/nikhil-actabl/.nuget/packages/microsoft.extensions.logging/7.0.0/microsoft.extensions.logging.7.0.0.nupkg.sha512",
     "/Users/nikhil-actabl/.nuget/packages/microsoft.extensions.logging.abstractions/7.0.0/microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
-    "/Users/nikhil-actabl/.nuget/packages/microsoft.extensions.logging.debug/7.0.0/microsoft.extensions.logging.debug.7.0.0.nupkg.sha512",
     "/Users/nikhil-actabl/.nuget/packages/microsoft.extensions.options/7.0.0/microsoft.extensions.options.7.0.0.nupkg.sha512",
     "/Users/nikhil-actabl/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "/Users/nikhil-actabl/.nuget/packages/microsoft.maui.graphics/7.0.101/microsoft.maui.graphics.7.0.101.nupkg.sha512",

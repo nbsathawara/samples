@@ -43,3 +43,9 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Car_Listing.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources/Styles/Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources/Styles/Styles.xaml
+
+[/Users/nikhil-actabl/Downloads/study/Samples/MAUI/1. Car Listing App/Car Listing/Car Listing/Views/CarDetailsPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Car_Listing.Views.CarDetailsPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/CarDetailsPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/CarDetailsPage.xaml

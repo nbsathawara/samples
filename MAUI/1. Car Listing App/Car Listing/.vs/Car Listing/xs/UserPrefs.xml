@@ -1,4 +1,27 @@
 ﻿<Properties StartupConfiguration="{3B5B5A1F-43F5-48D3-8BD3-BB04382FEF88}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Car Listing/Car Listing.csproj">
+    <Files>
+      <File FileName="Car Listing/MainPage.xaml.cs" />
+      <File FileName="Car Listing/MainPage.xaml" />
+      <File FileName="Car Listing/Services/CarService.cs" />
+      <File FileName="Car Listing/Car Listing.csproj" Line="12" Column="42" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Car Listing" expanded="True">
+            <Node name="Car Listing" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Car_220Listing PreferredExecutionTarget="net7.0.311-android" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.Car_220Listing FirstBuild="True" />
 </Properties>
