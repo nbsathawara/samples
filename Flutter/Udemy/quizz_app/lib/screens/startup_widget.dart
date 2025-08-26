@@ -22,13 +22,7 @@ class StartUpwidget extends StatelessWidget {
             color: Color.fromARGB(150, 255, 255, 255),
           ),
           Dimensions.veryLargeDivider,
-          Text(
-            Strings.lblStatrtUp,
-            style: GoogleFonts.lato(
-              fontSize: Dimensions.normalFontSize,
-              color: Color.fromARGB(255, 201, 153, 251),
-            ),
-          ),
+          Text(Strings.lblStatrtUp, style: Styles.appTextStyle),
           Dimensions.veryLargeDivider,
           OutlinedButton.icon(
             onPressed: startQuiz,

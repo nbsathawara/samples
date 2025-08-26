@@ -12,6 +12,7 @@ class Dimensions {
 
   static double verySmallFontSize = 4.0;
   static double smallFontSize = 8.0;
+  static double mediumFontSize = 15.0;
   static double normalFontSize = 18.0;
   static double largeFontSize = 26.0;
   static double veryLargeFontSize = 48.0;

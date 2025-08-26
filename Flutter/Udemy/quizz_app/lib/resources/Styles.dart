@@ -13,4 +13,9 @@ class Styles {
     color: Colors.white,
     //fontFamily: Strings.boldFont,
   );
+  static TextStyle appTextStyle = GoogleFonts.lato(
+    fontSize: Dimensions.normalFontSize,
+    color: Color.fromARGB(255, 201, 153, 251),
+    fontWeight: FontWeight.bold,
+  );
 }
