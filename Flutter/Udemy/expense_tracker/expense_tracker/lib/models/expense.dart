@@ -7,6 +7,8 @@ class Expense {
   final DateTime date;
   final Category category;
 
+  String get formattedDate => Constants.dateFormatter.format(date);
+
   Expense({
     required this.category,
     required this.date,
