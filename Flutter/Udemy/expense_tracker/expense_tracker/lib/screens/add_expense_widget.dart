@@ -1,12 +1,18 @@
-import 'package:expense_tracker/resources/Dimensions.dart';
+import 'package:expense_tracker/data/constants.dart';
+import 'package:expense_tracker/data/extensions.dart';
+import 'package:expense_tracker/models/expense.dart';
+import 'package:expense_tracker/resources/dimensions.dart';
+import 'package:expense_tracker/resources/strings.dart';
 import 'package:flutter/material.dart';
 
 class AddExpense extends StatefulWidget {
-  const AddExpense({super.key});
+  const AddExpense({super.key, required this.onAddExpense});
+
+  final void Function(Expense expense) onAddExpense;
 
   @override
   State<AddExpense> createState() {
-    return new _AddExpenseState();
+    return _AddExpenseState();
   }
 }
 
@@ -14,68 +20,161 @@ class _AddExpenseState extends State<AddExpense> {
   final _titleTEController = TextEditingController();
   final _amountTEController = TextEditingController();
 
-  void _showDatePicker() {
+  DateTime? _selectedDate;
+  var _selectedCategory = Category.leisure;
 
-    final now=DateTime.now();
-    final firstDate=DateTime(now.year-1,now.month,now.day);
+  void _showDatePicker() async {
+    final now = DateTime.now();
+    final firstDate = DateTime(now.year - 1, now.month, now.day);
 
-    showDatePicker(context: context, initialDate: now,firstDate: firstDate, lastDate: now);
+    var date = await showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: firstDate,
+      lastDate: now,
+    );
+
+    setState(() {
+      _selectedDate = date;
+    });
+  }
+
+  void _saveExpense() {
+    var errorMsg = isValidData();
+    if (errorMsg.isEmpty) {
+      widget.onAddExpense(
+        Expense(
+          category: _selectedCategory,
+          date: _selectedDate!,
+          amount: _amountTEController.getDoubleValue(),
+          title: _titleTEController.text.trim(),
+        ),
+      );
+      Navigator.pop(context);
+    } else {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text(Strings.lblMessage),
+          content: Text(errorMsg),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(ctx);
+              },
+              child: const Text(Strings.lblOK),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
+  String isValidData() {
+    var errorMsg = Strings.emptyString;
+    final amount = _amountTEController.getDoubleValue();
+
+    if (_titleTEController.isEmptyText()) {
+      errorMsg = '${Strings.lblInvalid} title.';
+    } else if (_amountTEController.isEmptyText() || amount <= 0) {
+      errorMsg = '${Strings.lblInvalid} amount.';
+    } else if (_selectedDate == null) {
+      errorMsg = '${Strings.lblInvalid} date.';
+    }
+    return errorMsg;
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: Dimensions.mediumMarginAll,
+      padding: EdgeInsetsGeometry.fromLTRB(16, 48, 16, 16),
       child: Column(
         children: [
-          TextField(
-            maxLength: 50,
-            decoration: const InputDecoration(label: Text('Title')),
-            controller: _titleTEController,
-          ),
+          titleWidget(),
           Row(
             children: [
-              Expanded(
-                child: TextField(
-                  decoration: const InputDecoration(
-                    prefixText: '\$ ',
-                    label: Text('Amount'),
-                  ),
-                  controller: _amountTEController,
-                  keyboardType: TextInputType.number,
-                ),
-              ),
+              amountWidget(),
               Dimensions.normalDividerHorizontal,
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: _showDatePicker,
-                      icon: const Icon(Icons.calendar_month),
-                    ),
-                    const Text('Select Date'),
-                  ],
-                ),
-              ),
+              selectDateWidget(),
             ],
           ),
-
+          Dimensions.normalDivider,
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              selectCategoryWidget(),
+              const Spacer(),
               ElevatedButton(
-                onPressed: () {},
-                child: const Text("Save Expense"),
+                onPressed: _saveExpense,
+                child: const Text(Strings.lblSaveExpense),
               ),
+              Dimensions.normalDividerHorizontal,
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text("Cancel"),
+                child: const Text(Strings.lblCancel),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  DropdownButton<Category> selectCategoryWidget() {
+    return DropdownButton(
+      value: _selectedCategory,
+      items: Category.values
+          .map(
+            (category) => DropdownMenuItem(
+              value: category,
+              child: Text(category.name.toUpperCase()),
+            ),
+          )
+          .toList(),
+      onChanged: (value) {
+        setState(() {
+          _selectedCategory = value as Category;
+        });
+      },
+    );
+  }
+
+  TextField titleWidget() {
+    return TextField(
+      maxLength: 50,
+      decoration: const InputDecoration(label: Text('Title')),
+      controller: _titleTEController,
+    );
+  }
+
+  Expanded amountWidget() {
+    return Expanded(
+      child: TextField(
+        decoration: const InputDecoration(
+          prefixText: '\$ ',
+          label: Text('Amount'),
+        ),
+        controller: _amountTEController,
+        keyboardType: TextInputType.number,
+      ),
+    );
+  }
+
+  Expanded selectDateWidget() {
+    return Expanded(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          IconButton(
+            onPressed: _showDatePicker,
+            icon: const Icon(Icons.calendar_month),
+          ),
+          Text(
+            _selectedDate == null
+                ? 'Select Date'
+                : Constants.dateFormatter.format(_selectedDate!),
           ),
         ],
       ),

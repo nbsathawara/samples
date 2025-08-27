@@ -10,6 +10,7 @@ class Constants {
     Category.travel: Icons.flight_takeoff,
     Category.leisure: Icons.movie,
     Category.work: Icons.work,
+    Category.others: Icons.auto_awesome_mosaic,
   };
 
   //Date Formats
@@ -17,4 +18,4 @@ class Constants {
 }
 
 //Enums
-enum Category { food, travel, leisure, work }
+enum Category { food, travel, leisure, work, others }
