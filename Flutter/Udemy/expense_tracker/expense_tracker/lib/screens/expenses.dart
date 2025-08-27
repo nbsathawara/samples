@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
 import 'package:expense_tracker/data/constants.dart';
 import 'package:expense_tracker/models/expense.dart';
 import 'package:expense_tracker/resources/Strings.dart';
 import 'package:expense_tracker/screens/add_expense_widget.dart';
+import 'package:expense_tracker/screens/chart/chart.dart';
 import 'package:expense_tracker/screens/expense_list_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -79,7 +82,7 @@ class _ExpensesState extends State<Expenses> {
       appBar: _appBar(),
       body: Column(
         children: [
-          Text('Chart...'),
+          Chart(expenses: _expenses,),
           Expanded(child: mainContent),
         ],
       ),

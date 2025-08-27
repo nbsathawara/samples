@@ -5,7 +5,7 @@ import 'package:uuid/uuid.dart';
 class Constants {
   static const uuid = Uuid();
 
-  static const CategoryIcons = {
+  static const categoryIcons = {
     Category.food: Icons.lunch_dining,
     Category.travel: Icons.flight_takeoff,
     Category.leisure: Icons.movie,
