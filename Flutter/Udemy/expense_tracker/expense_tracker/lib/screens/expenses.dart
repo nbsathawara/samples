@@ -1,3 +1,4 @@
+import 'package:expense_tracker/data/constants.dart';
 import 'package:expense_tracker/models/expense.dart';
 import 'package:expense_tracker/resources/Strings.dart';
 import 'package:expense_tracker/screens/add_expense_widget.dart';
@@ -12,7 +13,10 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
-  final List<Expense> _expenses = [];
+  final List<Expense> _expenses = [
+    Expense(category: Category.food, date: DateTime.now(), amount: 19.99, title: "Cheese Burger"),
+     Expense(category: Category.travel, date: DateTime.now(), amount: 199.99, title: "flight to LA")
+  ];
 
   AppBar _appBar() {
     return AppBar(

@@ -76,6 +76,11 @@ class Dimensions {
 
   static final EdgeInsets mediumMarginAll = EdgeInsets.all(mediumMargin);
 
+  static EdgeInsets cardMargin = EdgeInsets.symmetric(
+    horizontal: 16,
+    vertical: 8,
+  );
+
   static EdgeInsets expenseCardPadding = EdgeInsets.symmetric(
     horizontal: 20,
     vertical: 16,

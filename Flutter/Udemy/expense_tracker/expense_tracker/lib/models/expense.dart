@@ -16,3 +16,10 @@ class Expense {
     required this.title,
   }) : id = Constants.uuid.v4();
 }
+
+class ExpenseBucket {
+  final Category category;
+  final List<Expense> expenses;
+
+  ExpenseBucket({required this.category, required this.expenses});
+}
