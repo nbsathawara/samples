@@ -17,7 +17,7 @@ class CategoryGridItem extends StatelessWidget {
     return InkWell(
       onTap: onSelectCategory,
       splashColor: Theme.of(context).primaryColor,
-      borderRadius: BorderRadius.circular(Dimensions.defualtRadius),
+      borderRadius: BorderRadius.circular(Dimensions.normalRadius),
       child: CategoryItem(category: category),
     );
   }
@@ -33,7 +33,7 @@ class CategoryItem extends StatelessWidget {
     return Container(
       padding: Dimensions.mediumMarginAll,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(Dimensions.defualtRadius),
+        borderRadius: BorderRadius.circular(Dimensions.normalRadius),
         gradient: LinearGradient(
           colors: [
             category.color.withValues(alpha: 0.55),

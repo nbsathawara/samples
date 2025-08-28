@@ -9,8 +9,6 @@ class Dimensions {
   static double mediumMargin = 15;
   static double largeMargin = 20.0;
   static double veryLargeMargin = 50.0;
-
-  static double defualtRadius = 16;
   static double verySmallFontSize = 4.0;
   static double smallFontSize = 8.0;
   static double mediumFontSize = 15.0;
@@ -23,6 +21,11 @@ class Dimensions {
   static double twelveFontSize = 12.0;
   static double fifteenFontSize = 15.0;
   static double seventeenFontSize = 17.0;
+
+  static double defaultElevation = 2;
+
+  static double smallRadius = 8;
+  static double normalRadius = 16;
 
   static double titleHeight = 50.0;
   static double lblHeight = 30.0;
@@ -38,92 +41,86 @@ class Dimensions {
   static double schemeSlabViewWidth = 100.0;
   static const divider = 1.0;
 
+  static const zeroMargin = EdgeInsets.all(0);
   static const zeroDivider = SizedBox(height: 0);
 
-  static SizedBox verySmallDivider = SizedBox(height: verySmallMargin);
-  static SizedBox smallDivider = SizedBox(height: smallMargin);
-  static SizedBox normalDivider = SizedBox(height: normalMargin);
-  static SizedBox largeDivider = SizedBox(height: largeMargin);
-  static SizedBox veryLargeDivider = SizedBox(height: veryLargeMargin);
+  static final verySmallDivider = SizedBox(height: verySmallMargin);
+  static final smallDivider = SizedBox(height: smallMargin);
+  static final normalDivider = SizedBox(height: normalMargin);
+  static final mediumDivider = SizedBox(height: mediumMargin);
+  static final largeDivider = SizedBox(height: largeMargin);
+  static final veryLargeDivider = SizedBox(height: veryLargeMargin);
 
-  static SizedBox smallDividerHorizontal = SizedBox(width: smallMargin);
-  static final SizedBox mediumDividerHorizontal = SizedBox(width: mediumMargin);
-  static final SizedBox normalDividerHorizontal = SizedBox(width: normalMargin);
-  static SizedBox largeDividerHorizontal = SizedBox(width: largeMargin);
-  static SizedBox verySmallDividerHorizontal = SizedBox(width: verySmallMargin);
+  static final smallDividerHorizontal = SizedBox(width: smallMargin);
+  static final mediumDividerHorizontal = SizedBox(width: mediumMargin);
+  static final normalDividerHorizontal = SizedBox(width: normalMargin);
+  static final largeDividerHorizontal = SizedBox(width: largeMargin);
+  static final verySmallDividerHorizontal = SizedBox(width: verySmallMargin);
 
-  static const zeroMargin = EdgeInsets.all(0);
+  static final smallMarginAll = EdgeInsets.all(smallMargin);
 
-  static EdgeInsets smallMarginAll = EdgeInsets.all(smallMargin);
+  static final verySmallMarginAll = EdgeInsets.all(verySmallMargin);
 
-  static EdgeInsets verySmallMarginAll = EdgeInsets.all(verySmallMargin);
-
-  static EdgeInsets verSmallTBMargin = EdgeInsets.only(
+  static final verSmallTBMargin = EdgeInsets.only(
     top: verySmallMargin,
     bottom: verySmallMargin,
   );
 
-  static EdgeInsets smallTBMargin = EdgeInsets.only(
+  static final smallTBMargin = EdgeInsets.only(
     top: smallMargin,
     bottom: smallMargin,
   );
 
-  static EdgeInsets smallLRMargin = EdgeInsets.only(
+  static final smallLRMargin = EdgeInsets.only(
     left: smallMargin,
     right: smallMargin,
   );
 
-  static final EdgeInsets normalMarginAll = EdgeInsets.all(normalMargin);
+  static final normalMarginAll = EdgeInsets.all(normalMargin);
 
-  static final EdgeInsets mediumMarginAll = EdgeInsets.all(mediumMargin);
+  static final mediumMarginAll = EdgeInsets.all(mediumMargin);
 
-  static EdgeInsets cardMargin = EdgeInsets.symmetric(
-    horizontal: 16,
-    vertical: 8,
-  );
+  static final cardMargin = EdgeInsets.symmetric(horizontal: 16, vertical: 8);
 
-  static EdgeInsets expenseCardPadding = EdgeInsets.symmetric(
+  static final expenseCardPadding = EdgeInsets.symmetric(
     horizontal: 20,
     vertical: 16,
   );
 
-  static EdgeInsets normalLRMargin = EdgeInsets.only(
+  static final normalLRMargin = EdgeInsets.only(
     left: normalMargin,
     right: normalMargin,
   );
 
-  static EdgeInsets normalLRTMargin = EdgeInsets.only(
+  static final normalLRTMargin = EdgeInsets.only(
     left: normalMargin,
     right: normalMargin,
     top: normalMargin,
   );
 
-  static EdgeInsets normalTBMargin = EdgeInsets.only(
+  static final normalTBMargin = EdgeInsets.only(
     bottom: normalMargin,
     top: normalMargin,
   );
 
-  static EdgeInsets veryLargeLRMargin = EdgeInsets.only(
+  static final veryLargeLRMargin = EdgeInsets.only(
     left: veryLargeMargin,
     right: veryLargeMargin,
   );
 
-  static EdgeInsets largeLRMargin = EdgeInsets.only(
+  static final largeLRMargin = EdgeInsets.only(
     left: largeMargin,
     right: largeMargin,
   );
 
-  static EdgeInsets largeMarginAll = EdgeInsets.all(largeMargin);
+  static final largeMarginAll = EdgeInsets.all(largeMargin);
 
-  static EdgeInsets answerPadding = EdgeInsets.only(
+  static final answerPadding = EdgeInsets.only(
     left: veryLargeMargin,
     top: largeMargin,
     right: veryLargeMargin,
     bottom: largeMargin,
   );
 
-  static Container emptyView = Container(
-    padding: zeroMargin,
-    margin: zeroMargin,
-  );
+  static final emptyView = Container(padding: zeroMargin, margin: zeroMargin);
 }
