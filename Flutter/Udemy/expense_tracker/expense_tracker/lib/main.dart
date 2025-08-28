@@ -1,16 +1,22 @@
 import 'package:expense_tracker/resources/dimensions.dart';
 import 'package:expense_tracker/screens/expenses.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
-      theme: appTheme(),
-      darkTheme: appDarkTheme(),
-      debugShowCheckedModeBanner: false,
-      home: Expenses(),
-    ),
-  );
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((
+    fn,
+  ) {
+    runApp(
+      MaterialApp(
+        theme: appTheme(),
+        darkTheme: appDarkTheme(),
+        debugShowCheckedModeBanner: false,
+        home: Expenses(),
+      ),
+    );
+  });
 }
 
 ThemeData appTheme() {
@@ -26,7 +32,7 @@ ThemeData appTheme() {
       foregroundColor: kColorScheme.primaryContainer,
       titleTextStyle: TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: Dimensions.normalFontSize
+        fontSize: Dimensions.normalFontSize,
       ),
     ),
     cardTheme: const CardThemeData().copyWith(
