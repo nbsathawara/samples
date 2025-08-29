@@ -1,35 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/models/category.dart';
 import 'package:meals_app/models/meal.dart';
 import 'package:meals_app/resources/dimensions.dart';
 import 'package:meals_app/screens/meals/details/meal_details.dart';
 import 'package:meals_app/screens/meals/list/meal_item.dart';
 
 class MealsScreen extends StatelessWidget {
-  final Category category;
+  final String title;
   final List<Meal> meals;
+  final void Function(Meal meal) onToggleFavoriteMeal;
 
-  const MealsScreen({super.key, required this.category, required this.meals});
+  const MealsScreen({
+    super.key,
+    required this.title,
+    required this.meals,
+    required this.onToggleFavoriteMeal,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(category.title)),
+      appBar: AppBar(title: Text(title)),
 
-      body: meals.isEmpty ? EmptyWidget() : MealsListWidget(meals: meals),
+      body: meals.isEmpty
+          ? EmptyWidget()
+          : MealsListWidget(
+              meals: meals,
+              onToggleFavoriteMeal: onToggleFavoriteMeal,
+            ),
     );
   }
 }
 
 class MealsListWidget extends StatelessWidget {
-  const MealsListWidget({super.key, required this.meals});
-
+  const MealsListWidget({
+    super.key,
+    required this.meals,
+    required this.onToggleFavoriteMeal,
+  });
+  final void Function(Meal meal) onToggleFavoriteMeal;
   final List<Meal> meals;
 
   void selectMeal(BuildContext context, Meal meal) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (ctx) => MealDetails(meal: meal)),
+      MaterialPageRoute(
+        builder: (ctx) =>
+            MealDetails(meal: meal, onToggleFavoriteMeal: onToggleFavoriteMeal),
+      ),
     );
   }
 

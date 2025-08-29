@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app/resources/themes.dart';
-import 'package:meals_app/screens/category/categories.dart';
+import 'package:meals_app/screens/tabs.dart';
 
 void main() {
   runApp(const App());
@@ -15,7 +15,7 @@ class App extends StatelessWidget {
       theme: Themes.appTheme(),
       darkTheme: Themes.appDarkTheme(),
       debugShowCheckedModeBanner: false,
-      home: const CategoriesScreen(),
+      home: const Tabs(),
     );
   }
 }
