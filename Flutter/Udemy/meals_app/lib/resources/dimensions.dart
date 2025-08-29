@@ -13,7 +13,7 @@ class Dimensions {
   static double smallFontSize = 8.0;
   static double mediumFontSize = 15.0;
   static double normalFontSize = 18.0;
-  static double largeFontSize = 26.0;
+  static double largeFontSize = 24.0;
   static double veryLargeFontSize = 48.0;
   static double customLblFontSize = 14.0;
   static double customBtnFontSize = 22.5;

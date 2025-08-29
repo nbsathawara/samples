@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class Constants {
   //static const uuid = Uuid();
@@ -14,3 +13,5 @@ class Constants {
 enum Complexity { simple, challenging, hard }
 
 enum Affordability { affordable, pricey, luxurious }
+
+enum Filter { glutenFree, lactoseFree, vegeterian,vegan }

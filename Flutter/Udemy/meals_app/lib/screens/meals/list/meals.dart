@@ -19,8 +19,7 @@ class MealsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
-
+      appBar: title.isEmpty ? null : AppBar(title: Text(title)),
       body: meals.isEmpty
           ? EmptyWidget()
           : MealsListWidget(
