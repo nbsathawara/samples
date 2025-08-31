@@ -24,8 +24,18 @@ class MealDetails extends ConsumerWidget {
         title: Text(meal.title),
         actions: [
           IconButton(
-            icon: Icon(
-              favoriteMeals.contains(meal) ? Icons.star : Icons.star_border,
+            icon: AnimatedSwitcher(
+              duration: Duration(milliseconds: 300),
+              child: Icon(
+                key: ValueKey(favoriteMeals.contains(meal)),
+                favoriteMeals.contains(meal) ? Icons.star : Icons.star_border,
+              ),
+              transitionBuilder: (child, animation) {
+                return RotationTransition(
+                  turns: Tween(begin: 0.75, end: 1.0).animate(animation),
+                  child: child,
+                );
+              },
             ),
             onPressed: () {
               var isFavorite = ref
@@ -147,17 +157,20 @@ class MealImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      clipBehavior: Clip.hardEdge,
-      elevation: Dimensions.defaultElevation,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Dimensions.smallRadius),
-      ),
-      child: Image.network(
-        meal.imageUrl,
-        height: 250,
-        width: double.infinity,
-        fit: BoxFit.cover,
+    return Hero(
+      tag: meal.id,
+      child: Card(
+        clipBehavior: Clip.hardEdge,
+        elevation: Dimensions.defaultElevation,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(Dimensions.smallRadius),
+        ),
+        child: Image.network(
+          meal.imageUrl,
+          height: 250,
+          width: double.infinity,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

@@ -81,12 +81,15 @@ class MealImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FadeInImage(
-      placeholder: MemoryImage(kTransparentImage),
-      image: NetworkImage(meal.imageUrl),
-      fit: BoxFit.cover,
-      height: 200,
-      width: double.infinity,
+    return Hero(
+      tag: meal.id,
+      child: FadeInImage(
+        placeholder: MemoryImage(kTransparentImage),
+        image: NetworkImage(meal.imageUrl),
+        fit: BoxFit.cover,
+        height: 200,
+        width: double.infinity,
+      ),
     );
   }
 }
