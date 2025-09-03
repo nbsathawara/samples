@@ -18,6 +18,9 @@ import com.example.myfirstapp.ui.theme.MyFirstAppTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        rockPaperScissors()
+
         enableEdgeToEdge()
         setContent {
             MyFirstAppTheme {
@@ -30,6 +33,36 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+}
+
+fun rockPaperScissors() {
+    var computerChoice = ""
+    var playerChoice = ""
+
+    var randomNumber = (1..3).random()
+    when (randomNumber) {
+        1 -> computerChoice = "Rock"
+        2 -> computerChoice = "Paper"
+        3 -> computerChoice = "Scissors"
+    }
+    println("Computer Choice : $computerChoice")
+
+    randomNumber = (1..3).random()//readln()
+    when (randomNumber) {
+        1 -> playerChoice = "Rock"
+        2 -> playerChoice = "Paper"
+        3 -> playerChoice = "Scissors"
+    }
+    println("Player Choice : $playerChoice")
+
+    val winner = when {
+        playerChoice == computerChoice -> "Tie"
+        playerChoice == "Rock" && computerChoice == "Scissors" -> "Player"
+        playerChoice == "Paper" && computerChoice == "Rock" -> "Player"
+        playerChoice == "Scissors" && computerChoice == "Paper" -> "Player"
+        else -> "Computer"
+    }
+    println("Winner : $winner")
 }
 
 @Composable
