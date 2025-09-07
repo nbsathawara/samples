@@ -2,6 +2,7 @@ package com.nbs.recipeapp.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -28,7 +29,7 @@ import com.nbs.recipeapp.models.Category
 import com.nbs.recipeapp.viewmodels.MainViewModel
 
 @Composable
-fun RecipeScreen(modifier: Modifier = Modifier) {
+fun RecipeScreen(modifier: Modifier = Modifier, navigateToDetails: (Category) -> Unit) {
     val recipeViewModel: MainViewModel = viewModel()
     val recipeState by recipeViewModel.categoriesState
 
@@ -43,28 +44,31 @@ fun RecipeScreen(modifier: Modifier = Modifier) {
             }
 
             else -> {
-                CategoriesScreen(recipeState.categories)
+                CategoriesScreen(recipeState.categories, navigateToDetails)
             }
         }
     }
 }
 
 @Composable
-fun CategoriesScreen(categories: List<Category>) {
+fun CategoriesScreen(categories: List<Category>, navigateToDetails: (Category) -> Unit) {
     LazyVerticalGrid(GridCells.Fixed(2), Modifier.fillMaxSize()) {
         items(categories) {
-            CategoryItem(it)
+            CategoryItem(it, navigateToDetails)
         }
     }
 }
 
 @Composable
-fun CategoryItem(category: Category) {
+fun CategoryItem(category: Category, navigateToDetails: (Category) -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .padding(8.dp)
             .fillMaxSize()
+            .clickable {
+                navigateToDetails(category)
+            }
     ) {
         Image(
             painter = rememberAsyncImagePainter(category.strCategoryThumb),
@@ -81,17 +85,4 @@ fun CategoryItem(category: Category) {
 
         )
     }
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun RecipeScreenPreview() {
-    CategoryItem(
-        Category(
-            "1",
-            "Beef",
-            "https://www.themealdb.com/images/category/beef.png",
-            "Beef is the culinary name for meat from cattle, particularly skeletal muscle. Humans have been eating beef since prehistoric times.[1] Beef is a source of high-quality protein and essential nutrients.[2]"
-        )
-    )
 }
