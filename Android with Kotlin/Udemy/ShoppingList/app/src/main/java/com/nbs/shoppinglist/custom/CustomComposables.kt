@@ -1,5 +1,7 @@
 package com.nbs.shoppinglist.custom
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -22,4 +24,31 @@ fun CustomSpacer(width: Dp = 0.dp, height: Dp = 0.dp, modifier: Modifier = Modif
 @Composable
 fun ErrorText(msg: String = "Invalid Value") {
     Text(text = msg, color = MaterialTheme.colorScheme.error)
+}
+
+
+
+@Composable
+fun RequestPermission(
+    requestedPermissions: List<String>,
+    onPermissionGranted: () -> Unit,
+    onPermissionDenied: (String) -> Unit
+) {
+    val requestPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestMultiplePermissions(),
+        onResult = { grantedPermissions ->
+            val allPermissionsGranted = requestedPermissions.all {
+                grantedPermissions[it] == true
+            }
+
+            if (allPermissionsGranted) {
+                onPermissionGranted()
+            } else {
+                val deniedPermission = grantedPermissions.entries.first { !it.value }
+                onPermissionDenied(deniedPermission.key)
+            }
+        }
+    )
+
+    requestPermissionLauncher.launch(requestedPermissions.toTypedArray())
 }
