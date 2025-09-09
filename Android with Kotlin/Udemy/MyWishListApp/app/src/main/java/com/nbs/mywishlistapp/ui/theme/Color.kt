@@ -16,6 +16,7 @@ val Secondary = Color(0XFFF48FB1)
 
 val Tertiary = Color(0XFFF06292)
 
+val Error = Color(0XFFAA1111)
 val White = Color(0XFFFFFFFF)
 
 val Black = Color(0XFF000000)

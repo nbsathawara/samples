@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -18,6 +20,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.nbs.mywishlistapp.data.Screens
 import com.nbs.mywishlistapp.ui.theme.MyWishListAppTheme
+import com.nbs.mywishlistapp.viewmodels.WishViewModel
+import com.nbs.mywishlistapp.views.AddWishView
 import com.nbs.mywishlistapp.views.HomeView
 
 class MainActivity : ComponentActivity() {
@@ -35,12 +39,21 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp() {
     val navController: NavHostController = rememberNavController()
+    val wishViewModel: WishViewModel = viewModel()
+    Navigation(navController, wishViewModel)
+}
+
+@Composable
+fun Navigation(navController: NavHostController, wishViewModel: WishViewModel) {
     NavHost(
         navController = navController,
         startDestination = Screens.HomeScreen.name
     ) {
         composable(Screens.HomeScreen.name) {
-            HomeView()
+            HomeView(navController, wishViewModel)
+        }
+        composable(Screens.AddWishScreen.name) {
+            AddWishView(0L, navController, wishViewModel)
         }
     }
 }

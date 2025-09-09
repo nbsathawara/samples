@@ -17,14 +17,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.nbs.mywishlistapp.custom.BackIcon
 import com.nbs.mywishlistapp.custom.NavigationIcon
 import com.nbs.mywishlistapp.data.Constants
+import com.nbs.mywishlistapp.data.Screens
 import com.nbs.mywishlistapp.models.DummyData
 import com.nbs.mywishlistapp.ui.theme.Primary
+import com.nbs.mywishlistapp.viewmodels.WishViewModel
 
 @Composable
-fun HomeView() {
+fun HomeView(navController: NavController, wishViewModel: WishViewModel) {
     Scaffold(
         topBar = {
             AppBar(
@@ -36,7 +39,9 @@ fun HomeView() {
             FloatingActionButton(
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = MaterialTheme.colorScheme.onPrimary,
-                onClick = {}) {
+                onClick = {
+                    navController.navigate(Screens.AddWishScreen.name)
+                }) {
                 Icon(Icons.Default.Add, contentDescription = "")
             }
         }
@@ -56,5 +61,5 @@ fun HomeView() {
 @Composable
 @Preview(showSystemUi = true, showBackground = true)
 fun HomeViewPreview() {
-    HomeView()
+    //HomeView()
 }
