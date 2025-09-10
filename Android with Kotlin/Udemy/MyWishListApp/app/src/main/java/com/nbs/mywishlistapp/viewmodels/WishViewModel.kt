@@ -16,6 +16,8 @@ class WishViewModel(
     private val wishRepository: WishRepository = Graph.wishRepository
 ) : ViewModel() {
 
+    var wishTitle by mutableStateOf("")
+    var wishDesc by mutableStateOf("")
     lateinit var getAllWishes: Flow<List<Wish>>
 
     init {
@@ -44,16 +46,5 @@ class WishViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             wishRepository.deleteWish(wish)
         }
-    }
-
-    var wishTitle by mutableStateOf("")
-    var wishDesc by mutableStateOf("")
-
-    fun editWishTitle(title: String) {
-        wishTitle = title
-    }
-
-    fun editWishDesc(desc: String) {
-        wishDesc = desc
     }
 }

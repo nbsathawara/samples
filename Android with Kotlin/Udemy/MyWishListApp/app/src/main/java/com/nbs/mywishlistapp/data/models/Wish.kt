@@ -12,6 +12,8 @@ data class Wish(
     val description: String
 )
 
+val emptyWish = Wish(0, "", "")
+
 object DummyData {
     val wishList = listOf(
         Wish(1, "asmsakfmdasdas", "sdfnsdkfnsmkdnfksdnfksndfksndfs"),

@@ -19,6 +19,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -33,6 +34,7 @@ import com.nbs.mywishlistapp.R
 import com.nbs.mywishlistapp.custom.BackIcon
 import com.nbs.mywishlistapp.custom.CustomSpacer
 import com.nbs.mywishlistapp.data.models.Wish
+import com.nbs.mywishlistapp.data.models.emptyWish
 import com.nbs.mywishlistapp.viewmodels.WishViewModel
 import kotlinx.coroutines.launch
 
@@ -49,6 +51,15 @@ fun AddWishView(
     val scope = rememberCoroutineScope()
     var snackMsg by remember { mutableStateOf("") }
     val snackBarHostState = remember { SnackbarHostState() }
+
+    if (isEditMode) {
+        val wish = viewModel.getWish(id).collectAsState(initial = emptyWish).value
+        viewModel.wishTitle = wish.title
+        viewModel.wishDesc = wish.description
+    } else {
+        viewModel.wishTitle = ""
+        viewModel.wishDesc = ""
+    }
 
     fun validate(): Boolean {
         val title = viewModel.wishTitle.trim()
@@ -71,6 +82,8 @@ fun AddWishView(
             val desc = viewModel.wishDesc.trim()
 
             if (isEditMode) {
+                viewModel.updateWish(Wish(id = id, title = title, description = desc))
+                snackMsg = "Wish has been updated!!!"
             } else {
                 viewModel.insertWish(Wish(title = title, description = desc))
                 snackMsg = "Wish has been created!!!"
@@ -88,7 +101,7 @@ fun AddWishView(
 
     Scaffold(
         snackbarHost = {
-            SnackbarHost(snackBarHostState, Modifier.padding(  8.dp))
+            SnackbarHost(snackBarHostState, Modifier.padding(8.dp))
         },
         topBar = {
             AppBar(
@@ -116,14 +129,14 @@ fun AddWishView(
                     "Title",
                     viewModel.wishTitle,
                     onValueChange = {
-                        viewModel.editWishTitle(it)
+                        viewModel.wishTitle = it
                     })
                 CustomSpacer(height = 16.dp)
                 CustomTextField(
                     "Description",
                     viewModel.wishDesc,
                     onValueChange = {
-                        viewModel.editWishDesc(it)
+                        viewModel.wishDesc = it
                     })
                 CustomSpacer(height = 16.dp)
                 Button({ saveWish() }) {

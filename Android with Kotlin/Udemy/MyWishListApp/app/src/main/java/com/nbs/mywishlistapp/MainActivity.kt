@@ -52,8 +52,13 @@ fun Navigation(navController: NavHostController, wishViewModel: WishViewModel) {
         composable(Screens.HomeScreen.name) {
             HomeView(navController, wishViewModel)
         }
-        composable(Screens.AddWishScreen.name) {
-            AddWishView(0L, navController, wishViewModel)
+        composable(Screens.AddWishScreen.name + "/{id}") { navBackStackEntry ->
+            val id = navBackStackEntry.arguments?.getString("id")?.toLong()
+            AddWishView(
+                id = id ?: 0,
+                navController = navController,
+                viewModel = wishViewModel
+            )
         }
     }
 }
