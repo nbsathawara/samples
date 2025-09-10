@@ -1,6 +1,16 @@
-package com.nbs.mywishlistapp.models
+package com.nbs.mywishlistapp.data.models
 
-data class Wish(val id: Long = 0, val title: String = "", val description: String)
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.nbs.mywishlistapp.data.Constants
+
+@Entity(tableName = Constants.TABLE_WISH)
+data class Wish(
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0,
+    val title: String = "",
+    val description: String
+)
 
 object DummyData {
     val wishList = listOf(

@@ -1,29 +1,22 @@
 package com.nbs.mywishlistapp.views
 
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import com.nbs.mywishlistapp.custom.BackIcon
-import com.nbs.mywishlistapp.custom.NavigationIcon
-import com.nbs.mywishlistapp.data.Constants
 import com.nbs.mywishlistapp.data.Screens
-import com.nbs.mywishlistapp.models.DummyData
-import com.nbs.mywishlistapp.ui.theme.Primary
+import com.nbs.mywishlistapp.data.models.DummyData
 import com.nbs.mywishlistapp.viewmodels.WishViewModel
 
 @Composable
@@ -45,13 +38,16 @@ fun HomeView(navController: NavController, wishViewModel: WishViewModel) {
                 Icon(Icons.Default.Add, contentDescription = "")
             }
         }
-    ) { it ->
+    ) { innerPadding ->
+
+        val wishList = wishViewModel.getAllWishes.collectAsState(initial = emptyList())
+
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(it)
+                .padding(innerPadding)
         ) {
-            items(DummyData.wishList) { wish ->
+            items(wishList.value) { wish ->
                 WishItem(wish, {})
             }
         }
