@@ -1,7 +1,9 @@
 package com.nbs.subsriptionapp.views
 
+import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,6 +14,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -30,6 +34,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -37,11 +42,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -79,6 +87,16 @@ fun HomeScreen() {
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val navController = rememberNavController()
+    
+    val primaryColor = MaterialTheme.colorScheme.primary
+    val view = LocalView.current
+    val isDarkTheme = isSystemInDarkTheme()
+    LaunchedEffect(drawerState.isOpen) {
+        val window = (view.context as? Activity)?.window ?: return@LaunchedEffect
+        window.statusBarColor = primaryColor.toArgb()
+        WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = isDarkTheme
+
+    }
 
     val scope = rememberCoroutineScope()
     fun closeDrawer() {
@@ -97,13 +115,12 @@ fun HomeScreen() {
             {
                 ModalDrawerSheet(
                     modifier = Modifier
-                        .fillMaxWidth(0.65f),
+                        .fillMaxWidth(0.65f)
                 ) {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
                             .background(Color.LightGray)
-                            .windowInsetsPadding(WindowInsets.statusBars)
                     ) {
                         DrawerHeaderView()
                         CustomSpacer(height = 2.dp)
@@ -111,11 +128,11 @@ fun HomeScreen() {
                             val isSelected = drawerItem == curDrawerItem
                             val color =
                                 if (isSelected)
-                                    MaterialTheme.colorScheme.primary
+                                    MaterialTheme.colorScheme.secondary
                                 else Color.White
                             val tintColor =
                                 if (isSelected)
-                                    MaterialTheme.colorScheme.onPrimary
+                                    MaterialTheme.colorScheme.onSecondary
                                 else Color.Black
                             Box(
                                 modifier = Modifier
@@ -141,10 +158,11 @@ fun HomeScreen() {
                                             tint = tintColor
                                         )
                                     }
+                                    CustomSpacer(width = 8.dp)
                                     Text(text = drawerItem.title, color = tintColor)
                                 }
-                                CustomSpacer(height = 4.dp)
                             }
+                            CustomSpacer(height = 4.dp)
                         }
                     }
                 }
@@ -180,33 +198,6 @@ fun HomeScreen() {
             )
         }
     }
-}
-
-@Composable
-fun DrawerItemView(
-    drawerItem: DrawerItem,
-    onItemClick: () -> Unit
-) {
-    NavigationDrawerItem(
-        label = { Text(text = drawerItem.title) },
-        icon = {
-            if (drawerItem.icon != null) {
-                Icon(
-                    imageVector = drawerItem.icon!!,
-                    contentDescription = ""
-                )
-            } else {
-                Icon(
-                    painter = drawerItem.painter!!,
-                    contentDescription = ""
-                )
-            }
-        },
-        selected = false,
-        onClick = {
-            onItemClick()
-        }
-    )
 }
 
 @Composable

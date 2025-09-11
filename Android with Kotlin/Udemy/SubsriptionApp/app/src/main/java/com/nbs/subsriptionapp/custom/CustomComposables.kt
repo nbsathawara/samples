@@ -40,7 +40,6 @@ fun CustomSpacer(
     else
         Spacer(
             modifier
-                .fillMaxHeight()
                 .width(width)
                 .background(color)
         )
