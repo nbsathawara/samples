@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SubsriptionApp</string>
+
+    <!--   Home View-->
+    <string name="my_account">My Account</string>
+    <string name="add_account">Add Account</string>
+    <string name="my_subscriptions">My Subscriptions</string>
+</resources>
