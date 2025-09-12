@@ -30,7 +30,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -56,7 +55,6 @@ import com.nbs.subsriptionapp.data.Screens
 import com.nbs.subsriptionapp.models.NavigationItem
 import com.nbs.subsriptionapp.models.bottomItems
 import com.nbs.subsriptionapp.models.drawerItems
-import com.nbs.subsriptionapp.views.bottom.BrowseScreen
 import com.nbs.subsriptionapp.views.bottom.HomeScreen
 import com.nbs.subsriptionapp.views.bottom.LibraryScreen
 import com.nbs.subsriptionapp.views.drawer.AddAccountScreen
@@ -98,7 +96,7 @@ fun MainScreen() {
             }
 
             3 -> {
-                bottomItem.title = stringResource(R.string.library)
+                bottomItem.title = stringResource(R.string.genres)
                 bottomItem.painter = painterResource(R.drawable.outline_library_music_24)
             }
         }
@@ -256,7 +254,7 @@ fun MainScreen() {
                             onClick = {
                                 currentNavigationItem = bottomItem
                                 title = bottomItem.title
-                                navController.navigate(bottomItem.route)
+                                navController.navigate( bottomItem.route)
                             }
                         )
                     }
@@ -307,13 +305,14 @@ fun Navigation(
         composable(Screens.AddAccountScreen.name) {
             AddAccountScreen()
         }
-        composable(Screens.HomeScreen.name) {
+        composable(Screens.HomeScreen.name) { it ->
+            val isBrowse = it.arguments?.getString("isBrowse")
             HomeScreen()
         }
-        composable(Screens.BrowseScreen.name) {
-            BrowseScreen()
+        composable(Screens.HomeScreen.name + "/{Browse}") { it ->
+            HomeScreen(true)
         }
-        composable(Screens.LibraryScreen.name) {
+        composable(Screens.GenresScreen.name) {
             LibraryScreen()
         }
     }

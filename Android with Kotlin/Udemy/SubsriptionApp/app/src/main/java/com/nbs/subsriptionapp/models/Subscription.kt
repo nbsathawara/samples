@@ -2,7 +2,6 @@ package com.nbs.subsriptionapp.models
 
 import com.nbs.subsriptionapp.R
 
-
 data class Subscription(
     val title: String,
     val price: Double,

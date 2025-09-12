@@ -29,8 +29,8 @@ sealed class NavigationItem(
 
 val bottomItems = listOf<NavigationItem.BottomItem>(
     NavigationItem.BottomItem(id = 1, bRoute = Screens.HomeScreen.name),
-    NavigationItem.BottomItem(id = 2, bRoute = Screens.BrowseScreen.name),
-    NavigationItem.BottomItem(id = 3, bRoute = Screens.LibraryScreen.name)
+    NavigationItem.BottomItem(id = 2, bRoute = Screens.HomeScreen.name + "/Browse"),
+    NavigationItem.BottomItem(id = 3, bRoute = Screens.GenresScreen.name)
 )
 
 val drawerItems = listOf<NavigationItem.DrawerItem>(

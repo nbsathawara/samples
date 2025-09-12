@@ -49,6 +49,7 @@ fun CustomSpacer(
         Spacer(
             modifier
                 .width(width)
+                .height(0.dp)
                 .background(color)
         )
 }
@@ -59,7 +60,7 @@ fun CustomButton(text: String = "", onClick: () -> Unit) {
         Text(
             text = text,
             fontWeight = FontWeight.Bold,
-            fontSize =16.sp,
+            fontSize = 16.sp,
             style = TextStyle(
                 color = MaterialTheme.colorScheme.onPrimary
             )
