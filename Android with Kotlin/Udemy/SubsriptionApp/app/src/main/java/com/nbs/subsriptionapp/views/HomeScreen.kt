@@ -7,29 +7,19 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.getValue
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.NavigationDrawerItem
-import androidx.compose.material3.NavigationDrawerItemColors
-import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
@@ -40,7 +30,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
@@ -59,7 +48,6 @@ import com.nbs.subsriptionapp.R
 import com.nbs.subsriptionapp.custom.CustomSpacer
 import com.nbs.subsriptionapp.custom.NavigationIcon
 import com.nbs.subsriptionapp.data.Screens
-import com.nbs.subsriptionapp.models.DrawerItem
 import com.nbs.subsriptionapp.models.drawerItems
 import com.nbs.subsriptionapp.viewmodels.HomeViewModel
 import kotlinx.coroutines.launch
@@ -87,7 +75,7 @@ fun HomeScreen() {
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val navController = rememberNavController()
-    
+
     val primaryColor = MaterialTheme.colorScheme.primary
     val view = LocalView.current
     val isDarkTheme = isSystemInDarkTheme()
@@ -186,7 +174,18 @@ fun HomeScreen() {
                         )
                     },
                     actionIcons = {
+                        when (curDrawerItem) {
+                            drawerItems[0] -> {
+                                Icon(
+                                    Icons.Default.MoreVert,
+                                    contentDescription = "",
+                                    tint = MaterialTheme.colorScheme.onPrimary
+                                )
+                            }
 
+                            drawerItems[1] -> {}
+                            drawerItems[2] -> {}
+                        }
                     }
                 )
             }
@@ -224,6 +223,7 @@ fun Navigation(
     modifier: Modifier = Modifier
 ) {
     NavHost(
+        modifier = modifier,
         navController = navController,
         startDestination = Screens.MyAccountScreen.name
     ) {

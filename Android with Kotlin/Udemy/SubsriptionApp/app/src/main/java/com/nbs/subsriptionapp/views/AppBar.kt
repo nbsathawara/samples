@@ -46,11 +46,7 @@ fun AppBar(
             IconButton({
 
             }) {
-                Icon(
-                    Icons.Default.MoreVert,
-                    contentDescription = "",
-                    tint = MaterialTheme.colorScheme.onPrimary
-                )
+               actionIcons()
             }
         }
     )
