@@ -1,5 +1,6 @@
 package com.nbs.subsriptionapp.views
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -43,16 +44,18 @@ fun MyAccountScreen() {
     if (showDetails)
         icon = Icons.Default.KeyboardArrowDown
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(androidx.compose.ui.graphics.Color.LightGray)
+    ) {
         Card(
             modifier = Modifier
-                .padding(8.dp)
-                .clickable {
-                    showDetails = !showDetails
-                },
+                .padding(8.dp),
+            elevation = CardDefaults.cardElevation(2.dp),
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                containerColor = MaterialTheme.colorScheme.background,
+                contentColor = MaterialTheme.colorScheme.onBackground
             )
         ) {
             Row(
@@ -70,19 +73,24 @@ fun MyAccountScreen() {
                     modifier = Modifier.weight(1f),
                     text = "Nikhil Sathawara\nnbsathawara@gmail.com"
                 )
-                Icon(
-                    icon, "",
-                    Modifier.size(24.dp)
-                )
+                IconButton({
+                    showDetails = !showDetails
+                }) {
+                    Icon(
+                        icon, "",
+                        Modifier.size(24.dp)
+                    )
+                }
             }
         }
 
         if (showDetails)
             Card(
                 modifier = Modifier.padding(8.dp),
+                elevation = CardDefaults.cardElevation(2.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                    containerColor = MaterialTheme.colorScheme.background,
+                    contentColor = MaterialTheme.colorScheme.onBackground
                 )
             ) {
                 Column(

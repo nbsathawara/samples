@@ -62,7 +62,7 @@ fun HomeScreen() {
             }
 
             2 -> {
-                drawerItem.title = stringResource(R.string.my_subscriptions)
+                drawerItem.title = stringResource(R.string.subscriptions)
                 drawerItem.painter = painterResource(R.drawable.outline_subscriptions_24)
             }
 
