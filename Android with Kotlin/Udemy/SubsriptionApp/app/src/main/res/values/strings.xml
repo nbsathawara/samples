@@ -5,4 +5,7 @@
     <string name="my_account">My Account</string>
     <string name="add_account">Add Account</string>
     <string name="subscriptions">Subscriptions</string>
+    <string name="home">Home</string>
+    <string name="browse">Browse</string>
+    <string name="library">Library</string>
 </resources>

@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import com.nbs.subsriptionapp.ui.theme.SubsriptionAppTheme
-import com.nbs.subsriptionapp.views.HomeScreen
+import com.nbs.subsriptionapp.views.MainScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,5 +22,5 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyApp() {
-   HomeScreen()
+   MainScreen()
 }

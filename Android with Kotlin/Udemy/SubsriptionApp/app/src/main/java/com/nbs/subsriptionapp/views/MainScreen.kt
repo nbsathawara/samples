@@ -9,10 +9,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.getValue
 import androidx.compose.material3.DrawerValue
@@ -20,11 +22,15 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -39,7 +45,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -48,12 +53,19 @@ import com.nbs.subsriptionapp.R
 import com.nbs.subsriptionapp.custom.CustomSpacer
 import com.nbs.subsriptionapp.custom.NavigationIcon
 import com.nbs.subsriptionapp.data.Screens
+import com.nbs.subsriptionapp.models.NavigationItem
+import com.nbs.subsriptionapp.models.bottomItems
 import com.nbs.subsriptionapp.models.drawerItems
-import com.nbs.subsriptionapp.viewmodels.HomeViewModel
+import com.nbs.subsriptionapp.views.bottom.BrowseScreen
+import com.nbs.subsriptionapp.views.bottom.HomeScreen
+import com.nbs.subsriptionapp.views.bottom.LibraryScreen
+import com.nbs.subsriptionapp.views.drawer.AddAccountScreen
+import com.nbs.subsriptionapp.views.drawer.MyAccountScreen
+import com.nbs.subsriptionapp.views.drawer.SubscriptionsScreen
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeScreen() {
+fun MainScreen() {
     drawerItems.forEach { drawerItem ->
         when (drawerItem.id) {
             1 -> {
@@ -69,6 +81,25 @@ fun HomeScreen() {
             3 -> {
                 drawerItem.title = stringResource(R.string.add_account)
                 drawerItem.painter = painterResource(R.drawable.outline_person_add_24)
+            }
+        }
+    }
+
+    bottomItems.forEach { bottomItem ->
+        when (bottomItem.id) {
+            1 -> {
+                bottomItem.title = stringResource(R.string.home)
+                bottomItem.icon = Icons.Default.Home
+            }
+
+            2 -> {
+                bottomItem.title = stringResource(R.string.browse)
+                bottomItem.painter = painterResource(R.drawable.outline_browse_24)
+            }
+
+            3 -> {
+                bottomItem.title = stringResource(R.string.library)
+                bottomItem.painter = painterResource(R.drawable.outline_library_music_24)
             }
         }
     }
@@ -93,9 +124,8 @@ fun HomeScreen() {
         }
     }
 
-    val viewModel: HomeViewModel = viewModel()
-    var curDrawerItem by remember { mutableStateOf(viewModel.curDrawerItem) }
-    var title by remember { mutableStateOf(curDrawerItem.title) }
+    var currentNavigationItem by remember { mutableStateOf<NavigationItem>(drawerItems[0]) }
+    var title by remember { mutableStateOf(currentNavigationItem.title) }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -113,7 +143,7 @@ fun HomeScreen() {
                         DrawerHeaderView()
                         CustomSpacer(height = 2.dp)
                         drawerItems.forEach { drawerItem ->
-                            val isSelected = drawerItem == curDrawerItem
+                            val isSelected = drawerItem == currentNavigationItem
                             val color =
                                 if (isSelected)
                                     MaterialTheme.colorScheme.secondary
@@ -128,7 +158,7 @@ fun HomeScreen() {
                                     .background(color)
                                     .clickable {
                                         title = drawerItem.title
-                                        curDrawerItem = drawerItem
+                                        currentNavigationItem = drawerItem
                                         navController.navigate(drawerItem.route)
                                         closeDrawer()
                                     }) {
@@ -174,25 +204,67 @@ fun HomeScreen() {
                         )
                     },
                     actionIcons = {
-                        when (curDrawerItem) {
-                            drawerItems[0] -> {
-                                Icon(
-                                    Icons.Default.MoreVert,
-                                    contentDescription = "",
-                                    tint = MaterialTheme.colorScheme.onPrimary
-                                )
-                            }
-
+                        Icon(
+                            Icons.Default.MoreVert,
+                            contentDescription = "",
+                            tint = MaterialTheme.colorScheme.onPrimary
+                        )
+                        when (currentNavigationItem) {
+                            drawerItems[0] -> {}
                             drawerItems[1] -> {}
                             drawerItems[2] -> {}
+                            else -> {}
                         }
                     }
                 )
+            },
+            bottomBar = {
+                NavigationBar(
+                    modifier = Modifier
+                        .navigationBarsPadding(),
+                    containerColor = MaterialTheme.colorScheme.background,
+                    tonalElevation = 2.dp
+                ) {
+                    bottomItems.forEachIndexed { index, bottomItem ->
+                        NavigationBarItem(
+                            colors = NavigationBarItemDefaults.colors(
+                                indicatorColor = Color.Transparent,
+                                selectedIconColor = MaterialTheme.colorScheme.primary,
+                                selectedTextColor = MaterialTheme.colorScheme.primary,
+                                unselectedIconColor = MaterialTheme.colorScheme.onBackground,
+                                unselectedTextColor = MaterialTheme.colorScheme.onBackground,
+                            ),
+                            selected = currentNavigationItem == bottomItem,
+                            icon = {
+                                if (bottomItem.icon != null)
+                                    Icon(
+                                        imageVector = bottomItem.icon!!,
+                                        contentDescription = "",
+                                    )
+                                else
+                                    Icon(
+                                        painter = bottomItem.painter!!,
+                                        contentDescription = "",
+                                    )
+                            },
+                            label = {
+                                Text(
+                                    text = bottomItem.title,
+                                    style = MaterialTheme.typography.titleSmall
+                                )
+                            },
+                            onClick = {
+                                currentNavigationItem = bottomItem
+                                title = bottomItem.title
+                                navController.navigate(bottomItem.route)
+                            }
+                        )
+                    }
+                }
             }
         ) {
             Navigation(
                 navController = navController,
-                viewModel = viewModel,
                 modifier = Modifier.padding(it)
             )
         }
@@ -219,7 +291,6 @@ fun DrawerHeaderView() {
 @Composable
 fun Navigation(
     navController: NavHostController,
-    viewModel: HomeViewModel,
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -236,11 +307,20 @@ fun Navigation(
         composable(Screens.AddAccountScreen.name) {
             AddAccountScreen()
         }
+        composable(Screens.HomeScreen.name) {
+            HomeScreen()
+        }
+        composable(Screens.BrowseScreen.name) {
+            BrowseScreen()
+        }
+        composable(Screens.LibraryScreen.name) {
+            LibraryScreen()
+        }
     }
 }
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen()
+    MainScreen()
 }

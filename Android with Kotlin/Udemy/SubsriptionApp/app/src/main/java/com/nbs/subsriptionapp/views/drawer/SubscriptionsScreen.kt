@@ -1,4 +1,4 @@
-package com.nbs.subsriptionapp.views
+package com.nbs.subsriptionapp.views.drawer
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

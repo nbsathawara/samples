@@ -11,5 +11,6 @@ object Constants {
 }
 
 enum class Screens {
-    MyAccountScreen, SubscriptionsScreen,AddAccountScreen
+    MyAccountScreen, SubscriptionsScreen, AddAccountScreen,
+    HomeScreen, BrowseScreen, LibraryScreen
 }
