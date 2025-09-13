@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "933280608092",
+    "project_id": "chatroom-app-7a70d",
+    "storage_bucket": "chatroom-app-7a70d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933280608092:android:271d72c09290d4218a9b99",
+        "android_client_info": {
+          "package_name": "com.nbs.chatroomapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsNLV33h-jcDoRLQAzrxXJZ1cGQraU9lU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
