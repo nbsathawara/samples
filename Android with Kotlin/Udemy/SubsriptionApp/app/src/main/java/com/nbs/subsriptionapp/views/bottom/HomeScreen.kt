@@ -36,7 +36,6 @@ import com.nbs.subsriptionapp.models.randomGenres
 @Composable
 fun HomeScreen(isBrowse: Boolean = false) {
     val subscriptionGenresMap = mutableMapOf<Subscription, List<Genre>>()
-    //var genres by remember { mutableStateOf(allGenres) }
 
     val subscriptions = if (isBrowse)
         allSubscriptions
@@ -44,8 +43,8 @@ fun HomeScreen(isBrowse: Boolean = false) {
         allSubscriptions.filter { it.isSubscribed }
 
     subscriptions.sortedBy { it.title }.forEach { subscription ->
-        //genres = allGenres.shuffled().take(allGenres.size / 2)
-        subscriptionGenresMap[subscription] = allGenres.shuffled().take(allGenres.size / 2)
+        subscriptionGenresMap[subscription] = allGenres.shuffled()
+            .take(allGenres.size / 2)
     }
 
     LazyColumn(

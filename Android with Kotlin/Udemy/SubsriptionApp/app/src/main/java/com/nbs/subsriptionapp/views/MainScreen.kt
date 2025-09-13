@@ -7,10 +7,14 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.windowInsetsBottomHeight
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.AccountCircle
@@ -18,8 +22,11 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.getValue
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationBar
@@ -103,6 +110,7 @@ fun MainScreen() {
     }
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
+    var showBottomSheet by remember { mutableStateOf(false) }
     val navController = rememberNavController()
 
     val primaryColor = MaterialTheme.colorScheme.primary
@@ -202,17 +210,21 @@ fun MainScreen() {
                         )
                     },
                     actionIcons = {
-                        Icon(
-                            Icons.Default.MoreVert,
-                            contentDescription = "",
-                            tint = MaterialTheme.colorScheme.onPrimary
-                        )
-                        when (currentNavigationItem) {
-                            drawerItems[0] -> {}
-                            drawerItems[1] -> {}
-                            drawerItems[2] -> {}
-                            else -> {}
+                        IconButton({
+                            showBottomSheet = true
+                        }) {
+                            Icon(
+                                Icons.Default.MoreVert,
+                                contentDescription = "",
+                                tint = MaterialTheme.colorScheme.onPrimary
+                            )
                         }
+//                        when (currentNavigationItem) {
+//                            drawerItems[0] -> {}
+//                            drawerItems[1] -> {}
+//                            drawerItems[2] -> {}
+//                            else -> {}
+//                        }
                     }
                 )
             },
@@ -254,7 +266,7 @@ fun MainScreen() {
                             onClick = {
                                 currentNavigationItem = bottomItem
                                 title = bottomItem.title
-                                navController.navigate( bottomItem.route)
+                                navController.navigate(bottomItem.route)
                             }
                         )
                     }
@@ -265,6 +277,44 @@ fun MainScreen() {
                 navController = navController,
                 modifier = Modifier.padding(it)
             )
+
+            if (showBottomSheet) {
+                BottomSheet(
+                    onDismiss = { showBottomSheet = false }
+                )
+            }
+
+        }
+    }
+}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun BottomSheet(onDismiss: () -> Unit = {}) {
+    ModalBottomSheet(
+        modifier = Modifier.navigationBarsPadding(),
+        onDismissRequest = { onDismiss() },
+        containerColor = MaterialTheme.colorScheme.background,
+        contentColor = MaterialTheme.colorScheme.onBackground
+    ) {
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            LazyColumn {
+                items(5) { index ->
+                    Text(
+                        text = "Option ${index + 1}",
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth()
+                    )
+                }
+            }
         }
     }
 }
