@@ -1,0 +1,239 @@
+package com.nbs.chatroomapp.views.account
+
+import android.util.Patterns
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.nbs.chatroomapp.R
+import com.nbs.chatroomapp.data.models.HttpResult
+import com.nbs.chatroomapp.viewmodels.account.AuthViewModel
+import com.nbs.chatroomapp.views.custom.AppBar
+import com.nbs.subsriptionapp.custom.CustomSnackbar
+import com.nbs.subsriptionapp.custom.CustomSpacer
+import com.nbs.subsriptionapp.custom.ErrorText
+import com.nbs.subsriptionapp.data.HttpStatus
+import kotlinx.coroutines.launch
+
+@Composable
+fun SignInScreen(
+    viewModel: AuthViewModel,//= viewModel(),
+    navigateToSignUp: () -> Unit,
+    onSignInSuccess: () -> Unit
+) {
+    val scope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    val signInResult by viewModel.authResult.collectAsStateWithLifecycle()
+
+    var email by remember { mutableStateOf("a@a.a") }
+    var password by remember { mutableStateOf("asas") }
+
+    var showPassword by remember { mutableStateOf(false) }
+    var invalidEmail by remember { mutableStateOf(false) }
+    var inValidPassword by remember { mutableStateOf(false) }
+
+    fun signIn() {
+        invalidEmail =
+            email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        inValidPassword = password.isEmpty()
+        if (invalidEmail || inValidPassword)
+            return
+
+        viewModel.signIn(
+            email = email,
+            password = password
+        )
+
+        when (signInResult) {
+             HttpResult.Success(true) -> {
+                onSignInSuccess()
+                email = ""
+                password = ""
+            }
+
+            is HttpResult.Error -> {
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = (signInResult as HttpResult.Error).exception.message
+                            ?: "Unknown error",
+                    )
+                }
+            }
+            else -> {
+
+            }
+        }
+    }
+
+    Scaffold(
+        topBar = {
+            AppBar(
+                title = stringResource(id = R.string.sign_in),
+                navIcon = {},
+                actionIcons = {}
+            )
+        },
+        snackbarHost = {
+            SnackbarHost(
+                hostState = snackbarHostState,
+                snackbar = {
+                    CustomSnackbar(it)
+                })
+        }
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(it)
+                .padding(horizontal = 16.dp)
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            CustomSpacer(height = 8.dp)
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = email,
+                onValueChange = {
+                    email = it
+                },
+                label = {
+                    Text(text = stringResource(id = R.string.email))
+                },
+                isError = invalidEmail,
+                supportingText = {
+                    if (invalidEmail)
+                        ErrorText()
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email
+                )
+            )
+            CustomSpacer(height = 8.dp)
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = password,
+                onValueChange = {
+                    password = it
+                },
+                label = {
+                    Text(text = stringResource(id = R.string.password))
+                },
+                isError = inValidPassword,
+                supportingText = {
+                    if (inValidPassword)
+                        ErrorText()
+                },
+                visualTransformation = if (showPassword)
+                    VisualTransformation.None
+                else PasswordVisualTransformation(),
+                trailingIcon = {
+                    IconButton(
+                        onClick = {
+                            showPassword = !showPassword
+                        }) {
+                        if (showPassword)
+                            Icon(
+                                painter = painterResource(id = R.drawable.outline_visibility_24),
+                                contentDescription = ""
+                            )
+                        else
+                            Icon(
+                                painter = painterResource(id = R.drawable.outline_visibility_off_24),
+                                contentDescription = ""
+                            )
+                    }
+                }
+            )
+            CustomSpacer(height = 16.dp)
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    signIn()
+                }
+            ) {
+                Text(
+                    text = stringResource(id = R.string.sign_in),
+                    style = MaterialTheme.typography.titleLarge
+                )
+            }
+            CustomSpacer(height = 16.dp)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = stringResource(id = R.string.dont_have_an_account),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                CustomSpacer(width = 8.dp)
+                Text(
+                    text = stringResource(id = R.string.sign_up),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.clickable {
+                        navigateToSignUp()
+                    }
+                )
+            }
+        }
+    }
+
+//    if (signInResult?.status == HttpStatus.Loading) {
+//        Column(
+//            Modifier.fillMaxSize(),
+//            verticalArrangement = Arrangement.Center,
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
+//            CircularProgressIndicator(
+//                modifier = Modifier.size(64.dp),
+//                color = MaterialTheme.colorScheme.primary,
+//            )
+//        }
+//    }
+}
+
+@Composable
+@Preview(showBackground = true, showSystemUi = true)
+fun SignInScreenPreview() {
+//    SignInScreen(
+//        navigateToSignUp = {},
+//        onSignInSuccess = {}
+//    )
+}

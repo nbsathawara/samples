@@ -54,11 +54,14 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
 
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
 
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.runtime.livedata)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
 
