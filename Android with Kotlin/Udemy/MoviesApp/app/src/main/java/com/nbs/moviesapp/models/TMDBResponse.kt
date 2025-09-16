@@ -1,5 +1,7 @@
 package com.nbs.moviesapp.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class TMDBResponse(
@@ -11,7 +13,9 @@ data class TMDBResponse(
     open val totalResults: Int
 )
 
+@Entity
 data class Movie(
+    @PrimaryKey
     val id: Int,
     @SerializedName("original_title")
     val originalTitle: String,
