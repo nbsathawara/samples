@@ -11,30 +11,25 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.graphics.toColorInt
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nbs.chatroomapp.views.custom.AppBar
-import com.nbs.mynotesapp.database.AppDatabase
-import com.nbs.mynotesapp.models.Note
-import com.nbs.mynotesapp.repositories.NoteRepository
 import com.nbs.mynotesapp.ui.theme.MyNotesAppTheme
 import com.nbs.mynotesapp.viewmodels.NotesViewModel
 import com.nbs.mynotesapp.views.AddNoteScreen
 import com.nbs.mynotesapp.views.NotesScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,9 +37,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MyNotesAppTheme {
-                val notesViewModel: NotesViewModel = viewModel()
-                val notes by notesViewModel.allNotes.collectAsState(initial = emptyList())
-
+                val notesViewModel: NotesViewModel = hiltViewModel()
                 var showAddNoteDialog by remember { mutableStateOf(false) }
 
                 // A surface container using the 'background' color from the theme
@@ -79,7 +72,7 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     ) { paddingValues ->
-                        NotesScreen(Modifier.padding(paddingValues), notes)
+                        NotesScreen(Modifier.padding(paddingValues), notesViewModel)
                         AddNoteScreen(
                             showDialog = showAddNoteDialog,
                             onDismiss = { showAddNoteDialog = false },

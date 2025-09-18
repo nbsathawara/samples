@@ -1,10 +1,8 @@
 package com.nbs.mynotesapp
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class NotesApp : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        Graph.provide(context = this)
-    }
 }

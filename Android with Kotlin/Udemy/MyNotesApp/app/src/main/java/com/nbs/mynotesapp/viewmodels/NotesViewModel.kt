@@ -2,13 +2,16 @@ package com.nbs.mynotesapp.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nbs.mynotesapp.Graph
 import com.nbs.mynotesapp.models.Note
-import com.nbs.mynotesapp.repositories.NoteRepository
+import com.nbs.mynotesapp.repository.NoteRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NotesViewModel(private val noteRepository: NoteRepository = Graph.noteRepository) :
-    ViewModel() {
+@HiltViewModel
+class NotesViewModel @Inject constructor(
+    private val noteRepository: NoteRepository
+) : ViewModel() {
 
     val allNotes = noteRepository.allNotes
 

@@ -82,6 +82,7 @@ fun AddNoteScreen(
                     val newNote = Note(
                         title = title,
                         description = description,
+                        timestamp = System.currentTimeMillis(),
                         color = selectedColor.toArgb()
                     )
                     onNoteAdded(newNote)

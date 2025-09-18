@@ -20,6 +20,6 @@ interface NoteDao {
     @Update
     suspend fun updateNote(note: Note)
 
-    @Query("SELECT * FROM table_notes")
+    @Query("SELECT * FROM table_notes order by timestamp desc")
     fun getAllNotes(): Flow<List<Note>>
 }
