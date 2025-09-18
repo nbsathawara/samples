@@ -1,6 +1,5 @@
 package com.nbs.chatroomapp.views.account
 
-import android.util.Log
 import android.util.Patterns
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -9,24 +8,19 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -41,18 +35,16 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nbs.chatroomapp.R
 import com.nbs.chatroomapp.data.models.HttpResult
 import com.nbs.chatroomapp.viewmodels.account.AuthViewModel
 import com.nbs.chatroomapp.views.custom.AppBar
+import com.nbs.subsriptionapp.custom.CustomProgressbar
 import com.nbs.subsriptionapp.custom.CustomSnackbar
 import com.nbs.subsriptionapp.custom.CustomSpacer
 import com.nbs.subsriptionapp.custom.ErrorText
-import com.nbs.subsriptionapp.data.HttpStatus
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.time.Duration
 
 @Composable
 fun SignInScreen(
@@ -60,14 +52,13 @@ fun SignInScreen(
     navigateToSignUp: () -> Unit,
     onSignInSuccess: () -> Unit
 ) {
-    val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
 
     val isLoading = viewModel.isLoading.collectAsStateWithLifecycle()
     val signInResult by viewModel.authResult.collectAsStateWithLifecycle()
 
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("nbsathawara@gmail.com") }
+    var password by remember { mutableStateOf("123456") }
 
     var showPassword by remember { mutableStateOf(false) }
     var invalidEmail by remember { mutableStateOf(false) }
@@ -75,8 +66,8 @@ fun SignInScreen(
 
     fun signIn() {
 
-        email=email.trim()
-        password=password.trim()
+        email = email.trim()
+        password = password.trim()
 
         invalidEmail =
             email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()
@@ -94,24 +85,20 @@ fun SignInScreen(
     LaunchedEffect(signInResult) {
         when (signInResult) {
             HttpResult.Success(true) -> {
-                scope.launch {
-                    snackbarHostState.showSnackbar(
-                        message = "Sign in successful"
-                    )
-                }
-                delay(1000)
+                snackbarHostState.showSnackbar(
+                    message = "Sign in successful"
+                )
+                delay(500)
                 onSignInSuccess()
                 email = ""
                 password = ""
             }
 
             is HttpResult.Error -> {
-                scope.launch {
                     snackbarHostState.showSnackbar(
                         message = (signInResult as HttpResult.Error).exception.message
                             ?: "Unknown error",
                     )
-                }
             }
 
             else -> {
@@ -234,16 +221,7 @@ fun SignInScreen(
         }
 
         if (isLoading.value) {
-            Column(
-                Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                CircularProgressIndicator(
-                    modifier = Modifier.size(64.dp),
-                    color = MaterialTheme.colorScheme.primary,
-                )
-            }
+            CustomProgressbar()
         }
     }
 }

@@ -42,8 +42,10 @@ import com.nbs.chatroomapp.R
 import com.nbs.chatroomapp.data.models.HttpResult
 import com.nbs.chatroomapp.viewmodels.account.AuthViewModel
 import com.nbs.chatroomapp.views.custom.AppBar
+import com.nbs.subsriptionapp.custom.CustomProgressbar
 import com.nbs.subsriptionapp.custom.CustomSnackbar
 import com.nbs.subsriptionapp.custom.CustomSpacer
+import com.nbs.subsriptionapp.custom.ErrorText
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -53,8 +55,6 @@ fun SignUpScreen(
     navigateToSingIn: () -> Unit,
     onSignUpSuccess: () -> Unit
 ) {
-
-    val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
 
     val isLoading = viewModel.isLoading.collectAsStateWithLifecycle()
@@ -97,11 +97,9 @@ fun SignUpScreen(
     LaunchedEffect(signUpResult) {
         when (signUpResult) {
             HttpResult.Success(true) -> {
-                scope.launch {
-                    snackbarHostState.showSnackbar(
-                        message = "Registration successful."
-                    )
-                }
+                snackbarHostState.showSnackbar(
+                    message = "Registration successful."
+                )
                 delay(1000)
                 onSignUpSuccess()
                 email = ""
@@ -109,12 +107,10 @@ fun SignUpScreen(
             }
 
             is HttpResult.Error -> {
-                scope.launch {
-                    snackbarHostState.showSnackbar(
-                        message = (signUpResult as HttpResult.Error).exception.message
-                            ?: "Unknown error",
-                    )
-                }
+                snackbarHostState.showSnackbar(
+                    message = (signUpResult as HttpResult.Error).exception.message
+                        ?: "Unknown error",
+                )
             }
 
             else -> {
@@ -154,6 +150,11 @@ fun SignUpScreen(
                 },
                 label = {
                     Text(text = stringResource(id = R.string.first_name))
+                },
+                isError = invalidFirstName,
+                supportingText = {
+                    if (invalidFirstName)
+                        ErrorText()
                 }
             )
             CustomSpacer(height = 8.dp)
@@ -165,6 +166,11 @@ fun SignUpScreen(
                 },
                 label = {
                     Text(text = stringResource(id = R.string.last_name))
+                },
+                isError = invalidLastName,
+                supportingText = {
+                    if (invalidLastName)
+                        ErrorText()
                 }
             )
             CustomSpacer(height = 8.dp)
@@ -176,6 +182,11 @@ fun SignUpScreen(
                 },
                 label = {
                     Text(text = stringResource(id = R.string.email))
+                },
+                isError = invalidEmail,
+                supportingText = {
+                    if (invalidEmail)
+                        ErrorText()
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Email
@@ -190,6 +201,11 @@ fun SignUpScreen(
                 },
                 label = {
                     Text(text = stringResource(id = R.string.password))
+                },
+                isError = inValidPassword,
+                supportingText = {
+                    if (inValidPassword)
+                        ErrorText()
                 },
                 visualTransformation = if (showPassword)
                     VisualTransformation.None
@@ -248,16 +264,7 @@ fun SignUpScreen(
             }
         }
         if (isLoading.value) {
-            Column(
-                Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                CircularProgressIndicator(
-                    modifier = Modifier.size(64.dp),
-                    color = MaterialTheme.colorScheme.primary,
-                )
-            }
+            CustomProgressbar()
         }
     }
 }

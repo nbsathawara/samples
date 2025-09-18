@@ -1,7 +1,9 @@
 package com.nbs.chatroomapp.di
 
-import com.nbs.chatroomapp.network.AccountService
-import com.nbs.chatroomapp.network.AccountServiceImpl
+import com.nbs.chatroomapp.repository.AccountRepository
+import com.nbs.chatroomapp.repository.AccountRepositoryImpl
+import com.nbs.chatroomapp.repository.ChatRoomRepository
+import com.nbs.chatroomapp.repository.ChatRoomRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -13,5 +15,9 @@ import javax.inject.Singleton
 abstract class ServiceModule {
     @Binds
     @Singleton
-    abstract fun provideAccountService(impl: AccountServiceImpl): AccountService
+    abstract fun provideAccountService(impl: AccountRepositoryImpl): AccountRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideChatRoomService(impl: ChatRoomRepositoryImpl): ChatRoomRepository
 }

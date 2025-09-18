@@ -16,6 +16,13 @@
     <string name="sign_up_success">Successfully signed up.</string>
     <string name="sign_up_failed">Sign up failed!!!</string>
 
+    <!--Chat Room-->
+    <string name="chat_rooms">Chat Rooms</string>
+    <string name="create_chat_room">Create Chat Room</string>
+    <string name="chat_room_name">Enter Chat Room Name</string>
+    <string name="no_chat_rooms">No chat rooms found.\nClick on + to create one.</string>
+    <string name="chat_room_created">Chat room created successfully.</string>
+
     <!--Common-->
     <string name="error">Error</string>
     <string name="success">Success</string>
@@ -29,8 +36,10 @@
     <string name="no">No</string>
     <string name="search">Search</string>
     <string name="add">Add</string>
+    <string name="create">Create</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="join">Join</string>
     <string name="save">Save</string>
     <string name="confirmation">Confirmation</string>
 

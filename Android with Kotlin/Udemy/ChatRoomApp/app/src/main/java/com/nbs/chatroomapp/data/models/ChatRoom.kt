@@ -1,3 +1,7 @@
 package com.nbs.chatroomapp.data.models
 
-data class ChatRoom(val id: String, val name: String)
+data class ChatRoom(
+    val id: String = "",
+    val name: String = "",
+    val createdBy: String = ""
+)

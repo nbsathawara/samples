@@ -1,15 +1,15 @@
-package com.nbs.subsriptionapp.data
+package com.nbs.chatroomapp.data
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import com.nbs.chatroomapp.R
-import com.nbs.chatroomapp.data.models.User
 
 object Constants {
     const val appTag = "ChatRoom Custom Tag"
+
+    //Firestore
+    const val usersCollection = "users"
+    const val chatRoomsCollection = "chat_rooms"
+    const val messagesCollection = "messages"
 
     //icons
     val backIcon = Icons.AutoMirrored.Default.ArrowBack
@@ -24,6 +24,4 @@ enum class HttpStatus {
 }
 
 //Extensions
-fun User.reset(): Unit {
-
-}
+fun String.toLowerUnderScore(): String = replace(" ", "_").lowercase()

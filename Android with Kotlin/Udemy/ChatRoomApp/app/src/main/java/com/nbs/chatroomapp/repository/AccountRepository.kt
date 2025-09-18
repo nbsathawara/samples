@@ -1,17 +1,41 @@
-package com.nbs.chatroomapp.network
+package com.nbs.chatroomapp.repository
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.nbs.chatroomapp.data.Constants
 import com.nbs.chatroomapp.data.models.HttpResult
 import com.nbs.chatroomapp.data.models.User
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 import javax.inject.Inject
 
-class AccountServiceImpl @Inject constructor(
+interface AccountRepository {
+    suspend fun signUp(
+        email: String,
+        password: String,
+        firstName: String,
+        lastName: String
+    ): HttpResult<Boolean>
+
+    suspend fun signIn(email: String, password: String): HttpResult<Boolean>
+
+    suspend fun getUserDetails(email: String): HttpResult<User>
+}
+
+class AccountRepositoryImpl @Inject constructor(
     private val auth: FirebaseAuth,
     private val fireStore: FirebaseFirestore
-) : AccountService {
+) : AccountRepository {
+
+    override suspend fun getUserDetails(email: String): HttpResult<User> =
+        try {
+            val user = fireStore.collection(Constants.usersCollection)
+                .document(email).get().await()
+                .toObject(User::class.java)
+            HttpResult.Success(user!!)
+        } catch (e: Exception) {
+            HttpResult.Error(e)
+        }
 
     override suspend fun signUp(
         email: String,
@@ -42,18 +66,6 @@ class AccountServiceImpl @Inject constructor(
         }
 
     suspend fun saveUserToFiresStore(user: User) {
-        fireStore.collection("users").document(user.email).set(user).await()
+        fireStore.collection(Constants.usersCollection).document(user.email).set(user).await()
     }
-}
-
-
-interface AccountService {
-    suspend fun signUp(
-        email: String,
-        password: String,
-        firstName: String,
-        lastName: String
-    ): HttpResult<Boolean>
-
-    suspend fun signIn(email: String, password: String): HttpResult<Boolean>
 }
