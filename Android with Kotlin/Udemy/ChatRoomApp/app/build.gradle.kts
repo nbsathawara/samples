@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("com.google.gms.google-services")
     id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -64,6 +65,10 @@ dependencies {
     implementation(libs.androidx.runtime.livedata)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
+
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.hilt.android)
+    implementation (libs.androidx.hilt.navigation.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

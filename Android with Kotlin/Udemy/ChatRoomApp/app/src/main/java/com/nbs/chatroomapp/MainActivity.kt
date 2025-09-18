@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -15,7 +16,9 @@ import com.nbs.chatroomapp.views.account.SignInScreen
 import com.nbs.chatroomapp.views.account.SignUpScreen
 import com.nbs.chatroomapp.views.chat.ChatRoomListScreen
 import com.nbs.subsriptionapp.data.Screens
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +39,11 @@ fun App() {
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    val authViewModel: AuthViewModel = viewModel()
+    val authViewModel: AuthViewModel = hiltViewModel()
 
-    NavHost(navController, startDestination = Screens.SignInScreen.name) {
+    val startDestination = Screens.SignInScreen.name
+
+    NavHost(navController, startDestination = startDestination) {
         composable(Screens.SignUpScreen.name) {
             SignUpScreen(
                 viewModel = authViewModel,

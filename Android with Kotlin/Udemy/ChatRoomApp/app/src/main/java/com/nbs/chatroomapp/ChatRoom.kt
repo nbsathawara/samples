@@ -1,10 +1,7 @@
 package com.nbs.chatroomapp
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-class ChatRoom : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        Graph.provide(this)
-    }
-}
+@HiltAndroidApp
+class ChatRoom : Application()

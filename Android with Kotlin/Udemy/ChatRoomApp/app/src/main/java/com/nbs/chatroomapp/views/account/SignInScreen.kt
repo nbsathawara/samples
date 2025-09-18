@@ -1,5 +1,6 @@
 package com.nbs.chatroomapp.views.account
 
+import android.util.Log
 import android.util.Patterns
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,10 +18,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -47,30 +50,38 @@ import com.nbs.subsriptionapp.custom.CustomSnackbar
 import com.nbs.subsriptionapp.custom.CustomSpacer
 import com.nbs.subsriptionapp.custom.ErrorText
 import com.nbs.subsriptionapp.data.HttpStatus
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.time.Duration
 
 @Composable
 fun SignInScreen(
-    viewModel: AuthViewModel,//= viewModel(),
+    viewModel: AuthViewModel,
     navigateToSignUp: () -> Unit,
     onSignInSuccess: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
 
+    val isLoading = viewModel.isLoading.collectAsStateWithLifecycle()
     val signInResult by viewModel.authResult.collectAsStateWithLifecycle()
 
-    var email by remember { mutableStateOf("a@a.a") }
-    var password by remember { mutableStateOf("asas") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
 
     var showPassword by remember { mutableStateOf(false) }
     var invalidEmail by remember { mutableStateOf(false) }
     var inValidPassword by remember { mutableStateOf(false) }
 
     fun signIn() {
+
+        email=email.trim()
+        password=password.trim()
+
         invalidEmail =
             email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()
         inValidPassword = password.isEmpty()
+
         if (invalidEmail || inValidPassword)
             return
 
@@ -78,9 +89,17 @@ fun SignInScreen(
             email = email,
             password = password
         )
+    }
 
+    LaunchedEffect(signInResult) {
         when (signInResult) {
-             HttpResult.Success(true) -> {
+            HttpResult.Success(true) -> {
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = "Sign in successful"
+                    )
+                }
+                delay(1000)
                 onSignInSuccess()
                 email = ""
                 password = ""
@@ -94,8 +113,8 @@ fun SignInScreen(
                     )
                 }
             }
-            else -> {
 
+            else -> {
             }
         }
     }
@@ -213,20 +232,20 @@ fun SignInScreen(
                 )
             }
         }
-    }
 
-//    if (signInResult?.status == HttpStatus.Loading) {
-//        Column(
-//            Modifier.fillMaxSize(),
-//            verticalArrangement = Arrangement.Center,
-//            horizontalAlignment = Alignment.CenterHorizontally
-//        ) {
-//            CircularProgressIndicator(
-//                modifier = Modifier.size(64.dp),
-//                color = MaterialTheme.colorScheme.primary,
-//            )
-//        }
-//    }
+        if (isLoading.value) {
+            Column(
+                Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(64.dp),
+                    color = MaterialTheme.colorScheme.primary,
+                )
+            }
+        }
+    }
 }
 
 @Composable

@@ -1,5 +1,7 @@
 package com.nbs.chatroomapp.views.account
 
+import android.util.Log
+import android.util.Patterns
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,18 +9,24 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,11 +37,15 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nbs.chatroomapp.R
 import com.nbs.chatroomapp.data.models.HttpResult
 import com.nbs.chatroomapp.viewmodels.account.AuthViewModel
 import com.nbs.chatroomapp.views.custom.AppBar
+import com.nbs.subsriptionapp.custom.CustomSnackbar
 import com.nbs.subsriptionapp.custom.CustomSpacer
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun SignUpScreen(
@@ -42,13 +54,37 @@ fun SignUpScreen(
     onSignUpSuccess: () -> Unit
 ) {
 
+    val scope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    val isLoading = viewModel.isLoading.collectAsStateWithLifecycle()
+    val signUpResult by viewModel.authResult.collectAsStateWithLifecycle()
+
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+
     var showPassword by remember { mutableStateOf(false) }
+    var invalidEmail by remember { mutableStateOf(false) }
+    var inValidPassword by remember { mutableStateOf(false) }
+    var invalidFirstName by remember { mutableStateOf(false) }
+    var invalidLastName by remember { mutableStateOf(false) }
 
     fun signUp() {
+        firstName = firstName.trim()
+        lastName = lastName.trim()
+        email = email.trim()
+        password = password.trim()
+
+        invalidFirstName = firstName.isEmpty()
+        invalidLastName = lastName.isEmpty()
+        invalidEmail =
+            email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        inValidPassword = password.isEmpty()
+
+        if (invalidFirstName || invalidLastName || invalidEmail || inValidPassword)
+            return
 
         viewModel.signUp(
             email = email,
@@ -56,21 +92,34 @@ fun SignUpScreen(
             firstName = firstName,
             lastName = lastName
         )
+    }
 
-//        when (viewModel.authResult.value) {
-//            is HttpResult.Success -> {
-//                onSignUpSuccess()
-//                firstName = ""
-//                lastName = ""
-//                email = ""
-//                password = ""
-//            }
-//
-//            is HttpResult.Error -> {
-//
-//            }
-//
-//        }
+    LaunchedEffect(signUpResult) {
+        when (signUpResult) {
+            HttpResult.Success(true) -> {
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = "Registration successful."
+                    )
+                }
+                delay(1000)
+                onSignUpSuccess()
+                email = ""
+                password = ""
+            }
+
+            is HttpResult.Error -> {
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = (signUpResult as HttpResult.Error).exception.message
+                            ?: "Unknown error",
+                    )
+                }
+            }
+
+            else -> {
+            }
+        }
     }
 
     Scaffold(
@@ -80,6 +129,13 @@ fun SignUpScreen(
                 navIcon = {},
                 actionIcons = {}
             )
+        },
+        snackbarHost = {
+            SnackbarHost(
+                hostState = snackbarHostState,
+                snackbar = {
+                    CustomSnackbar(it)
+                })
         }
     ) {
         Column(
@@ -188,6 +244,18 @@ fun SignUpScreen(
                     modifier = Modifier.clickable {
                         navigateToSingIn()
                     }
+                )
+            }
+        }
+        if (isLoading.value) {
+            Column(
+                Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(64.dp),
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
         }
