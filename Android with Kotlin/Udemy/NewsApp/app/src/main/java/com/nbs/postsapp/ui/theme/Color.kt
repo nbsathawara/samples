@@ -1,4 +1,4 @@
-package com.nbs.newsapp.ui.theme
+package com.nbs.postsapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

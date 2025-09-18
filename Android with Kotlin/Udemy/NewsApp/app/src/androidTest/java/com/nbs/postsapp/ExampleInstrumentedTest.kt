@@ -1,4 +1,4 @@
-package com.nbs.newsapp
+package com.nbs.postsapp
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

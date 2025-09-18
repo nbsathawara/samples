@@ -1,4 +1,4 @@
-package com.nbs.newsapp.views.custom
+package com.nbs.postsapp.views.custom
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton

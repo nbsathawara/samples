@@ -1,4 +1,4 @@
-package com.nbs.newsapp.views.custom
+package com.nbs.postsapp.views.custom
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

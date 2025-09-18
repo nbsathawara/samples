@@ -1,4 +1,4 @@
-package com.nbs.newsapp
+package com.nbs.postsapp
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,15 +8,14 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.nbs.newsapp.ui.theme.NewsAppTheme
-import com.nbs.newsapp.viewmodels.PostViewModel
-import com.nbs.newsapp.views.PostScreen
-import com.nbs.newsapp.views.custom.AppBar
+import com.nbs.postsapp.ui.theme.PotsAppTheme
+import com.nbs.postsapp.viewmodels.PostViewModel
+import com.nbs.postsapp.views.PostScreen
+import com.nbs.postsapp.views.custom.AppBar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val postViewModel: PostViewModel by viewModels()
 
@@ -24,12 +23,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            NewsAppTheme {
+            PotsAppTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
                         AppBar(
-                            title = "News App",
+                            title = "Posts App",
                             navIcon = {},
                             actionIcons = {}
                         )

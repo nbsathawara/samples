@@ -1,4 +1,4 @@
-package com.nbs.newsapp
+package com.nbs.postsapp
 
 import org.junit.Test
 

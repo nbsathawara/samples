@@ -1,4 +1,4 @@
-package com.nbs.newsapp
+package com.nbs.postsapp.data
 
 import androidx.compose.ui.graphics.Color
 import kotlin.random.Random
