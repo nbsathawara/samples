@@ -19,31 +19,31 @@ abstract class BaseViewModel(
         _isLoading.value = value
     }
 
-    private val _msg = MutableStateFlow("")
-    var msg = _msg.asStateFlow()
-    fun setMsg(value: String = "") {
-        _msg.value = value
+    private val _message = MutableStateFlow("")
+    var message = _message.asStateFlow()
+    fun setMessage(value: String = "") {
+        _message.value = value
     }
 
     private val _currentUser = MutableStateFlow<User?>(null)
     val currentUser = _currentUser.asStateFlow()
 
     init {
-        fetchUserDetails("nbsathawara@gmail.com")
+        fetchCurrentUser()
     }
 
-    fun fetchUserDetails(email: String) {
+    fun fetchCurrentUser() {
         viewModelScope.launch {
             try {
                 _isLoading.value = true
-                val result = accountRepository.getUserDetails(email)
+                val result = accountRepository.getCurrentUser()
                 when (result) {
                     is HttpResult.Success -> {
                         _currentUser.value = result.data
                     }
 
                     is HttpResult.Error -> {
-                        _msg.value = result.exception.localizedMessage ?: "Something went wrong"
+                        _message.value = result.exception.localizedMessage ?: "Something went wrong"
                     }
                 }
             } catch (e: Exception) {

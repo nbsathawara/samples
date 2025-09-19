@@ -22,6 +22,8 @@
     <string name="chat_room_name">Enter Chat Room Name</string>
     <string name="no_chat_rooms">No chat rooms found.\nClick on + to create one.</string>
     <string name="chat_room_created">Chat room created successfully.</string>
+    <string name="type_message">Type a message…</string>
+    <string name="no_messages">No messages found.</string>
 
     <!--Common-->
     <string name="error">Error</string>

@@ -1,9 +1,6 @@
 package com.nbs.chatroomapp.views.chat
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -25,7 +22,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,7 +42,10 @@ import com.nbs.subsriptionapp.custom.EmptyView
 import com.nbs.subsriptionapp.custom.NavigationIcon
 
 @Composable
-fun ChatRoomListScreen(viewModel: ChatRoomListViewModel = hiltViewModel()) {
+fun ChatRoomListScreen(
+    viewModel: ChatRoomListViewModel = hiltViewModel(),
+    onChatRoomJoined: (ChatRoom) -> Unit
+) {
 
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -54,7 +53,7 @@ fun ChatRoomListScreen(viewModel: ChatRoomListViewModel = hiltViewModel()) {
 
     val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
     val chatRooms by viewModel.chatRooms.collectAsStateWithLifecycle()
-    val msg by viewModel.msg.collectAsStateWithLifecycle()
+    val msg by viewModel.message.collectAsStateWithLifecycle()
 
     LaunchedEffect(msg) {
         if (msg.isNotEmpty()) {
@@ -96,7 +95,11 @@ fun ChatRoomListScreen(viewModel: ChatRoomListViewModel = hiltViewModel()) {
                 modifier = Modifier.padding(it)
             ) {
                 items(chatRooms) { chatroom ->
-                    ChatRoomItem(chatroom)
+                    ChatRoomItem(
+                        chatRoom = chatroom,
+                        onChatRoomJoined = {
+                            onChatRoomJoined(chatroom)
+                        })
                 }
             }
 
@@ -108,7 +111,7 @@ fun ChatRoomListScreen(viewModel: ChatRoomListViewModel = hiltViewModel()) {
             NewChatRoomScreen(
                 onChatRoomCreated = { it ->
                     val chatRoom = ChatRoom(
-                        id = it.toLowerUnderScore(),
+                        id = "cr_" + it.toLowerUnderScore(),
                         name = it,
                         createdBy = viewModel.currentUser.value?.email ?: "Unknown User"
                     )
@@ -124,7 +127,7 @@ fun ChatRoomListScreen(viewModel: ChatRoomListViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun ChatRoomItem(chatRoom: ChatRoom) {
+fun ChatRoomItem(chatRoom: ChatRoom, onChatRoomJoined: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -144,7 +147,7 @@ fun ChatRoomItem(chatRoom: ChatRoom) {
             )
             Button(
                 {
-
+                    onChatRoomJoined()
                 }
             ) {
                 Text(
@@ -159,11 +162,11 @@ fun ChatRoomItem(chatRoom: ChatRoom) {
 @Preview
 @Composable
 fun CustomPreview() {
-    ChatRoomItem(
-        ChatRoom(
-            id = "1",
-            name = "Test Room",
-            createdBy = "Test User"
-        )
-    )
+//    ChatRoomItem(
+//        ChatRoom(
+//            id = "1",
+//            name = "Test Room",
+//            createdBy = "Test User"
+//        )
+//    )
 }

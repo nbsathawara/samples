@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
@@ -27,8 +28,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -52,13 +55,14 @@ fun SignInScreen(
     navigateToSignUp: () -> Unit,
     onSignInSuccess: () -> Unit
 ) {
+    val keyboardController = LocalSoftwareKeyboardController.current
     val snackbarHostState = remember { SnackbarHostState() }
 
     val isLoading = viewModel.isLoading.collectAsStateWithLifecycle()
     val signInResult by viewModel.authResult.collectAsStateWithLifecycle()
 
-    var email by remember { mutableStateOf("nbsathawara@gmail.com") }
-    var password by remember { mutableStateOf("123456") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
 
     var showPassword by remember { mutableStateOf(false) }
     var invalidEmail by remember { mutableStateOf(false) }
@@ -76,6 +80,7 @@ fun SignInScreen(
         if (invalidEmail || inValidPassword)
             return
 
+        keyboardController?.hide()
         viewModel.signIn(
             email = email,
             password = password
@@ -95,10 +100,10 @@ fun SignInScreen(
             }
 
             is HttpResult.Error -> {
-                    snackbarHostState.showSnackbar(
-                        message = (signInResult as HttpResult.Error).exception.message
-                            ?: "Unknown error",
-                    )
+                snackbarHostState.showSnackbar(
+                    message = (signInResult as HttpResult.Error).exception.message
+                        ?: "Unknown error",
+                )
             }
 
             else -> {
@@ -145,7 +150,8 @@ fun SignInScreen(
                         ErrorText()
                 },
                 keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Email
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next
                 )
             )
             CustomSpacer(height = 8.dp)
@@ -163,6 +169,14 @@ fun SignInScreen(
                     if (inValidPassword)
                         ErrorText()
                 },
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        signIn()
+                    }
+                ),
                 visualTransformation = if (showPassword)
                     VisualTransformation.None
                 else PasswordVisualTransformation(),

@@ -19,7 +19,7 @@ interface AccountRepository {
 
     suspend fun signIn(email: String, password: String): HttpResult<Boolean>
 
-    suspend fun getUserDetails(email: String): HttpResult<User>
+    suspend fun getCurrentUser(): HttpResult<User>
 }
 
 class AccountRepositoryImpl @Inject constructor(
@@ -27,8 +27,12 @@ class AccountRepositoryImpl @Inject constructor(
     private val fireStore: FirebaseFirestore
 ) : AccountRepository {
 
-    override suspend fun getUserDetails(email: String): HttpResult<User> =
+    override suspend fun getCurrentUser(): HttpResult<User> =
         try {
+            val currentUser = auth.currentUser
+            if (currentUser == null)
+                HttpResult.Error(Exception("User not logged in"))
+            val email = currentUser!!.email!!
             val user = fireStore.collection(Constants.usersCollection)
                 .document(email).get().await()
                 .toObject(User::class.java)

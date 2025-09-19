@@ -9,6 +9,7 @@ import com.nbs.chatroomapp.viewmodels.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,10 +35,11 @@ class ChatRoomListViewModel @Inject constructor(
                 when (result) {
                     is HttpResult.Success -> {
                         _chatRooms.value = result.data
+                        sortChatRooms()
                     }
 
                     is HttpResult.Error -> {
-                        setMsg(result.exception.localizedMessage ?: "Something went wrong")
+                        setMessage(result.exception.localizedMessage ?: "Something went wrong")
                     }
                 }
             } catch (e: Exception) {
@@ -56,11 +58,12 @@ class ChatRoomListViewModel @Inject constructor(
                 when (result) {
                     is HttpResult.Success -> {
                         _chatRooms.value = _chatRooms.value + result.data
-                        setMsg("Chat room created successfully")
+                        sortChatRooms()
+                        setMessage("Chat room created successfully")
                     }
 
                     is HttpResult.Error -> {
-                        setMsg(result.exception.localizedMessage ?: "Something went wrong")
+                        setMessage(result.exception.localizedMessage ?: "Something went wrong")
                     }
                 }
 
@@ -69,6 +72,12 @@ class ChatRoomListViewModel @Inject constructor(
             } finally {
                 setLoading(false)
             }
+        }
+    }
+
+    private fun sortChatRooms() {
+        _chatRooms.value = _chatRooms.value.sortedBy { chatRoom ->
+            chatRoom.name
         }
     }
 }

@@ -11,9 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import com.nbs.chatroomapp.R
-import com.nbs.chatroomapp.data.models.ChatRoom
 import com.nbs.subsriptionapp.custom.ErrorText
-import com.nbs.chatroomapp.data.toLowerUnderScore
 
 @Composable
 fun NewChatRoomScreen(

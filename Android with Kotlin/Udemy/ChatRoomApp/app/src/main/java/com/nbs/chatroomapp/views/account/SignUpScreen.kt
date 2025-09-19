@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -30,8 +31,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -55,6 +58,7 @@ fun SignUpScreen(
     navigateToSingIn: () -> Unit,
     onSignUpSuccess: () -> Unit
 ) {
+    val keyboardController = LocalSoftwareKeyboardController.current
     val snackbarHostState = remember { SnackbarHostState() }
 
     val isLoading = viewModel.isLoading.collectAsStateWithLifecycle()
@@ -86,6 +90,7 @@ fun SignUpScreen(
         if (invalidFirstName || invalidLastName || invalidEmail || inValidPassword)
             return
 
+        keyboardController?.hide()
         viewModel.signUp(
             email = email,
             password = password,
@@ -155,7 +160,10 @@ fun SignUpScreen(
                 supportingText = {
                     if (invalidFirstName)
                         ErrorText()
-                }
+                },
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next
+                )
             )
             CustomSpacer(height = 8.dp)
             OutlinedTextField(
@@ -171,7 +179,10 @@ fun SignUpScreen(
                 supportingText = {
                     if (invalidLastName)
                         ErrorText()
-                }
+                },
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next
+                )
             )
             CustomSpacer(height = 8.dp)
             OutlinedTextField(
@@ -189,7 +200,8 @@ fun SignUpScreen(
                         ErrorText()
                 },
                 keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Email
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next
                 )
             )
             CustomSpacer(height = 8.dp)
@@ -207,6 +219,14 @@ fun SignUpScreen(
                     if (inValidPassword)
                         ErrorText()
                 },
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        signUp()
+                    }
+                ),
                 visualTransformation = if (showPassword)
                     VisualTransformation.None
                 else PasswordVisualTransformation(),
