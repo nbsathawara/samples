@@ -6,12 +6,15 @@ import com.nbs.chatroomapp.data.Constants
 import com.nbs.chatroomapp.data.models.ChatRoom
 import com.nbs.chatroomapp.data.models.HttpResult
 import com.nbs.chatroomapp.data.models.Message
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 interface MessageRepository {
     suspend fun sendMessage(roomId: String, message: Message): HttpResult<Message>
-    suspend fun getMessages(chatRoomId: String): HttpResult<List<Message>>
+    suspend fun getMessages(chatRoomId: String): Flow<List<Message>>
 }
 
 class MessageRepositoryImpl @Inject constructor(
@@ -30,15 +33,21 @@ class MessageRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getMessages(chatRoomId: String)
-            : HttpResult<List<Message>> = try {
-        val snapshot = fireStore.collection(Constants.chatRoomsCollection)
+            : Flow<List<Message>> = callbackFlow {
+
+        val messages = fireStore.collection(Constants.chatRoomsCollection)
             .document(chatRoomId)
             .collection(Constants.messagesCollection)
-            .orderBy(Constants.messagesTimestamp)
-            .get().await()
-        val messages = snapshot.toObjects(Message::class.java)
-        HttpResult.Success(messages)
-    } catch (e: Exception) {
-        HttpResult.Error(e)
+            .orderBy("timestamp")
+
+        val subscription = messages.addSnapshotListener { snapshot, error ->
+            snapshot?.let {
+                val messages = it.toObjects(Message::class.java)
+                trySend(messages).isSuccess
+            }
+        }
+        awaitClose {
+            subscription.remove()
+        }
     }
 }

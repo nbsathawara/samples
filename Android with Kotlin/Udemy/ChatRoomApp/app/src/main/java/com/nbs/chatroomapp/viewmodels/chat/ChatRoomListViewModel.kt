@@ -19,6 +19,9 @@ class ChatRoomListViewModel @Inject constructor(
     private val chatRoomRepository: ChatRoomRepository
 ) : BaseViewModel(accountRepository) {
 
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing = _isRefreshing.asStateFlow()
+
     private val _chatRooms =
         MutableStateFlow(emptyList<ChatRoom>())
     val chatRooms = _chatRooms.asStateFlow()
@@ -30,6 +33,7 @@ class ChatRoomListViewModel @Inject constructor(
     fun fetchChatRooms() {
         viewModelScope.launch {
             try {
+                _isRefreshing.value = true
                 setLoading(true)
                 val result = chatRoomRepository.getChatRooms()
                 when (result) {
@@ -45,6 +49,7 @@ class ChatRoomListViewModel @Inject constructor(
             } catch (e: Exception) {
                 e.printStackTrace()
             } finally {
+                _isRefreshing.value = false
                 setLoading(false)
             }
         }

@@ -19,9 +19,6 @@ class ChatroomViewModel @Inject constructor(
 ) : BaseViewModel(
     accountRepository
 ) {
-    private val _isRefreshing = MutableStateFlow(false)
-    val isRefreshing = _isRefreshing.asStateFlow()
-
     private val _messages = MutableStateFlow(emptyList<Message>())
     val messages = _messages.asStateFlow()
 
@@ -58,22 +55,14 @@ class ChatroomViewModel @Inject constructor(
     fun fetchMessages() {
         viewModelScope.launch {
             try {
-                _isRefreshing.value = true
                 setLoading(true)
                 val result = messageRepository.getMessages(_roomId.value)
-                when (result) {
-                    is HttpResult.Success -> {
-                        _messages.value = result.data
-                    }
-
-                    is HttpResult.Error -> {
-                        setMessage(result.exception.localizedMessage ?: "Unknown Error")
-                    }
+                result.collect {
+                    _messages.value = it
                 }
             } catch (e: Exception) {
                 setMessage(e.localizedMessage ?: "Unknown Error")
             } finally {
-                _isRefreshing.value = false
                 setLoading(false)
             }
         }

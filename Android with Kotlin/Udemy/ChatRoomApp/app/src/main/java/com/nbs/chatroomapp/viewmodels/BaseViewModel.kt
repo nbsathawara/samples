@@ -22,7 +22,7 @@ abstract class BaseViewModel(
     private val _message = MutableStateFlow("")
     var message = _message.asStateFlow()
     fun setMessage(value: String = "") {
-        _message.value = value
+        _message.value = value.trim()
     }
 
     private val _currentUser = MutableStateFlow<User?>(null)

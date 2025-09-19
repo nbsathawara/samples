@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material3.Card
@@ -25,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -56,8 +58,10 @@ fun ChatRoomScreen(
     val currentUser by viewModel.currentUser.collectAsStateWithLifecycle()
     val messages by viewModel.messages.collectAsStateWithLifecycle()
 
-    val pullToRefreshState = rememberPullToRefreshState()
-    val isRefreshing by viewModel.isRefreshing.collectAsStateWithLifecycle()
+    val listState = rememberLazyListState()
+    LaunchedEffect(messages.size) {
+        listState.animateScrollToItem(messages.size - 1)
+    }
 
     Scaffold(
         topBar = {
@@ -79,26 +83,18 @@ fun ChatRoomScreen(
                 emptyMsg = stringResource(R.string.no_messages)
             )
         else
-            PullToRefreshBox(
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(it),
-                state = pullToRefreshState,
-                isRefreshing = isRefreshing,
-                onRefresh = {
-                    viewModel.fetchMessages()
-                }
+                state = listState
             ) {
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize()
-                ) {
-                    items(messages) { message ->
-                        MessageItem(
-                            message = message,
-                            isMe = message.sender == currentUser?.firstName
-                        )
-                    }
+                items(messages) { message ->
+                    MessageItem(
+                        message = message,
+                        isMe = message.sender == currentUser?.firstName
+                    )
+
                 }
             }
     }
@@ -158,7 +154,7 @@ fun SendMessage(
         modifier = Modifier
             .fillMaxWidth()
             .padding(
-               horizontal = 8.dp, vertical = 24.dp
+                horizontal = 8.dp, vertical = 24.dp
             )
             .navigationBarsPadding(),
         verticalAlignment = Alignment.CenterVertically,
