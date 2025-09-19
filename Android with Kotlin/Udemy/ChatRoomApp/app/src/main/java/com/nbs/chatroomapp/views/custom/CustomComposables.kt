@@ -51,7 +51,6 @@ fun CustomSpacer(
     if (isVertical)
         Spacer(
             modifier
-                .fillMaxWidth()
                 .height(height)
                 .width(0.dp)
                 .background(color)

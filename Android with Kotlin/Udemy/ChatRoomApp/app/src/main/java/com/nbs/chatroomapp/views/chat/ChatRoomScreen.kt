@@ -1,12 +1,16 @@
 package com.nbs.chatroomapp.views.chat
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -35,13 +39,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nbs.chatroomapp.R
 import com.nbs.chatroomapp.data.models.Message
-import com.nbs.chatroomapp.data.toDateTime
+import com.nbs.chatroomapp.data.toChatDateTime
 import com.nbs.chatroomapp.viewmodels.chat.ChatroomViewModel
 import com.nbs.chatroomapp.views.custom.AppBar
 import com.nbs.subsriptionapp.custom.CustomSpacer
@@ -102,37 +107,54 @@ fun ChatRoomScreen(
 
 @Composable
 fun MessageItem(message: Message, isMe: Boolean = false) {
-    Column(
-        modifier = Modifier.padding(8.dp),
-        horizontalAlignment = if (isMe) Alignment.End else Alignment.Start
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        contentAlignment = if (isMe)
+            Alignment.CenterEnd
+        else
+            Alignment.CenterStart
     ) {
         Card(
             colors = CardDefaults.cardColors(
-                containerColor = if (isMe) Color.Blue else Color.Gray,
+                containerColor = if (isMe)
+                    MaterialTheme.colorScheme.primary
+                else MaterialTheme.colorScheme.secondary,
                 contentColor = Color.White
             ),
             elevation = CardDefaults.cardElevation(4.dp)
         ) {
-            Text(
+            Column(
                 modifier = Modifier
+                    .width(IntrinsicSize.Max)
                     .padding(8.dp),
-                text = message.text,
-                color = Color.White,
-                style = MaterialTheme.typography.bodyMedium
-            )
+            ) {
+                if (!isMe) {
+                    Text(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = message.sender,
+                        color = Color.White,
+                        textAlign = if (isMe) TextAlign.End else TextAlign.Start,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                    CustomSpacer(height = 4.dp)
+                }
+                Text(
+                    text = message.text,
+                    color = Color.White,
+                    style = MaterialTheme.typography.bodyLarge
+                )
+                CustomSpacer(height = 4.dp)
+                Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = message.timestamp.toChatDateTime(),
+                    color = Color.LightGray,
+                    textAlign = TextAlign.End,
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
         }
-        CustomSpacer(height = 3.dp)
-        Text(
-            text = message.sender,
-            color = Color.Gray,
-            style = MaterialTheme.typography.bodySmall
-        )
-        CustomSpacer(height = 3.dp)
-        Text(
-            text = message.timestamp.toDateTime(),
-            color = Color.Gray,
-            style = MaterialTheme.typography.bodySmall
-        )
     }
 }
 
@@ -193,14 +215,14 @@ fun SendMessage(
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    SendMessage({})
-//    MessageItem(
-//        Message(
-//            "12",
-//            "Sample Message",
-//            "Nikhil Sathawara", 1234567890
-//        )
-//    )
+    //SendMessage({})
+    MessageItem(
+        Message(
+            text = "Hello World!!!!",
+            sender = "Nikhil",
+            timestamp = System.currentTimeMillis()
+        )
+    )
 
     //ChatRoomScreen("", "")
 }
