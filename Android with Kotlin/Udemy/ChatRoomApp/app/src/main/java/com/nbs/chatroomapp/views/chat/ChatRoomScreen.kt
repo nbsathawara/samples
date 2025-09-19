@@ -1,5 +1,6 @@
 package com.nbs.chatroomapp.views.chat
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material3.Card
@@ -21,14 +23,11 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.pulltorefresh.PullToRefreshBox
-import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -61,11 +60,11 @@ fun ChatRoomScreen(
 ) {
     viewModel.setRoomId(id)
     val currentUser by viewModel.currentUser.collectAsStateWithLifecycle()
-    val messages by viewModel.messages.collectAsStateWithLifecycle()
+    val messageList by viewModel.messageList.collectAsStateWithLifecycle()
 
     val listState = rememberLazyListState()
-    LaunchedEffect(messages.size) {
-        listState.animateScrollToItem(messages.size - 1)
+    LaunchedEffect(messageList) {
+        listState.scrollToItem(messageList.size - 1)
     }
 
     Scaffold(
@@ -82,7 +81,7 @@ fun ChatRoomScreen(
             })
         }
     ) {
-        if (messages.isEmpty())
+        if (messageList.isEmpty())
             EmptyView(
                 modifier = Modifier.padding(it),
                 emptyMsg = stringResource(R.string.no_messages)
@@ -91,17 +90,55 @@ fun ChatRoomScreen(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(it),
+                    .padding(it)
+                    .padding(top = 8.dp),
                 state = listState
             ) {
-                items(messages) { message ->
-                    MessageItem(
-                        message = message,
-                        isMe = message.sender == currentUser?.firstName
-                    )
-
+                items(messageList) { item ->
+                    if (item is String)
+                        MessageDateItem(item)
+                    else
+                        MessageItem(
+                            item as Message,
+                            isMe = item.sender == currentUser?.firstName
+                        )
                 }
+//                messageList.forEach { (date, messages) ->
+//                    item {
+//                        MessageDateItem(date = date)
+//                    }
+//                    items(messages) { message ->
+//                        MessageItem(
+//                            message = message,
+//                            isMe = message.sender == currentUser?.firstName
+//                        )
+//                    }
+//                }
             }
+    }
+}
+
+@Composable
+fun MessageDateItem(date: String) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(2.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            modifier = Modifier
+                .wrapContentWidth()
+                .background(
+                    color = Color.Gray,
+                    shape = RoundedCornerShape(20)
+                )
+                .padding(horizontal = 8.dp, vertical = 4.dp),
+            text = date,
+            color = MaterialTheme.colorScheme.onPrimary,
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.titleSmall
+        )
     }
 }
 
@@ -119,7 +156,7 @@ fun MessageItem(message: Message, isMe: Boolean = false) {
         Card(
             colors = CardDefaults.cardColors(
                 containerColor = if (isMe)
-                    MaterialTheme.colorScheme.primary
+                    MaterialTheme.colorScheme.tertiary
                 else MaterialTheme.colorScheme.secondary,
                 contentColor = Color.White
             ),
@@ -216,13 +253,14 @@ fun SendMessage(
 @Composable
 fun Preview() {
     //SendMessage({})
-    MessageItem(
-        Message(
-            text = "Hello World!!!!",
-            sender = "Nikhil",
-            timestamp = System.currentTimeMillis()
-        )
-    )
 
-    //ChatRoomScreen("", "")
+//    MessageItem(
+//        Message(
+//            text = "Hello World!!!!",
+//            sender = "Nikhil",
+//            timestamp = System.currentTimeMillis()
+//        )
+//    )
+
+    ChatRoomScreen("", "")
 }

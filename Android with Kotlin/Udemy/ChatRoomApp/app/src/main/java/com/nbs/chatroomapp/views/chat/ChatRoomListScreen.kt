@@ -150,7 +150,7 @@ fun ChatRoomItem(chatRoom: ChatRoom, onChatRoomJoined: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp),
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Row(

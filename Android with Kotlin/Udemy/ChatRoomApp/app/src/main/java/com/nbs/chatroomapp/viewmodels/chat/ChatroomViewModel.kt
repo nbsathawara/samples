@@ -3,6 +3,7 @@ package com.nbs.chatroomapp.viewmodels.chat
 import androidx.lifecycle.viewModelScope
 import com.nbs.chatroomapp.data.models.HttpResult
 import com.nbs.chatroomapp.data.models.Message
+import com.nbs.chatroomapp.data.toChatDate
 import com.nbs.chatroomapp.repository.AccountRepository
 import com.nbs.chatroomapp.repository.MessageRepository
 import com.nbs.chatroomapp.viewmodels.BaseViewModel
@@ -19,8 +20,10 @@ class ChatroomViewModel @Inject constructor(
 ) : BaseViewModel(
     accountRepository
 ) {
-    private val _messages = MutableStateFlow(emptyList<Message>())
-    val messages = _messages.asStateFlow()
+    private val _allMessages = MutableStateFlow(emptyList<Message>())
+
+    private val _messageList = MutableStateFlow(emptyList<Any>())
+    val messageList = _messageList.asStateFlow()
 
     private val _roomId = MutableStateFlow("")
     fun setRoomId(roomId: String) {
@@ -39,7 +42,8 @@ class ChatroomViewModel @Inject constructor(
                 val result = messageRepository.sendMessage(_roomId.value, msg)
                 when (result) {
                     is HttpResult.Success -> {
-                        _messages.value = _messages.value + result.data
+                        _allMessages.value = _allMessages.value + result.data
+                        updateMessage(result.data)
                     }
 
                     is HttpResult.Error -> {
@@ -58,7 +62,8 @@ class ChatroomViewModel @Inject constructor(
                 setLoading(true)
                 val result = messageRepository.getMessages(_roomId.value)
                 result.collect {
-                    _messages.value = it
+                    _allMessages.value = it
+                    updateMessages(messages = it)
                 }
             } catch (e: Exception) {
                 setMessage(e.localizedMessage ?: "Unknown Error")
@@ -67,4 +72,36 @@ class ChatroomViewModel @Inject constructor(
             }
         }
     }
+
+    fun updateMessage(message: Message) {
+        _messageList.value = _messageList.value + message
+    }
+
+    fun updateMessages(messages: List<Message>) {
+        val tmpMap = mutableMapOf<String, List<Message>>()
+        messages.forEach { message ->
+            val key = message.timestamp.toChatDate()
+            val value = tmpMap[key]
+            if (value == null)
+                tmpMap[key] = listOf(message)
+            else
+                tmpMap[key] = value + message
+        }
+        _messageList.value = tmpMap.flatMap { it ->
+            listOf(it.key) + it.value
+        }
+    }
+
+//    fun updateMessageMap(messages: List<Message>) {
+//        val tmpMap = mutableMapOf<String, List<Message>>()
+//        messages.forEach { message ->
+//            val key = message.timestamp.toChatDate()
+//            val value = tmpMap[key]
+//            if (value == null)
+//                tmpMap[key] = listOf(message)
+//            else
+//                tmpMap[key] = value + message
+//        }
+//        _messageMap.value = tmpMap
+//    }
 }
