@@ -24,6 +24,9 @@
     <string name="chat_room_created">Chat room created successfully.</string>
     <string name="type_message">Type a message…</string>
     <string name="no_messages">No messages found.</string>
+    <string name="edit_message">Edit Message</string>
+    <string name="confirmation_msg_delete">Are you sure you want to delete these messages?</string>
+
 
     <!--Common-->
     <string name="error">Error</string>

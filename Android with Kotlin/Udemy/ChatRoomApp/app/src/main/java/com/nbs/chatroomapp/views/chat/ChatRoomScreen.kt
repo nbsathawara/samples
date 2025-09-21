@@ -1,13 +1,18 @@
 package com.nbs.chatroomapp.views.chat
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.isImeVisible
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -18,6 +23,9 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,14 +36,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -47,38 +59,97 @@ import com.nbs.chatroomapp.R
 import com.nbs.chatroomapp.data.models.Message
 import com.nbs.chatroomapp.data.toChatDateTime
 import com.nbs.chatroomapp.viewmodels.chat.ChatroomViewModel
-import com.nbs.chatroomapp.views.custom.AppBar
+import com.nbs.subsriptionapp.custom.BackIcon
+import com.nbs.subsriptionapp.custom.CustomAlertDialog
 import com.nbs.subsriptionapp.custom.CustomSpacer
 import com.nbs.subsriptionapp.custom.EmptyView
+import com.nbs.subsriptionapp.custom.NavigationIcon
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun ChatRoomScreen(
     id: String = "",
     title: String = "",
+    onNavigateBack: () -> Unit = {},
     viewModel: ChatroomViewModel = hiltViewModel()
 ) {
     viewModel.setRoomId(id)
     val currentUser by viewModel.currentUser.collectAsStateWithLifecycle()
     val messageList by viewModel.messageList.collectAsStateWithLifecycle()
 
+    var showDialog by remember { mutableStateOf(false) }
+    var selectedMessages by remember { mutableStateOf(emptyList<Message>()) }
+    var editMessage by remember { mutableStateOf<Message?>(null) }
+
     val listState = rememberLazyListState()
     LaunchedEffect(messageList) {
-        listState.scrollToItem(messageList.size - 1)
+        if (messageList.isNotEmpty())
+            listState.scrollToItem(messageList.size - 1)
     }
 
+//    val isKeyboardVisible by rememberUpdatedState(WindowInsets.isImeVisible)
+//    LaunchedEffect(isKeyboardVisible) {
+//        if (isKeyboardVisible && messageList.isNotEmpty())
+//            listState.animateScrollToItem(messageList.size - 1)
+//    }
+
     Scaffold(
+        modifier = Modifier.imePadding(),
         topBar = {
-            AppBar(
-                title = title,
-                navIcon = {},
-                actionIcons = {}
+            TopAppBar(
+                modifier = Modifier.shadow(elevation = 4.dp),
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
+                ),
+                title = {
+                    if (editMessage != null) {
+                        Text(text = stringResource(R.string.edit_message))
+                    } else {
+                        if (selectedMessages.isNotEmpty()) {
+                            Text(text = selectedMessages.size.toString())
+                        } else {
+                            Text(text = title)
+                        }
+                    }
+                },
+                navigationIcon = {
+                    BackIcon({
+                        if (selectedMessages.isNotEmpty())
+                            selectedMessages = emptyList()
+                        else
+                            onNavigateBack()
+                    })
+                },
+                actions = {
+                    if (selectedMessages.size == 1)
+                        NavigationIcon(
+                            icon = Icons.Default.Edit,
+                            contentDesc = "Edit",
+                            onClick = {
+                                editMessage = selectedMessages.first()
+                            }
+                        )
+                    if (selectedMessages.isNotEmpty())
+                        NavigationIcon(
+                            icon = Icons.Default.Delete,
+                            contentDesc = "Delete",
+                            onClick = {
+                                showDialog = true
+                            }
+                        )
+                }
             )
         },
         bottomBar = {
-            SendMessage(onMessageSent = { message ->
-                viewModel.sendMessage(message)
-            })
+            SendMessage(
+                editMessage =
+                    if (selectedMessages.isNotEmpty())
+                        selectedMessages.first().text
+                    else "",
+                onMessageSent = { message ->
+                    viewModel.sendMessage(message)
+                })
         }
     ) {
         if (messageList.isEmpty())
@@ -100,21 +171,46 @@ fun ChatRoomScreen(
                     else
                         MessageItem(
                             item as Message,
-                            isMe = item.sender == currentUser?.firstName
+                            isMe = item.sender == currentUser?.firstName,
+                            isSelected = selectedMessages.contains(item),
+                            onMessageClicked = {
+                                //Handle single click for selected items
+                                if (selectedMessages.isNotEmpty()
+                                    && item.sender == currentUser?.firstName
+                                ) {
+                                    if (selectedMessages.contains(item))
+                                        selectedMessages = selectedMessages - item
+                                    else
+                                        selectedMessages = selectedMessages + item
+                                }
+                            },
+                            onLongClick = {
+                                if (item.sender == currentUser?.firstName)
+                                    if (selectedMessages.contains(item))
+                                        selectedMessages = selectedMessages - item
+                                    else
+                                        selectedMessages = selectedMessages + item
+                            }
                         )
                 }
-//                messageList.forEach { (date, messages) ->
-//                    item {
-//                        MessageDateItem(date = date)
-//                    }
-//                    items(messages) { message ->
-//                        MessageItem(
-//                            message = message,
-//                            isMe = message.sender == currentUser?.firstName
-//                        )
-//                    }
-//                }
             }
+
+        if (showDialog)
+            CustomAlertDialog(
+                onDismissRequest = {
+                    showDialog = false
+                    selectedMessages = emptyList()
+                },
+                onConfirmation = {
+                    viewModel.deleteMessages(selectedMessages)
+                    showDialog = false
+                    selectedMessages = emptyList()
+                },
+                dialogTitle = stringResource(R.string.confirmation),
+                dialogText = stringResource(R.string.confirmation_msg_delete),
+                confirmText = stringResource(R.string.yes),
+                dismissText = stringResource(R.string.no),
+            )
     }
 }
 
@@ -143,11 +239,32 @@ fun MessageDateItem(date: String) {
 }
 
 @Composable
-fun MessageItem(message: Message, isMe: Boolean = false) {
+fun MessageItem(
+    message: Message,
+    isSelected: Boolean = false,
+    isMe: Boolean = false,
+    onMessageClicked: () -> Unit = {},
+    onLongClick: () -> Unit = {},
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(8.dp)
+            .background(
+                color = if (isSelected)
+                    MaterialTheme.colorScheme.primary.copy(
+                        alpha = 0.3f
+                    )
+                else Color.Transparent
+            )
+            .combinedClickable(
+                onClick = {
+                    onMessageClicked()
+                },
+                onLongClick = {
+                    onLongClick()
+                }
+            ),
         contentAlignment = if (isMe)
             Alignment.CenterEnd
         else
@@ -197,10 +314,12 @@ fun MessageItem(message: Message, isMe: Boolean = false) {
 
 @Composable
 fun SendMessage(
+    editMessage: String = "",
     onMessageSent: (String) -> Unit
 ) {
 
-    var message by remember { mutableStateOf("") }
+    val isEditMode = editMessage.isNotEmpty()
+    var message by remember { mutableStateOf(editMessage) }
 
     fun sendMessage() {
         if (message.isEmpty())
@@ -239,7 +358,11 @@ fun SendMessage(
                         sendMessage()
                     }) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Filled.Send,
+                        imageVector =
+                            if (isEditMode)
+                                Icons.Default.Done
+                            else
+                                Icons.AutoMirrored.Filled.Send,
                         contentDescription = ""
                     )
                 }
@@ -262,5 +385,5 @@ fun Preview() {
 //        )
 //    )
 
-    ChatRoomScreen("", "")
+    //ChatRoomScreen("", "")
 }

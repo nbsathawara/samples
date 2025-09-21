@@ -25,8 +25,7 @@ import androidx.compose.ui.unit.dp
 fun AppBar(
     title: String,
     navIcon: (@Composable () -> Unit),
-    actionIcons: (
-    @Composable () -> Unit)
+    actionIcons: (@Composable () -> Unit)
 ) {
     TopAppBar(
         modifier = Modifier.shadow(elevation = 4.dp),
@@ -42,11 +41,7 @@ fun AppBar(
         },
         navigationIcon = navIcon,
         actions = {
-            IconButton({
-
-            }) {
-                actionIcons()
-            }
+                actionIcons
         }
     )
 }

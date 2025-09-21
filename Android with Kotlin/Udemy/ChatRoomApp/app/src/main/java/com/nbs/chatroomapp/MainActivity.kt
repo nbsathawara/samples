@@ -99,7 +99,11 @@ fun Navigation() {
         composable(Screens.ChatRoomScreen.name + "/{id}/{title}") {
             val id = it.arguments?.getString("id")!!
             val title = it.arguments?.getString("title")!!
-            ChatRoomScreen(id, title)
+            ChatRoomScreen(
+                id, title,
+                onNavigateBack = {
+                    navController.popBackStack()
+                })
         }
     }
 }
