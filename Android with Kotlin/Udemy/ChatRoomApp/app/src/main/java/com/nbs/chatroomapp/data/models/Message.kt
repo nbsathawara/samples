@@ -2,7 +2,8 @@ package com.nbs.chatroomapp.data.models
 
 data class Message(
     val id: String = "",
-    val text: String = "",
+    var text: String = "",
     val sender: String = "",
-    val timestamp: Long = 0
+    var isEdited: Boolean = false,
+    var timestamp: Long = 0
 )

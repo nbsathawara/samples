@@ -181,14 +181,13 @@ fun CustomSnackbar(snackbarData: SnackbarData) {
 
 @Composable
 fun CustomProgressbar() {
-    Column(
+    Box(
         Modifier
             .fillMaxSize()
             .clickable {
 
             },
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator(
             modifier = Modifier.size(64.dp),

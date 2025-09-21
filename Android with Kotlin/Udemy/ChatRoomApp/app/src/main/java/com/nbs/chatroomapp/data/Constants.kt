@@ -34,19 +34,19 @@ fun String.toLowerUnderScore(): String = replace(" ", "_").lowercase()
 fun Long.toChatDateTime()
         : String {
     try {
-        val curDate = Calendar.getInstance(Locale.getDefault())
-        val msgDate = Calendar.getInstance(Locale.getDefault())
-        msgDate.timeInMillis = this
+//        val curDate = Calendar.getInstance(Locale.getDefault())
+//        val msgDate = Calendar.getInstance(Locale.getDefault())
+//        msgDate.timeInMillis = this
+//
+//        if (curDate.get(Calendar.DATE) == msgDate.get(Calendar.DATE)) {
+//            return "Today " + Constants.msgTimeFormat.format(this)
+//        } else if (curDate.get(Calendar.DATE) - msgDate.get(Calendar.DATE) == 1) {
+//            return "Yesterday " + Constants.msgTimeFormat.format(this)
+//        }
+//        return Constants.msgDateFormat.format(msgDate.timeInMillis) + " " +
+//                Constants.msgTimeFormat.format(msgDate.timeInMillis)
 
-        if (curDate.get(Calendar.DATE) == msgDate.get(Calendar.DATE)) {
-            return "Today " + Constants.msgTimeFormat.format(this)
-        } else if (curDate.get(Calendar.DATE) - msgDate.get(Calendar.DATE) == 1) {
-            return "Yesterday " + Constants.msgTimeFormat.format(this)
-        }
-        return Constants.msgDateFormat.format(msgDate.timeInMillis) + " " +
-                Constants.msgTimeFormat.format(msgDate.timeInMillis)
-
-        //return Constants.msgTimeFormat.format(this)
+        return Constants.msgTimeFormat.format(this)
     } catch (e: Exception) {
         return "Invalid date"
     }

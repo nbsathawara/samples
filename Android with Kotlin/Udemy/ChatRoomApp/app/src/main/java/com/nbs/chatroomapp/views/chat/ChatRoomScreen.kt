@@ -1,6 +1,8 @@
 package com.nbs.chatroomapp.views.chat
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -8,6 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,6 +24,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.Delete
@@ -48,8 +53,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -77,9 +89,11 @@ fun ChatRoomScreen(
     val currentUser by viewModel.currentUser.collectAsStateWithLifecycle()
     val messageList by viewModel.messageList.collectAsStateWithLifecycle()
 
+
     var showDialog by remember { mutableStateOf(false) }
     var selectedMessages by remember { mutableStateOf(emptyList<Message>()) }
     var editMessage by remember { mutableStateOf<Message?>(null) }
+    val focusRequester = remember { FocusRequester() }
 
     val listState = rememberLazyListState()
     LaunchedEffect(messageList) {
@@ -92,6 +106,17 @@ fun ChatRoomScreen(
 //        if (isKeyboardVisible && messageList.isNotEmpty())
 //            listState.animateScrollToItem(messageList.size - 1)
 //    }
+
+    BackHandler(){
+        if (editMessage != null) {
+            editMessage = null
+            selectedMessages = emptyList()
+        } else
+            if (selectedMessages.isNotEmpty())
+                selectedMessages = emptyList()
+            else
+                onNavigateBack()
+    }
 
     Scaffold(
         modifier = Modifier.imePadding(),
@@ -115,40 +140,53 @@ fun ChatRoomScreen(
                 },
                 navigationIcon = {
                     BackIcon({
-                        if (selectedMessages.isNotEmpty())
+                        if (editMessage != null) {
+                            editMessage = null
                             selectedMessages = emptyList()
-                        else
-                            onNavigateBack()
+                        } else
+                            if (selectedMessages.isNotEmpty())
+                                selectedMessages = emptyList()
+                            else
+                                onNavigateBack()
                     })
                 },
                 actions = {
-                    if (selectedMessages.size == 1)
-                        NavigationIcon(
-                            icon = Icons.Default.Edit,
-                            contentDesc = "Edit",
-                            onClick = {
-                                editMessage = selectedMessages.first()
-                            }
-                        )
-                    if (selectedMessages.isNotEmpty())
-                        NavigationIcon(
-                            icon = Icons.Default.Delete,
-                            contentDesc = "Delete",
-                            onClick = {
-                                showDialog = true
-                            }
-                        )
+                    if (editMessage == null) {
+                        if (selectedMessages.size == 1)
+                            NavigationIcon(
+                                icon = Icons.Default.Edit,
+                                contentDesc = "Edit",
+                                onClick = {
+                                    editMessage = selectedMessages.first()
+                                    focusRequester.requestFocus()
+                                }
+                            )
+                        if (selectedMessages.isNotEmpty())
+                            NavigationIcon(
+                                icon = Icons.Default.Delete,
+                                contentDesc = "Delete",
+                                onClick = {
+                                    showDialog = true
+                                }
+                            )
+                    }
                 }
             )
         },
         bottomBar = {
             SendMessage(
-                editMessage =
-                    if (selectedMessages.isNotEmpty())
-                        selectedMessages.first().text
-                    else "",
+                editMessage = editMessage,
+                focusRequester = focusRequester,
                 onMessageSent = { message ->
-                    viewModel.sendMessage(message)
+                    if (editMessage != null) {
+                        editMessage!!.text = message
+                        editMessage!!.isEdited = true
+                        viewModel.updateMessage(editMessage!!)
+
+                        editMessage = null
+                        selectedMessages = emptyList()
+                    } else
+                        viewModel.sendMessage(message)
                 })
         }
     ) {
@@ -158,41 +196,56 @@ fun ChatRoomScreen(
                 emptyMsg = stringResource(R.string.no_messages)
             )
         else
-            LazyColumn(
+            Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(it)
-                    .padding(top = 8.dp),
-                state = listState
             ) {
-                items(messageList) { item ->
-                    if (item is String)
-                        MessageDateItem(item)
-                    else
-                        MessageItem(
-                            item as Message,
-                            isMe = item.sender == currentUser?.firstName,
-                            isSelected = selectedMessages.contains(item),
-                            onMessageClicked = {
-                                //Handle single click for selected items
-                                if (selectedMessages.isNotEmpty()
-                                    && item.sender == currentUser?.firstName
-                                ) {
-                                    if (selectedMessages.contains(item))
-                                        selectedMessages = selectedMessages - item
-                                    else
-                                        selectedMessages = selectedMessages + item
+                LazyColumn(
+                    modifier = Modifier
+                        .padding(top = 8.dp),
+                    state = listState
+                ) {
+                    items(messageList) { item ->
+                        if (item is String)
+                            MessageDateItem(item)
+                        else
+                            MessageItem(
+                                item as Message,
+                                isMe = item.sender == currentUser?.firstName,
+                                isSelected = selectedMessages.contains(item),
+                                onMessageClicked = {
+                                    //Handle single click for selected items
+                                    if (selectedMessages.isNotEmpty()
+                                        && item.sender == currentUser?.firstName
+                                    ) {
+                                        if (selectedMessages.contains(item))
+                                            selectedMessages = selectedMessages - item
+                                        else
+                                            selectedMessages = selectedMessages + item
+                                    }
+                                },
+                                onLongClick = {
+                                    if (item.sender == currentUser?.firstName)
+                                        if (selectedMessages.contains(item))
+                                            selectedMessages = selectedMessages - item
+                                        else
+                                            selectedMessages = selectedMessages + item
                                 }
-                            },
-                            onLongClick = {
-                                if (item.sender == currentUser?.firstName)
-                                    if (selectedMessages.contains(item))
-                                        selectedMessages = selectedMessages - item
-                                    else
-                                        selectedMessages = selectedMessages + item
-                            }
-                        )
+                            )
+                    }
                 }
+                if (editMessage != null)
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(
+                                color = Color.Black.copy(alpha = 0.8f)
+                            )
+                            .clickable {
+
+                            }
+                    )
             }
 
         if (showDialog)
@@ -289,7 +342,7 @@ fun MessageItem(
                         modifier = Modifier.fillMaxWidth(),
                         text = message.sender,
                         color = Color.White,
-                        textAlign = if (isMe) TextAlign.End else TextAlign.Start,
+                        textAlign = TextAlign.Start,
                         style = MaterialTheme.typography.bodySmall
                     )
                     CustomSpacer(height = 4.dp)
@@ -300,13 +353,27 @@ fun MessageItem(
                     style = MaterialTheme.typography.bodyLarge
                 )
                 CustomSpacer(height = 4.dp)
-                Text(
+                Row(
                     modifier = Modifier.fillMaxWidth(),
-                    text = message.timestamp.toChatDateTime(),
-                    color = Color.LightGray,
-                    textAlign = TextAlign.End,
-                    style = MaterialTheme.typography.bodySmall
-                )
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    if (message.isEdited) {
+                        Text(
+                            text = stringResource(R.string.edited),
+                            color = Color.LightGray,
+                            textAlign = TextAlign.End,
+                            fontFamily = FontFamily.Serif,
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                        CustomSpacer(width = 4.dp)
+                    }
+                    Text(
+                        text = message.timestamp.toChatDateTime(),
+                        color = Color.LightGray,
+                        textAlign = TextAlign.End,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
             }
         }
     }
@@ -314,18 +381,27 @@ fun MessageItem(
 
 @Composable
 fun SendMessage(
-    editMessage: String = "",
+    editMessage: Message?,
+    focusRequester: FocusRequester,
     onMessageSent: (String) -> Unit
 ) {
 
-    val isEditMode = editMessage.isNotEmpty()
-    var message by remember { mutableStateOf(editMessage) }
+    val isEditMode = editMessage != null
+    var initialValue = if (isEditMode) editMessage.text else ""
+    var message by remember(initialValue) {
+        mutableStateOf(
+            TextFieldValue(
+                text = initialValue,
+                TextRange(initialValue.length)
+            )
+        )
+    }
 
     fun sendMessage() {
-        if (message.isEmpty())
+        if (message.text.isEmpty())
             return
-        onMessageSent(message)
-        message = ""
+        onMessageSent(message.text)
+        message = TextFieldValue()
     }
 
     Row(
@@ -339,17 +415,30 @@ fun SendMessage(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         OutlinedTextField(
+            modifier = Modifier
+                .weight(1f)
+                .focusRequester(focusRequester),
             value = message,
             onValueChange = {
                 message = it
             },
-            modifier = Modifier.weight(1f),
             placeholder = {
                 Text(text = stringResource(R.string.type_message))
             },
+            keyboardOptions = KeyboardOptions(
+                imeAction = if (isEditMode) ImeAction.Done else ImeAction.Send,
+            ),
+            keyboardActions = KeyboardActions(
+                onSend = {
+                    sendMessage()
+                },
+                onDone = {
+                    sendMessage()
+                }
+            ),
             trailingIcon = {
                 IconButton(
-                    enabled = message.isNotEmpty(),
+                    enabled = message.text.isNotEmpty(),
                     colors = IconButtonDefaults.iconButtonColors(
                         contentColor = Color.Blue,
                         disabledContentColor = Color.LightGray
@@ -381,6 +470,7 @@ fun Preview() {
 //        Message(
 //            text = "Hello World!!!!",
 //            sender = "Nikhil",
+//            isEdited = false,
 //            timestamp = System.currentTimeMillis()
 //        )
 //    )
