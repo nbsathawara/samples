@@ -1,0 +1,43 @@
+# Gradle build outputs & caches
+.gradle/
+build/
+**/build/
+.kotlin/
+.konan/
+
+# IDE configuration files (Android Studio / IntelliJ)
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+.navigation/
+.DS_Store
+
+# Android specific
+local.properties
+.externalNativeBuild/
+.cxx/
+captures/
+*.keystore
+*.jks
+
+# Xcode / iOS specific
+xcuserdata/
+**/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcworkspace/xcuserdata/
+DerivedData/
+
+# Preserve essential Xcode workspace structure
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+!*.xcworkspace/contents.xcworkspacedata
+
+# Web / Node dependencies
+node_modules/
+
+# IDE agent artifacts
+.artifacts/
